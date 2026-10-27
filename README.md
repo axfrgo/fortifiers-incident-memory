@@ -2,11 +2,13 @@
 
 **Give the Physical World a Memory.** A local-first, synthetic mechanical-room demo for investigating what visibly changed around an alarm using OpenCV 5 and an observation-driven agent.
 
+![Fortifiers Incident Memory project cover. Synthetic baseline, alarm-time image, and OpenCV 5 overlay.](submission/project-cover.png)
+
 Public source repository: https://github.com/axfrgo/fortifiers-incident-memory
 
 Environmental Incident Memory investigates what changed around a physical alarm. It retrieves a pre-event frame, runs real OpenCV 5 image analysis, chooses follow-up actions from those observations, checks older history and sensor timing, and creates a reviewable evidence record. The demo focuses on a synthetic industrial mechanical-room water-sensor event.
 
-> **Honest build status:** local OpenCV 5 processing, API scenarios and tests are verified. AWS and Docker are **not deployed or verified**: the workspace has no Docker/AWS CLI or configured AWS credentials, and the owner requested deployment preparation only. The current AWS documentation also says App Runner is closed to new customers; account access cannot be checked here. There is no public demo endpoint, so this build does not yet meet the competition's mandatory AWS workload and judge-accessible endpoint requirements. See [deployment-manifest.json](deployment-manifest.json) and [DEPLOYMENT.md](DEPLOYMENT.md).
+> **Honest build status:** local OpenCV 5 processing, API scenarios and tests are verified. AWS and Docker are **not deployed or verified**: the workspace has no Docker/AWS CLI or configured AWS credentials, and the AWS browser session reached the IAM sign-in page rather than an authenticated console. No AWS resources were created. App Runner availability for this account is unknown. There is no public demo endpoint, so this build does not yet meet the competition's mandatory AWS workload and judge-accessible endpoint requirements. See [deployment-manifest.json](deployment-manifest.json) and [DEPLOYMENT.md](DEPLOYMENT.md).
 
 All included images and sensor events are procedurally generated synthetic fixtures. The blue/cool-toned patch is a staged visual cue, not actual water and not real-world validation.
 
@@ -52,9 +54,9 @@ $env:PYTHONPATH = 'src'
 .\.venv\Scripts\python.exe scripts\package_source.py
 ```
 
-The fresh held-out run selected expected policy actions for 7/7 scenario types versus 4/7 for the simple one-pass comparator. Synthetic pixel-mask precision/recall/F1 were 0.99183/0.99913/0.99546. Controller p50/p95 were 137.061/217.262 ms across 21 runs. These are procedural-fixture measurements, not field leak-detection performance. A fresh local HTTP check of four scenarios, overlay and evidence ZIP is in `artifacts/final-local-verification.json`; its downloaded synthetic evidence is `artifacts/final-local-clear-change-evidence.zip`. Full results and limitations are in [EVALUATION.md](EVALUATION.md).
+The fresh held-out run selected expected policy actions for 7/7 scenario types versus 4/7 for the simple one-pass comparator. Synthetic pixel-mask precision/recall/F1 were 0.99183/0.99913/0.99546. Controller p50/p95 were 137.061/217.262 ms across 21 runs. These are procedural-fixture measurements, not field leak-detection performance. A fresh local HTTP smoke check returned 200 for the dashboard, health endpoint and four scenarios; its actual traces are in `artifacts/finalization-api-smoke.json`. It is local-only evidence. Earlier overlay/ZIP evidence is in `artifacts/final-local-verification.json` and `artifacts/final-local-clear-change-evidence.zip`. Full results and limitations are in [EVALUATION.md](EVALUATION.md).
 
-The final local test output is in `artifacts/test-results.xml` and `artifacts/test-results.json`; `artifacts/demo-cases.json` points to synthetic reports, traces and overlays. The portable source archive is `artifacts/fortifiers-incident-memory-source.zip` (not independently judge-accessible unless hosted separately). The public GitHub repository above contains the source and documentation.
+The latest local test output is in `artifacts/test-results-finalization.xml` and `artifacts/test-results-finalization.json` (36 passed). `artifacts/demo-cases.json` points to synthetic reports, traces and overlays. The portable source archive is `artifacts/fortifiers-incident-memory-source.zip`; a copy is attached to the private Devpost draft but will not be judge-accessible there until that entry is submitted. The public GitHub repository above is the judge-accessible source.
 
 ## Deployment
 

@@ -1,0 +1,12 @@
+{
+  "run_at_local": "2026-10-26T22:48:52.147474-03:00",
+  "command": ".venv\\Scripts\\python.exe -m pytest -q --junitxml artifacts/test-results-finalization.xml",
+  "tests": 36,
+  "failures": 0,
+  "errors": 0,
+  "skipped": 0,
+  "time_seconds": 10.69,
+  "python": "3.14.0",
+  "opencv": "5.0.0",
+  "platform": "Windows 10"
+}

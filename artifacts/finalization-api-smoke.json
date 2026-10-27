@@ -1,0 +1,103 @@
+{
+  "checked_at_local": "2026-10-26T22:55:31.230518-03:00",
+  "endpoint": "http://127.0.0.1:8000",
+  "public": false,
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "bytes": 7009
+    },
+    {
+      "path": "/health",
+      "status": 200,
+      "bytes": 155,
+      "health": {
+        "status": "ok",
+        "service": "fortifiers-incident-memory",
+        "opencv_version": "5.0.0",
+        "opencv5": true,
+        "aws_s3_artifacts_enabled": false,
+        "user_uploads_enabled": true
+      }
+    },
+    {
+      "path": "/api/investigate/clear_change",
+      "status": 200,
+      "bytes": 1652510,
+      "scenario": "clear_change",
+      "outcome": "human_review_required",
+      "finding": "possible_visible_water_change",
+      "tool_calls": 9,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "inspect_region",
+        "retrieve_additional_frame",
+        "correlate_sensor_event",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "synthetic_demo": true
+    },
+    {
+      "path": "/api/investigate/poor_image",
+      "status": 200,
+      "bytes": 760500,
+      "scenario": "poor_image",
+      "outcome": "retake_requested",
+      "finding": "insufficient_evidence",
+      "tool_calls": 5,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "retrieve_additional_frame",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "synthetic_demo": true
+    },
+    {
+      "path": "/api/investigate/lighting_shift",
+      "status": 200,
+      "bytes": 1647769,
+      "scenario": "lighting_shift",
+      "outcome": "no_visual_change_supported",
+      "finding": "no_credible_visual_water_evidence",
+      "tool_calls": 6,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "synthetic_demo": true
+    },
+    {
+      "path": "/api/investigate/historical_match",
+      "status": 200,
+      "bytes": 1655441,
+      "scenario": "historical_match",
+      "outcome": "no_new_change_supported",
+      "finding": "visually_similar_change_previously_observed",
+      "tool_calls": 10,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "inspect_region",
+        "retrieve_additional_frame",
+        "align_and_compare",
+        "compare_historical_region",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "synthetic_demo": true
+    }
+  ]
+}

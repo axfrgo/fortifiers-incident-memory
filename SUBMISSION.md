@@ -1,10 +1,14 @@
 # Devpost submission wording — prepared, not submitted
 
-**Readiness warning (checked 2026-10-27):** the local OpenCV 5 app, synthetic evaluation and public source repository are verified. The AWS workload and endpoint are not deployed, and no video is recorded or hosted. The signed-in Devpost account is registered, but the project's submission list is empty; draft creation is blocked by a Devpost reCAPTCHA connection error. These remain mandatory gaps. Do not claim cloud execution, and do not submit this entry until the AWS, video, team identity and eligibility gaps are resolved and the owner gives final approval.
+**Readiness warning (checked 2026-10-27):** the local OpenCV 5 app, synthetic evaluation and public source repository are verified. A private Devpost draft now exists with the project title, pitch, story, cover, source archive, test instructions and Agentic Vision selection. It is still incomplete: the required video URL is blank; the AWS workload and public endpoint are not deployed; and team eligibility declarations have not been verified. Do not claim cloud execution or field performance. The draft is not a public project or a submitted entry.
 
 ## Project name
 
 **Fortifiers Incident Memory**
+
+## Tagline
+
+**Give the Physical World a Memory.**
 
 ## One-sentence pitch
 
@@ -30,7 +34,7 @@ OpenCV outputs are inputs to later actions. Poor blur quality skips comparison a
 
 ## AWS
 
-**Actual AWS use in this build: none.** A private ECR + App Runner + versioned S3 template and deployment script are prepared, but no AWS CLI, credentials or Docker are configured, and the owner directed preparation only. AWS says App Runner is closed to new customers; this account's access cannot be checked. No AWS resource, live endpoint or cloud processing response exists. The competition's meaningful AWS requirement and endpoint are not yet met. See `DEPLOYMENT.md` for the regional estimate and service restriction. Replace this section only after an AWS workload is live and independently verified.
+**Actual AWS use in this build: none.** A private ECR + App Runner + versioned S3 template and deployment script are prepared, but the active in-app AWS tab is at IAM sign-in and no AWS CLI, Docker, or credential profile is configured. The account, credits, service access, and account-specific cost eligibility could not be checked. No resources were created because deployment was previously limited to preparation, and no spend ceiling is set. AWS says App Runner is closed to new customers; account eligibility remains unknown. No live endpoint or cloud processing response exists. The competition's meaningful AWS requirement and endpoint are not yet met. See `DEPLOYMENT.md` for the illustrative cost estimate and service restriction. Replace this section only after an AWS workload is live and independently verified.
 
 ## Challenges and solutions
 
@@ -65,5 +69,5 @@ After a verified AWS deployment and operator feedback: gather consented and lice
 
 ## Competition entry checks
 
-The signed-in Devpost account is registered for the competition. Its “My projects” page showed no project draft during finalization; the “Start project” control was blocked by a reCAPTCHA connection error. No project has been submitted. The official banner shows October 26, 2026 at 11:45 PM PDT (October 27, 2026 at 03:45 AM ADT in Halifax); the overview also mentions 11:59 PM Pacific, so this package targets the earlier deadline. The full rules require participants to be at least 13 and guardian permission/forms for participants below local legal majority; the overview separately says participants must be above local majority. Confirm the governing eligibility with the organizer, actual team's roster, representative, rights and declarations before submission.
+The Devpost account is registered. The user reports entering solo; the draft has no listed teammates. A private draft was created and saved under the account, but it has not been submitted or made public. The AWS browser tab is not authenticated: opening the console redirected to an IAM sign-in form, and no local AWS CLI credentials are configured. The official Devpost banner shows October 26, 2026 at 11:45 PM PDT (October 27, 2026 at 03:45 AM ADT in Halifax); the overview also mentions 11:59 PM Pacific, so this package targets the earlier deadline. The rules/overview eligibility language should be reviewed by the entrant before accepting the required declarations. Confirm the actual representative, legal-majority/age requirements, rights and declarations before final submission.
 

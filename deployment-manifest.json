@@ -1,7 +1,7 @@
 {
   "status": "BLOCKED",
-  "checked_at_utc": "2026-10-27T01:05:00Z",
-  "reason": "No AWS CLI, AWS credential profile, environment credentials, or Docker CLI are available. The owner directed preparation only and declined resource creation. Current AWS documentation says App Runner is closed to new customers; this account's existing-service eligibility cannot be checked.",
+  "checked_at_utc": "2026-10-27T01:58:00Z",
+  "reason": "The in-app AWS tab redirected to an IAM sign-in page. No AWS CLI, Docker CLI, credential profile, or environment credentials are available. The AWS account and App Runner eligibility were not authenticated or verified; no spend ceiling was authorized. No resources or endpoint were created.",
   "service_url": null,
   "aws_account_id": null,
   "opencv_runtime_verified_locally": "5.0.0",
