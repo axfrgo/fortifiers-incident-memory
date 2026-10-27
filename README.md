@@ -71,5 +71,5 @@ The prepared deployment package uses private ECR, App Runner for the OpenCV 5 AP
 - `tests/` — vision, memory, agent, API and storage failure tests.
 - `submission/` — architecture and workflow SVG diagrams.
 
-See [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md), [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md), [JUDGING_SCORECARD.md](JUDGING_SCORECARD.md), and [BUILD_LEDGER.md](BUILD_LEDGER.md). The signed-in Devpost account is registered, but its project list is empty; a reCAPTCHA connection error blocked draft creation. Team roster, AWS endpoint and hosted video remain outstanding. Submission wording and the timed video script are in [SUBMISSION.md](SUBMISSION.md) and [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
+See [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md), [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md), [JUDGING_SCORECARD.md](JUDGING_SCORECARD.md), [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md), and [BUILD_LEDGER.md](BUILD_LEDGER.md). The signed-in Devpost account is registered, but its project list is empty; a reCAPTCHA connection error blocked draft creation. Team roster, AWS endpoint and hosted video remain outstanding. Submission wording and the timed video script are in [SUBMISSION.md](SUBMISSION.md) and [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
 

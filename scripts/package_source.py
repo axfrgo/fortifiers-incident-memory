@@ -8,6 +8,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "artifacts" / "fortifiers-incident-memory-source.zip"
+PUBLIC_REPOSITORY_URL = "https://github.com/axfrgo/fortifiers-incident-memory"
 IGNORED_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache"}
 IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "source-archive-manifest.json"}
 
@@ -55,7 +56,7 @@ def main() -> None:
     manifest = {"created_at_utc": datetime.now(timezone.utc).isoformat(),
                 "archive": ARCHIVE.name, "sha256": digest, "file_count": len(files),
                 "includes_virtual_environment": False,
-                "judge_accessible_public_url": None}
+                "judge_accessible_public_url": PUBLIC_REPOSITORY_URL}
     (ARCHIVE.parent / "source-archive-manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(json.dumps({**manifest, "path": str(ARCHIVE), "size_bytes": ARCHIVE.stat().st_size}, indent=2))
 
