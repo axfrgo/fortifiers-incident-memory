@@ -1,0 +1,81 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Public synthetic-only OpenCV 5 demonstration on AWS Lambda using a privately stored ZIP package.
+
+Parameters:
+  GitCommit:
+    Type: String
+    AllowedPattern: '[0-9a-f]{40}'
+    Description: Full Git commit SHA represented by this deployment.
+  PackageKey:
+    Type: String
+    Default: fortifiers-incident-memory-lambda-cp314.zip
+    Description: Key of the pinned Python 3.14 Lambda ZIP in the private bootstrap bucket.
+
+Resources:
+  FunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/fortifiers-incident-memory-demo
+      RetentionInDays: 14
+
+  IncidentMemoryFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: FunctionLogGroup
+    Properties:
+      FunctionName: fortifiers-incident-memory-demo
+      Runtime: python3.14
+      Handler: lambda_handler.handler
+      Code:
+        S3Bucket: !Sub 'fortifiers-incident-memory-bootstrap-${AWS::AccountId}-${AWS::Region}'
+        S3Key: !Ref PackageKey
+      Role: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:role/fortifiers-incident-memory-bootstrap-lambda-execution'
+      Architectures:
+        - x86_64
+      MemorySize: 512
+      Timeout: 90
+      EphemeralStorage:
+        Size: 512
+      Environment:
+        Variables:
+          DEPLOYMENT_MODE: aws-lambda
+          DEPLOYED_BUILD_ID: !Ref GitCommit
+          DEPLOYED_GIT_COMMIT: !Ref GitCommit
+          INCIDENT_ARTIFACTS_DIR: /tmp/fortifiers-incident-memory/artifacts/demo
+          ARTIFACT_BUCKET: !Sub 'fortifiers-incident-memory-bootstrap-${AWS::AccountId}-${AWS::Region}'
+          ALLOW_USER_UPLOADS: 'false'
+          PYTHONPATH: /var/task/src
+          PYTHONDONTWRITEBYTECODE: '1'
+          PYTHONUNBUFFERED: '1'
+
+  IncidentMemoryFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      TargetFunctionArn: !GetAtt IncidentMemoryFunction.Arn
+
+  PublicFunctionUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref IncidentMemoryFunction
+      Action: lambda:InvokeFunctionUrl
+      Principal: '*'
+      FunctionUrlAuthType: NONE
+
+  PublicFunctionInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref IncidentMemoryFunction
+      Action: lambda:InvokeFunction
+      Principal: '*'
+      InvokedViaFunctionUrl: true
+
+Outputs:
+  FunctionUrl:
+    Description: Public synthetic-only judge demonstration URL.
+    Value: !GetAtt IncidentMemoryFunctionUrl.FunctionUrl
+  FunctionName:
+    Value: !Ref IncidentMemoryFunction
+  LogGroupName:
+    Value: !Ref FunctionLogGroup
+  DeployedCommit:
+    Value: !Ref GitCommit

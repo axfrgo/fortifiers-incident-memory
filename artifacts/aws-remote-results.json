@@ -1,0 +1,1545 @@
+{
+  "endpoint": "https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws",
+  "opencv5_runtime_confirmed": true,
+  "scenarios": [
+    {
+      "scenario": "dry_normal",
+      "http_status": 200,
+      "elapsed_ms": 2266,
+      "response_bytes": 1650477,
+      "synthetic": true,
+      "outcome": "no_visual_change_supported",
+      "finding": "no_credible_visual_water_evidence",
+      "evidence_classes": [
+        "UNVERIFIED"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "dry_normal-ccfbd172361f",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "dry_normal-ccfbd172361f",
+            "available_historical_frames": 1,
+            "event_frame_ref": "dry_normal-ccfbd172361f-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:42.447027-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "dry_normal-ccfbd172361f-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "dry_normal-ccfbd172361f-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 516.37,
+            "mean_luminance": 141.95,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 1.0,
+            "usable": true,
+            "reasons": [],
+            "evidence_references": [
+              "dry_normal-ccfbd172361f-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:42.46593-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_time": "2026-10-27T02:05:42-03:00"
+          },
+          "thresholds": {
+            "exclude_incident_frames": true,
+            "minimum_quality_score": 0.4
+          },
+          "selected_action": "select_historical_baseline",
+          "evidence_references": [
+            "dry_normal-ccfbd172361f-baseline"
+          ],
+          "result": {
+            "selected_frame_id": "dry_normal-ccfbd172361f-baseline",
+            "selected_timestamp": "2026-10-27T01:50:42-03:00",
+            "reason": "nearest usable pre-event frame for the same camera and context",
+            "evidence_references": [
+              "dry_normal-ccfbd172361f-baseline"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:42.465977-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "reference": "dry_normal-ccfbd172361f-baseline",
+            "current": "dry_normal-ccfbd172361f-event"
+          },
+          "thresholds": {
+            "mask_delta_saturation": 42,
+            "minimum_region_area_fraction": 0.0025,
+            "minimum_registration_reliability": 0.45
+          },
+          "selected_action": "align_and_compare",
+          "evidence_references": [
+            "dry_normal-ccfbd172361f-baseline",
+            "dry_normal-ccfbd172361f-event"
+          ],
+          "result": {
+            "comparable": true,
+            "registration_method": "orb_ransac_homography",
+            "registration_inliers": 831,
+            "reliability_score": 1.0,
+            "illumination_gain": 1.0,
+            "changed_fraction": 0.0,
+            "candidate_regions": [],
+            "elapsed_ms": 200.984,
+            "notes": [],
+            "evidence_references": [
+              "dry_normal-ccfbd172361f-baseline",
+              "dry_normal-ccfbd172361f-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:42.667305-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "sensor_type": "water_contact",
+            "timestamp": "2026-10-27T02:05:42-03:00"
+          },
+          "thresholds": {
+            "maximum_time_offset_seconds": 300
+          },
+          "selected_action": "correlate_sensor_event",
+          "evidence_references": [
+            "synthetic-demo-sensor"
+          ],
+          "result": {
+            "sensor_type": "water_contact",
+            "active": false,
+            "time_aligned": true,
+            "offset_seconds": 0.0,
+            "classification": "UNVERIFIED",
+            "evidence_references": [
+              "synthetic-demo-sensor"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:42.667343-03:00"
+        },
+        {
+          "iteration": 6,
+          "observation_inputs": {
+            "finding": "no_credible_visual_water_evidence",
+            "outcome": "no_visual_change_supported"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current",
+            "change_mask",
+            "overlay"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 4,
+            "evidence_references": [
+              "baseline",
+              "current",
+              "change_mask",
+              "overlay"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:42.825181-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
+        "overlay": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564"
+      },
+      "run_storage_id": "dry_normal-ccfbd172361f",
+      "cloud_evidence_key": "evidence/dry_normal-ccfbd172361f.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    },
+    {
+      "scenario": "clear_change",
+      "http_status": 200,
+      "elapsed_ms": 2213,
+      "response_bytes": 1655776,
+      "synthetic": true,
+      "outcome": "human_review_required",
+      "finding": "possible_visible_water_change",
+      "evidence_classes": [
+        "OBSERVED",
+        "SENSOR_CORRELATED",
+        "HYPOTHESIS"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "inspect_region",
+        "retrieve_additional_frame",
+        "correlate_sensor_event",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "clear_change-6cfdae33bc65",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "clear_change-6cfdae33bc65",
+            "available_historical_frames": 1,
+            "event_frame_ref": "clear_change-6cfdae33bc65-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.704641-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "clear_change-6cfdae33bc65-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "clear_change-6cfdae33bc65-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 514.64,
+            "mean_luminance": 142.08,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 1.0,
+            "usable": true,
+            "reasons": [],
+            "evidence_references": [
+              "clear_change-6cfdae33bc65-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.707322-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_time": "2026-10-27T02:05:44-03:00"
+          },
+          "thresholds": {
+            "exclude_incident_frames": true,
+            "minimum_quality_score": 0.4
+          },
+          "selected_action": "select_historical_baseline",
+          "evidence_references": [
+            "clear_change-6cfdae33bc65-baseline"
+          ],
+          "result": {
+            "selected_frame_id": "clear_change-6cfdae33bc65-baseline",
+            "selected_timestamp": "2026-10-27T01:50:44-03:00",
+            "reason": "nearest usable pre-event frame for the same camera and context",
+            "evidence_references": [
+              "clear_change-6cfdae33bc65-baseline"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.707368-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "reference": "clear_change-6cfdae33bc65-baseline",
+            "current": "clear_change-6cfdae33bc65-event"
+          },
+          "thresholds": {
+            "mask_delta_saturation": 42,
+            "minimum_region_area_fraction": 0.0025,
+            "minimum_registration_reliability": 0.45
+          },
+          "selected_action": "align_and_compare",
+          "evidence_references": [
+            "clear_change-6cfdae33bc65-baseline",
+            "clear_change-6cfdae33bc65-event"
+          ],
+          "result": {
+            "comparable": true,
+            "registration_method": "orb_ransac_homography",
+            "registration_inliers": 831,
+            "reliability_score": 1.0,
+            "illumination_gain": 1.0,
+            "changed_fraction": 0.0263,
+            "candidate_regions": [
+              {
+                "region_id": "R1",
+                "bbox": [
+                  228,
+                  329,
+                  142,
+                  83
+                ],
+                "pixel_area": 8078,
+                "normalized_bbox": [
+                  0.3563,
+                  0.6854,
+                  0.2219,
+                  0.1729
+                ],
+                "cool_tone_fraction": 1.0,
+                "visual_cue": "localized cool-toned foreground change"
+              }
+            ],
+            "elapsed_ms": 219.022,
+            "notes": [],
+            "evidence_references": [
+              "clear_change-6cfdae33bc65-baseline",
+              "clear_change-6cfdae33bc65-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.92683-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "region_id": "R1",
+            "bbox": [
+              228,
+              329,
+              142,
+              83
+            ]
+          },
+          "thresholds": {
+            "cool_tone_descriptor_only": true
+          },
+          "selected_action": "inspect_region",
+          "evidence_references": [
+            "clear_change-6cfdae33bc65-event:R1"
+          ],
+          "result": {
+            "region_id": "R1",
+            "visual_cue": "localized cool-toned foreground change",
+            "cool_tone_fraction": 1.0,
+            "median_saturation": 126.0,
+            "median_luminance": 170.0,
+            "interpretation": "visible color/texture change only; material and cause are unverified",
+            "evidence_references": [
+              "clear_change-6cfdae33bc65-event:R1"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.927304-03:00"
+        },
+        {
+          "iteration": 6,
+          "observation_inputs": {
+            "reason": "check whether candidate region was present before the nearest baseline",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {},
+          "selected_action": "retrieve_additional_frame",
+          "evidence_references": [],
+          "result": {
+            "reason": "check whether candidate region was present before the nearest baseline",
+            "frame_id": null,
+            "available": false,
+            "evidence_references": []
+          },
+          "error": "no additional usable historical frame was available",
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.927333-03:00"
+        },
+        {
+          "iteration": 7,
+          "observation_inputs": {
+            "sensor_type": "water_contact",
+            "timestamp": "2026-10-27T02:05:44-03:00"
+          },
+          "thresholds": {
+            "maximum_time_offset_seconds": 300
+          },
+          "selected_action": "correlate_sensor_event",
+          "evidence_references": [
+            "synthetic-demo-sensor"
+          ],
+          "result": {
+            "sensor_type": "water_contact",
+            "active": true,
+            "time_aligned": true,
+            "offset_seconds": 0.0,
+            "classification": "SENSOR_CORRELATED",
+            "evidence_references": [
+              "synthetic-demo-sensor"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:44.927371-03:00"
+        },
+        {
+          "iteration": 8,
+          "observation_inputs": {
+            "finding": "possible_visible_water_change"
+          },
+          "thresholds": {},
+          "selected_action": "generate_review_request",
+          "evidence_references": [],
+          "result": {
+            "type": "operator_review",
+            "mandatory": true,
+            "reason": "New localized cool-toned change and a time-aligned water sensor warrant operator review; cause remains unverified.",
+            "available_actions": [
+              "approve",
+              "reject",
+              "request_more_evidence"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "waiting_for_human_review",
+          "timestamp": "2026-10-27T02:05:44.92738-03:00"
+        },
+        {
+          "iteration": 9,
+          "observation_inputs": {
+            "finding": "possible_visible_water_change",
+            "outcome": "human_review_required"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current",
+            "change_mask",
+            "overlay"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 4,
+            "evidence_references": [
+              "baseline",
+              "current",
+              "change_mask",
+              "overlay"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:45.069487-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "8fecdf843aed85cd0e5de658abed076323b185071da4857a814af74ead07cc05",
+        "change_mask": "29799d11c7f9337e8ce6534d196b07798db1486a48efd46b34909ed6c0fb7c56",
+        "overlay": "c50deb1070c5d7b9eccb15dcf5094771a94e750d8c4d63aabb12435b5d67b244"
+      },
+      "run_storage_id": "clear_change-6cfdae33bc65",
+      "cloud_evidence_key": "evidence/clear_change-6cfdae33bc65.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    },
+    {
+      "scenario": "poor_image",
+      "http_status": 200,
+      "elapsed_ms": 1222,
+      "response_bytes": 763763,
+      "synthetic": true,
+      "outcome": "retake_requested",
+      "finding": "insufficient_evidence",
+      "evidence_classes": [
+        "UNVERIFIED"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "retrieve_additional_frame",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "poor_image-aec6c6522783",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "poor_image-aec6c6522783",
+            "available_historical_frames": 1,
+            "event_frame_ref": "poor_image-aec6c6522783-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:46.806836-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "poor_image-aec6c6522783-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "poor_image-aec6c6522783-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 0.56,
+            "mean_luminance": 141.99,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 0.505,
+            "usable": false,
+            "reasons": [
+              "frame is blurred or lacks usable detail"
+            ],
+            "evidence_references": [
+              "poor_image-aec6c6522783-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:46.82577-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "reason": "alarm frame quality is below comparison threshold; seek corroborating view",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {},
+          "selected_action": "retrieve_additional_frame",
+          "evidence_references": [],
+          "result": {
+            "reason": "alarm frame quality is below comparison threshold; seek corroborating view",
+            "frame_id": null,
+            "available": false,
+            "evidence_references": []
+          },
+          "error": "no additional usable historical frame was available",
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:46.82581-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "finding": "insufficient_evidence"
+          },
+          "thresholds": {},
+          "selected_action": "generate_review_request",
+          "evidence_references": [],
+          "result": {
+            "type": "retake",
+            "mandatory": false,
+            "reason": "Alarm frame quality is inadequate; no incident claim is made.",
+            "available_actions": [
+              "approve",
+              "reject",
+              "request_more_evidence"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "retake_requested",
+          "timestamp": "2026-10-27T02:05:46.825821-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "finding": "insufficient_evidence",
+            "outcome": "retake_requested"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 2,
+            "evidence_references": [
+              "baseline",
+              "current"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:46.905094-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "36a42944efe802561c86eacb5c6c55a2a1298fb38002d7cd4dca8215e6e0a002"
+      },
+      "run_storage_id": "poor_image-aec6c6522783",
+      "cloud_evidence_key": "evidence/poor_image-aec6c6522783.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    },
+    {
+      "scenario": "lighting_shift",
+      "http_status": 200,
+      "elapsed_ms": 1961,
+      "response_bytes": 1651049,
+      "synthetic": true,
+      "outcome": "no_visual_change_supported",
+      "finding": "no_credible_visual_water_evidence",
+      "evidence_classes": [
+        "UNVERIFIED"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "lighting_shift-16a2317f69bf",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "lighting_shift-16a2317f69bf",
+            "available_historical_frames": 1,
+            "event_frame_ref": "lighting_shift-16a2317f69bf-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:48.031548-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "lighting_shift-16a2317f69bf-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "lighting_shift-16a2317f69bf-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 516.37,
+            "mean_luminance": 179.95,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 1.0,
+            "usable": true,
+            "reasons": [],
+            "evidence_references": [
+              "lighting_shift-16a2317f69bf-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:48.046485-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_time": "2026-10-27T02:05:48-03:00"
+          },
+          "thresholds": {
+            "exclude_incident_frames": true,
+            "minimum_quality_score": 0.4
+          },
+          "selected_action": "select_historical_baseline",
+          "evidence_references": [
+            "lighting_shift-16a2317f69bf-baseline"
+          ],
+          "result": {
+            "selected_frame_id": "lighting_shift-16a2317f69bf-baseline",
+            "selected_timestamp": "2026-10-27T01:50:48-03:00",
+            "reason": "nearest usable pre-event frame for the same camera and context",
+            "evidence_references": [
+              "lighting_shift-16a2317f69bf-baseline"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:48.046533-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "reference": "lighting_shift-16a2317f69bf-baseline",
+            "current": "lighting_shift-16a2317f69bf-event"
+          },
+          "thresholds": {
+            "mask_delta_saturation": 42,
+            "minimum_region_area_fraction": 0.0025,
+            "minimum_registration_reliability": 0.45
+          },
+          "selected_action": "align_and_compare",
+          "evidence_references": [
+            "lighting_shift-16a2317f69bf-baseline",
+            "lighting_shift-16a2317f69bf-event"
+          ],
+          "result": {
+            "comparable": true,
+            "registration_method": "orb_ransac_homography",
+            "registration_inliers": 831,
+            "reliability_score": 1.0,
+            "illumination_gain": 0.774,
+            "changed_fraction": 0.0,
+            "candidate_regions": [],
+            "elapsed_ms": 220.062,
+            "notes": [],
+            "evidence_references": [
+              "lighting_shift-16a2317f69bf-baseline",
+              "lighting_shift-16a2317f69bf-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:48.266961-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "sensor_type": "water_contact",
+            "timestamp": "2026-10-27T02:05:48-03:00"
+          },
+          "thresholds": {
+            "maximum_time_offset_seconds": 300
+          },
+          "selected_action": "correlate_sensor_event",
+          "evidence_references": [
+            "synthetic-demo-sensor"
+          ],
+          "result": {
+            "sensor_type": "water_contact",
+            "active": false,
+            "time_aligned": true,
+            "offset_seconds": 0.0,
+            "classification": "UNVERIFIED",
+            "evidence_references": [
+              "synthetic-demo-sensor"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:48.267007-03:00"
+        },
+        {
+          "iteration": 6,
+          "observation_inputs": {
+            "finding": "no_credible_visual_water_evidence",
+            "outcome": "no_visual_change_supported"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current",
+            "change_mask",
+            "overlay"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 4,
+            "evidence_references": [
+              "baseline",
+              "current",
+              "change_mask",
+              "overlay"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:48.40903-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "2d53cd20f993b93b9955ced30ee28c82d17f0eeeef127feb3efe863e60016bc0",
+        "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
+        "overlay": "2d53cd20f993b93b9955ced30ee28c82d17f0eeeef127feb3efe863e60016bc0"
+      },
+      "run_storage_id": "lighting_shift-16a2317f69bf",
+      "cloud_evidence_key": "evidence/lighting_shift-16a2317f69bf.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    },
+    {
+      "scenario": "historical_match",
+      "http_status": 200,
+      "elapsed_ms": 2384,
+      "response_bytes": 1658727,
+      "synthetic": true,
+      "outcome": "no_new_change_supported",
+      "finding": "visually_similar_change_previously_observed",
+      "evidence_classes": [
+        "OBSERVED"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "inspect_region",
+        "retrieve_additional_frame",
+        "align_and_compare",
+        "compare_historical_region",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "historical_match-6f43b40decde",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "historical_match-6f43b40decde",
+            "available_historical_frames": 2,
+            "event_frame_ref": "historical_match-6f43b40decde-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.127116-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "historical_match-6f43b40decde-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "historical_match-6f43b40decde-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 514.64,
+            "mean_luminance": 142.08,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 1.0,
+            "usable": true,
+            "reasons": [],
+            "evidence_references": [
+              "historical_match-6f43b40decde-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.146191-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_time": "2026-10-27T02:05:49-03:00"
+          },
+          "thresholds": {
+            "exclude_incident_frames": true,
+            "minimum_quality_score": 0.4
+          },
+          "selected_action": "select_historical_baseline",
+          "evidence_references": [
+            "historical_match-6f43b40decde-baseline"
+          ],
+          "result": {
+            "selected_frame_id": "historical_match-6f43b40decde-baseline",
+            "selected_timestamp": "2026-10-27T01:50:49-03:00",
+            "reason": "nearest usable pre-event frame for the same camera and context",
+            "evidence_references": [
+              "historical_match-6f43b40decde-baseline"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.146241-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "reference": "historical_match-6f43b40decde-baseline",
+            "current": "historical_match-6f43b40decde-event"
+          },
+          "thresholds": {
+            "mask_delta_saturation": 42,
+            "minimum_region_area_fraction": 0.0025,
+            "minimum_registration_reliability": 0.45
+          },
+          "selected_action": "align_and_compare",
+          "evidence_references": [
+            "historical_match-6f43b40decde-baseline",
+            "historical_match-6f43b40decde-event"
+          ],
+          "result": {
+            "comparable": true,
+            "registration_method": "orb_ransac_homography",
+            "registration_inliers": 831,
+            "reliability_score": 1.0,
+            "illumination_gain": 1.0,
+            "changed_fraction": 0.0263,
+            "candidate_regions": [
+              {
+                "region_id": "R1",
+                "bbox": [
+                  228,
+                  329,
+                  142,
+                  83
+                ],
+                "pixel_area": 8078,
+                "normalized_bbox": [
+                  0.3563,
+                  0.6854,
+                  0.2219,
+                  0.1729
+                ],
+                "cool_tone_fraction": 1.0,
+                "visual_cue": "localized cool-toned foreground change"
+              }
+            ],
+            "elapsed_ms": 218.586,
+            "notes": [],
+            "evidence_references": [
+              "historical_match-6f43b40decde-baseline",
+              "historical_match-6f43b40decde-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.365232-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "region_id": "R1",
+            "bbox": [
+              228,
+              329,
+              142,
+              83
+            ]
+          },
+          "thresholds": {
+            "cool_tone_descriptor_only": true
+          },
+          "selected_action": "inspect_region",
+          "evidence_references": [
+            "historical_match-6f43b40decde-event:R1"
+          ],
+          "result": {
+            "region_id": "R1",
+            "visual_cue": "localized cool-toned foreground change",
+            "cool_tone_fraction": 1.0,
+            "median_saturation": 126.0,
+            "median_luminance": 170.0,
+            "interpretation": "visible color/texture change only; material and cause are unverified",
+            "evidence_references": [
+              "historical_match-6f43b40decde-event:R1"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.365758-03:00"
+        },
+        {
+          "iteration": 6,
+          "observation_inputs": {
+            "reason": "check whether candidate region was present before the nearest baseline",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {},
+          "selected_action": "retrieve_additional_frame",
+          "evidence_references": [
+            "historical_match-6f43b40decde-older"
+          ],
+          "result": {
+            "reason": "check whether candidate region was present before the nearest baseline",
+            "frame_id": "historical_match-6f43b40decde-older",
+            "available": true,
+            "evidence_references": [
+              "historical_match-6f43b40decde-older"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.365794-03:00"
+        },
+        {
+          "iteration": 7,
+          "observation_inputs": {
+            "reference": "historical_match-6f43b40decde-older",
+            "current": "historical_match-6f43b40decde-event"
+          },
+          "thresholds": {
+            "mask_delta_saturation": 42,
+            "minimum_region_area_fraction": 0.0025,
+            "minimum_registration_reliability": 0.45
+          },
+          "selected_action": "align_and_compare",
+          "evidence_references": [
+            "historical_match-6f43b40decde-older",
+            "historical_match-6f43b40decde-event"
+          ],
+          "result": {
+            "comparable": true,
+            "registration_method": "orb_ransac_homography",
+            "registration_inliers": 887,
+            "reliability_score": 1.0,
+            "illumination_gain": 1.0,
+            "changed_fraction": 0.0,
+            "candidate_regions": [],
+            "elapsed_ms": 199.461,
+            "notes": [],
+            "evidence_references": [
+              "historical_match-6f43b40decde-older",
+              "historical_match-6f43b40decde-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.565614-03:00"
+        },
+        {
+          "iteration": 8,
+          "observation_inputs": {
+            "older_frame": "historical_match-6f43b40decde-older",
+            "event_frame": "historical_match-6f43b40decde-event",
+            "region_id": "R1"
+          },
+          "thresholds": {
+            "preexisting_similarity": 0.92
+          },
+          "selected_action": "compare_historical_region",
+          "evidence_references": [
+            "historical_match-6f43b40decde-older",
+            "historical_match-6f43b40decde-event:R1"
+          ],
+          "result": {
+            "region_id": "R1",
+            "similarity": 1.0,
+            "prior_candidate_regions": 0,
+            "interpretation": "similar appearance exists in an older pre-event image",
+            "evidence_references": [
+              "historical_match-6f43b40decde-older",
+              "historical_match-6f43b40decde-event:R1"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.565771-03:00"
+        },
+        {
+          "iteration": 9,
+          "observation_inputs": {
+            "sensor_type": "water_contact",
+            "timestamp": "2026-10-27T02:05:49-03:00"
+          },
+          "thresholds": {
+            "maximum_time_offset_seconds": 300
+          },
+          "selected_action": "correlate_sensor_event",
+          "evidence_references": [
+            "synthetic-demo-sensor"
+          ],
+          "result": {
+            "sensor_type": "water_contact",
+            "active": false,
+            "time_aligned": true,
+            "offset_seconds": 0.0,
+            "classification": "UNVERIFIED",
+            "evidence_references": [
+              "synthetic-demo-sensor"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:50.565798-03:00"
+        },
+        {
+          "iteration": 10,
+          "observation_inputs": {
+            "finding": "visually_similar_change_previously_observed",
+            "outcome": "no_new_change_supported"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current",
+            "change_mask",
+            "overlay"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 4,
+            "evidence_references": [
+              "baseline",
+              "current",
+              "change_mask",
+              "overlay"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:50.707913-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "8fecdf843aed85cd0e5de658abed076323b185071da4857a814af74ead07cc05",
+        "change_mask": "29799d11c7f9337e8ce6534d196b07798db1486a48efd46b34909ed6c0fb7c56",
+        "overlay": "c50deb1070c5d7b9eccb15dcf5094771a94e750d8c4d63aabb12435b5d67b244"
+      },
+      "run_storage_id": "historical_match-6f43b40decde",
+      "cloud_evidence_key": "evidence/historical_match-6f43b40decde.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    },
+    {
+      "scenario": "camera_movement",
+      "http_status": 200,
+      "elapsed_ms": 2000,
+      "response_bytes": 1619232,
+      "synthetic": true,
+      "outcome": "no_visual_change_supported",
+      "finding": "no_credible_visual_water_evidence",
+      "evidence_classes": [
+        "UNVERIFIED"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "camera_movement-9d258270183a",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "camera_movement-9d258270183a",
+            "available_historical_frames": 1,
+            "event_frame_ref": "camera_movement-9d258270183a-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:52.426683-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "camera_movement-9d258270183a-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "camera_movement-9d258270183a-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 517.83,
+            "mean_luminance": 140.71,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 1.0,
+            "usable": true,
+            "reasons": [],
+            "evidence_references": [
+              "camera_movement-9d258270183a-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:52.445727-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_time": "2026-10-27T02:05:52-03:00"
+          },
+          "thresholds": {
+            "exclude_incident_frames": true,
+            "minimum_quality_score": 0.4
+          },
+          "selected_action": "select_historical_baseline",
+          "evidence_references": [
+            "camera_movement-9d258270183a-baseline"
+          ],
+          "result": {
+            "selected_frame_id": "camera_movement-9d258270183a-baseline",
+            "selected_timestamp": "2026-10-27T01:50:52-03:00",
+            "reason": "nearest usable pre-event frame for the same camera and context",
+            "evidence_references": [
+              "camera_movement-9d258270183a-baseline"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:52.445776-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "reference": "camera_movement-9d258270183a-baseline",
+            "current": "camera_movement-9d258270183a-event"
+          },
+          "thresholds": {
+            "mask_delta_saturation": 42,
+            "minimum_region_area_fraction": 0.0025,
+            "minimum_registration_reliability": 0.45
+          },
+          "selected_action": "align_and_compare",
+          "evidence_references": [
+            "camera_movement-9d258270183a-baseline",
+            "camera_movement-9d258270183a-event"
+          ],
+          "result": {
+            "comparable": true,
+            "registration_method": "orb_ransac_homography",
+            "registration_inliers": 501,
+            "reliability_score": 0.963,
+            "illumination_gain": 1.008,
+            "changed_fraction": 0.0,
+            "candidate_regions": [],
+            "elapsed_ms": 240.608,
+            "notes": [],
+            "evidence_references": [
+              "camera_movement-9d258270183a-baseline",
+              "camera_movement-9d258270183a-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:52.686752-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "sensor_type": "water_contact",
+            "timestamp": "2026-10-27T02:05:52-03:00"
+          },
+          "thresholds": {
+            "maximum_time_offset_seconds": 300
+          },
+          "selected_action": "correlate_sensor_event",
+          "evidence_references": [
+            "synthetic-demo-sensor"
+          ],
+          "result": {
+            "sensor_type": "water_contact",
+            "active": false,
+            "time_aligned": true,
+            "offset_seconds": 0.0,
+            "classification": "UNVERIFIED",
+            "evidence_references": [
+              "synthetic-demo-sensor"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:52.686794-03:00"
+        },
+        {
+          "iteration": 6,
+          "observation_inputs": {
+            "finding": "no_credible_visual_water_evidence",
+            "outcome": "no_visual_change_supported"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current",
+            "change_mask",
+            "overlay"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 4,
+            "evidence_references": [
+              "baseline",
+              "current",
+              "change_mask",
+              "overlay"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:52.845566-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "d1c7cea7df2f0076259a5e4afcaf1db0553475f7cdb0ad67c6993e56a7a6c751",
+        "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
+        "overlay": "8cc26b031689b96f16267824b86aaf587523edf3aeb30650d277a5f477d66eac"
+      },
+      "run_storage_id": "camera_movement-9d258270183a",
+      "cloud_evidence_key": "evidence/camera_movement-9d258270183a.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    },
+    {
+      "scenario": "occlusion_blur",
+      "http_status": 200,
+      "elapsed_ms": 1206,
+      "response_bytes": 781345,
+      "synthetic": true,
+      "outcome": "retake_requested",
+      "finding": "insufficient_evidence",
+      "evidence_classes": [
+        "UNVERIFIED"
+      ],
+      "tool_calls": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "retrieve_additional_frame",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "trace": [
+        {
+          "iteration": 1,
+          "observation_inputs": {
+            "event_id": "occlusion_blur-7968227258c1",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {
+            "history_context": "mechanical_room"
+          },
+          "selected_action": "retrieve_event_frames",
+          "evidence_references": [],
+          "result": {
+            "camera_id": "mechanical-room-cam-01",
+            "event_id": "occlusion_blur-7968227258c1",
+            "available_historical_frames": 1,
+            "event_frame_ref": "occlusion_blur-7968227258c1-event"
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:54.425368-03:00"
+        },
+        {
+          "iteration": 2,
+          "observation_inputs": {
+            "frame": "occlusion_blur-7968227258c1-event"
+          },
+          "thresholds": {
+            "minimum_blur_variance": 24,
+            "minimum_resolution_px": 96
+          },
+          "selected_action": "evaluate_image_quality",
+          "evidence_references": [
+            "occlusion_blur-7968227258c1-event"
+          ],
+          "result": {
+            "width": 640,
+            "height": 480,
+            "blur_variance": 15.18,
+            "mean_luminance": 135.67,
+            "dark_fraction": 0.0,
+            "bright_fraction": 0.0,
+            "quality_score": 0.627,
+            "usable": false,
+            "reasons": [
+              "frame is blurred or lacks usable detail"
+            ],
+            "evidence_references": [
+              "occlusion_blur-7968227258c1-event"
+            ]
+          },
+          "error": null,
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:54.444019-03:00"
+        },
+        {
+          "iteration": 3,
+          "observation_inputs": {
+            "reason": "alarm frame quality is below comparison threshold; seek corroborating view",
+            "camera_id": "mechanical-room-cam-01"
+          },
+          "thresholds": {},
+          "selected_action": "retrieve_additional_frame",
+          "evidence_references": [],
+          "result": {
+            "reason": "alarm frame quality is below comparison threshold; seek corroborating view",
+            "frame_id": null,
+            "available": false,
+            "evidence_references": []
+          },
+          "error": "no additional usable historical frame was available",
+          "stopping_condition": null,
+          "timestamp": "2026-10-27T02:05:54.444061-03:00"
+        },
+        {
+          "iteration": 4,
+          "observation_inputs": {
+            "finding": "insufficient_evidence"
+          },
+          "thresholds": {},
+          "selected_action": "generate_review_request",
+          "evidence_references": [],
+          "result": {
+            "type": "retake",
+            "mandatory": false,
+            "reason": "Alarm frame quality is inadequate; no incident claim is made.",
+            "available_actions": [
+              "approve",
+              "reject",
+              "request_more_evidence"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "retake_requested",
+          "timestamp": "2026-10-27T02:05:54.444078-03:00"
+        },
+        {
+          "iteration": 5,
+          "observation_inputs": {
+            "finding": "insufficient_evidence",
+            "outcome": "retake_requested"
+          },
+          "thresholds": {},
+          "selected_action": "create_evidence_report",
+          "evidence_references": [
+            "baseline",
+            "current"
+          ],
+          "result": {
+            "report_schema": "1.0",
+            "sha256_count": 2,
+            "evidence_references": [
+              "baseline",
+              "current"
+            ]
+          },
+          "error": null,
+          "stopping_condition": "bounded investigation complete",
+          "timestamp": "2026-10-27T02:05:54.507184-03:00"
+        }
+      ],
+      "sha256": {
+        "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+        "current": "beaf65c97574738a299540ff968228fd6e01b75ecb925d9f4df0a73c2a28fda7"
+      },
+      "run_storage_id": "occlusion_blur-7968227258c1",
+      "cloud_evidence_key": "evidence/occlusion_blur-7968227258c1.zip",
+      "cloud_evidence_sse": "AES256",
+      "error": null
+    }
+  ],
+  "checked_at_utc": "2026-10-27T05:05:55.5217074Z",
+  "sample_count": 7
+}

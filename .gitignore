@@ -7,6 +7,9 @@ __pycache__/
 .env.*
 !.env.example
 artifacts/fortifiers-incident-memory-source.zip
+artifacts/fortifiers-incident-memory-lambda-*.zip
+artifacts/lambda-package-*/
+artifacts/aws-wheel-check*/
 artifacts/demo/*/
 artifacts/video/*.mp4
 artifacts/video/recording-smoke-frame.png

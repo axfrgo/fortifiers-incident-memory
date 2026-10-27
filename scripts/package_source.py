@@ -11,7 +11,8 @@ ARCHIVE = ROOT / "artifacts" / "fortifiers-incident-memory-source.zip"
 PUBLIC_REPOSITORY_URL = "https://github.com/axfrgo/fortifiers-incident-memory"
 PUBLIC_ARCHIVE_URL = f"{PUBLIC_REPOSITORY_URL}/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip"
 IGNORED_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache"}
-IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "source-archive-manifest.json", "source-archive-validation.json", "recording-smoke-frame.png"}
+IGNORED_ARTIFACT_PREFIXES = ("lambda-package-build", "lambda-package-py", "aws-wheel-check")
+IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "fortifiers-incident-memory-lambda-cp314.zip", "source-archive-manifest.json", "source-archive-validation.json", "recording-smoke-frame.png"}
 NON_SOURCE_MEDIA_SUFFIXES = {".mp4", ".mov"}
 
 
@@ -38,6 +39,8 @@ def included_files():
             continue
         relative = path.relative_to(ROOT)
         if any(part in IGNORED_DIRS for part in relative.parts):
+            continue
+        if len(relative.parts) >= 2 and relative.parts[0] == "artifacts" and relative.parts[1].startswith(IGNORED_ARTIFACT_PREFIXES):
             continue
         if len(relative.parts) >= 3 and relative.parts[:2] == ("artifacts", "demo") and relative.parts[2] not in demo_ids:
             continue
