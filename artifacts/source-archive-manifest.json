@@ -1,5 +1,5 @@
 {
-  "created_at_utc": "2026-10-27T05:53:06.579178+00:00",
+  "created_at_utc": "2026-10-27T02:53:06.579178-03:00",
   "archive": "fortifiers-incident-memory-source.zip",
   "sha256": "2c29327dbe42dbca87e034f2925380a0d95c1852db69aa259cd9abf6ca0a745f",
   "file_count": 232,
@@ -34,6 +34,28 @@
       "sanitized_aws_evidence_included": true,
       "signed_presigned_urls_found": false,
       "synthetic_visual_examples_included": true
+    }
+  },
+  "publication_verification": {
+    "verified_at_utc": "2026-10-27T05:53:55Z",
+    "github_release": {
+      "url": "https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip",
+      "anonymous_http_status": 200,
+      "anonymous_download_sha256": "2c29327dbe42dbca87e034f2925380a0d95c1852db69aa259cd9abf6ca0a745f",
+      "local_sha256": "2c29327dbe42dbca87e034f2925380a0d95c1852db69aa259cd9abf6ca0a745f",
+      "bytes": 34475631,
+      "checksum_match": true,
+      "zip_integrity": "PASS",
+      "extracted_tests_passed": 37
+    },
+    "devpost_draft": {
+      "saved": true,
+      "state": "DRAFT",
+      "completion": "4/5",
+      "attachment": "fortifiers-incident-memory-source.zip",
+      "agentic_vision_award_selected": true,
+      "rules_terms_checkbox_checked": false,
+      "submitted": false
     }
   }
 }
