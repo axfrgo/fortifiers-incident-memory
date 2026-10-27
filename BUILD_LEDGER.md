@@ -135,3 +135,13 @@
 |---|---|---|---|
 | 2026-10-27 02:13Z | Rebuild the portable source archive after status and ledger updates; run zipfile.testzip() and compare SHA/member count to artifacts/source-archive-manifest.json | 213 members, no corrupt member, manifest SHA/member count matched the archive. | Current SHA is recorded in artifacts/source-archive-manifest.json; this archive is for the private draft, while the public GitHub repository is the judge-accessible source. |
 | 2026-10-27 02:13Z | Repeat the targeted secret-pattern scan over current working text, source archive text, and Git history | No access-key, GitHub-token, private-key-header, AWS-secret assignment, or long generic token assignment matches. No full secret values were printed. | gitleaks, trufflehog and detect-secrets are not installed; this is a focused scan, not a comprehensive certification. The first doc-only diff check found one blank trailing line from the PowerShell append; removed it and reran the diff check cleanly. |
+
+## FINAL PUBLIC-ACCESS RECHECK — 2026-10-27 02:17Z
+
+| Time (UTC) | Action / command | Result | Evidence / next step |
+|---|---|---|---|
+| 2026-10-27 02:16Z | Push doc-only closeout commit c0e95ec5bf01a789ce124ae4396574c48f341439; query unauthenticated GitHub API | GitHub API reported c0e95ec5bf01a789ce124ae4396574c48f341439 as master HEAD. | Public repo remains https://github.com/axfrgo/fortifiers-incident-memory. |
+| 2026-10-27 02:16Z | Check raw.githubusercontent URLs for the new status file | The raw-content response was stale and still showed the prior BLOCKED row after the push. | Do not rely on the cached raw response for the latest status; verify the pinned commit through the GitHub Contents API. |
+| 2026-10-27 02:17Z | Anonymous GitHub Contents API calls pinned to commit c0e95ec5bf01a789ce124ae4396574c48f341439 for README, FINAL_SUBMISSION_STATUS, test-result JSON, and project-cover PNG | All four public API calls returned file contents. The status blob a27f889d553999b60e1b48695f7bbcaac17dacb6 contains GITHUB_PUBLISHED PASS. | Verified without credentials. An initial URL-construction attempt returned 404 because PowerShell interpolated the query incorrectly; concatenating the URL fixed it. |
+
+The latest local status and ledger now reflect the anonymous Contents API verification. Rebuild the source archive and push this closeout; AWS, video and Devpost submission remain blocked.
