@@ -20,6 +20,15 @@ def included_files():
     live_check_path = ROOT / "artifacts" / "live-http-check.json"
     if live_check_path.exists():
         demo_ids.add(json.loads(live_check_path.read_text(encoding="utf-8"))["run_storage_id"])
+    final_check_path = ROOT / "artifacts" / "final-local-verification.json"
+    if final_check_path.exists():
+        final_check = json.loads(final_check_path.read_text(encoding="utf-8"))
+        for case in final_check.get("scenarios", []):
+            if case.get("run_id"):
+                demo_ids.add(case["run_id"])
+        for case in final_check.get("dashboard_runs", []):
+            if case.get("run_id"):
+                demo_ids.add(case["run_id"])
 
     for path in sorted(ROOT.rglob("*")):
         if not path.is_file():

@@ -1,17 +1,17 @@
 {
-  "generated_at_utc": "2026-10-26T21:25:56.968992-03:00",
+  "generated_at_utc": "2026-10-27T00:55:43.488122+00:00",
   "synthetic": true,
   "cases": [
     {
       "scenario": "dry_normal",
       "description": "No scene change; normal dry frame",
       "outcome": "no_visual_change_supported",
-      "run_storage_id": "dry_normal-d721d9844c20",
+      "run_storage_id": "dry_normal-2bcc50299895",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "dry_normal-d721d9844c20",
+            "event_id": "dry_normal-2bcc50299895",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -21,9 +21,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "dry_normal-d721d9844c20",
+            "event_id": "dry_normal-2bcc50299895",
             "available_historical_frames": 1,
-            "event_frame_ref": "dry_normal-d721d9844c20-event"
+            "event_frame_ref": "dry_normal-2bcc50299895-event"
           },
           "error": null,
           "stopping_condition": null
@@ -31,7 +31,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "dry_normal-d721d9844c20-event"
+            "frame": "dry_normal-2bcc50299895-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -39,7 +39,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "dry_normal-d721d9844c20-event"
+            "dry_normal-2bcc50299895-event"
           ],
           "result": {
             "width": 640,
@@ -52,7 +52,7 @@
             "usable": true,
             "reasons": [],
             "evidence_references": [
-              "dry_normal-d721d9844c20-event"
+              "dry_normal-2bcc50299895-event"
             ]
           },
           "error": null,
@@ -62,7 +62,7 @@
           "iteration": 3,
           "observation_inputs": {
             "camera_id": "mechanical-room-cam-01",
-            "event_time": "2026-10-26T21:25:57-03:00"
+            "event_time": "2026-10-27T00:55:43+00:00"
           },
           "thresholds": {
             "exclude_incident_frames": true,
@@ -70,14 +70,14 @@
           },
           "selected_action": "select_historical_baseline",
           "evidence_references": [
-            "dry_normal-d721d9844c20-baseline"
+            "dry_normal-2bcc50299895-baseline"
           ],
           "result": {
-            "selected_frame_id": "dry_normal-d721d9844c20-baseline",
-            "selected_timestamp": "2026-10-26T21:10:57-03:00",
+            "selected_frame_id": "dry_normal-2bcc50299895-baseline",
+            "selected_timestamp": "2026-10-27T00:40:43+00:00",
             "reason": "nearest usable pre-event frame for the same camera and context",
             "evidence_references": [
-              "dry_normal-d721d9844c20-baseline"
+              "dry_normal-2bcc50299895-baseline"
             ]
           },
           "error": null,
@@ -86,8 +86,8 @@
         {
           "iteration": 4,
           "observation_inputs": {
-            "reference": "dry_normal-d721d9844c20-baseline",
-            "current": "dry_normal-d721d9844c20-event"
+            "reference": "dry_normal-2bcc50299895-baseline",
+            "current": "dry_normal-2bcc50299895-event"
           },
           "thresholds": {
             "mask_delta_saturation": 42,
@@ -96,8 +96,8 @@
           },
           "selected_action": "align_and_compare",
           "evidence_references": [
-            "dry_normal-d721d9844c20-baseline",
-            "dry_normal-d721d9844c20-event"
+            "dry_normal-2bcc50299895-baseline",
+            "dry_normal-2bcc50299895-event"
           ],
           "result": {
             "comparable": true,
@@ -107,11 +107,11 @@
             "illumination_gain": 1.0,
             "changed_fraction": 0.0,
             "candidate_regions": [],
-            "elapsed_ms": 114.068,
+            "elapsed_ms": 81.054,
             "notes": [],
             "evidence_references": [
-              "dry_normal-d721d9844c20-baseline",
-              "dry_normal-d721d9844c20-event"
+              "dry_normal-2bcc50299895-baseline",
+              "dry_normal-2bcc50299895-event"
             ]
           },
           "error": null,
@@ -121,7 +121,7 @@
           "iteration": 5,
           "observation_inputs": {
             "sensor_type": "water_contact",
-            "timestamp": "2026-10-26T21:25:57-03:00"
+            "timestamp": "2026-10-27T00:55:43+00:00"
           },
           "thresholds": {
             "maximum_time_offset_seconds": 300
@@ -177,19 +177,19 @@
         "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
         "overlay": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564"
       },
-      "artifact_directory": "artifacts/demo/dry_normal-d721d9844c20",
-      "report_url_local": "/artifacts/dry_normal-d721d9844c20/report.html"
+      "artifact_directory": "artifacts/demo/dry_normal-2bcc50299895",
+      "report_url_local": "/artifacts/dry_normal-2bcc50299895/report.html"
     },
     {
       "scenario": "clear_change",
       "description": "Localized new cool-toned floor change with an active water sensor",
       "outcome": "human_review_required",
-      "run_storage_id": "clear_change-8d262f4bf45a",
+      "run_storage_id": "clear_change-212abed6e73c",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "clear_change-8d262f4bf45a",
+            "event_id": "clear_change-212abed6e73c",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -199,9 +199,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "clear_change-8d262f4bf45a",
+            "event_id": "clear_change-212abed6e73c",
             "available_historical_frames": 1,
-            "event_frame_ref": "clear_change-8d262f4bf45a-event"
+            "event_frame_ref": "clear_change-212abed6e73c-event"
           },
           "error": null,
           "stopping_condition": null
@@ -209,7 +209,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "clear_change-8d262f4bf45a-event"
+            "frame": "clear_change-212abed6e73c-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -217,7 +217,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "clear_change-8d262f4bf45a-event"
+            "clear_change-212abed6e73c-event"
           ],
           "result": {
             "width": 640,
@@ -230,7 +230,7 @@
             "usable": true,
             "reasons": [],
             "evidence_references": [
-              "clear_change-8d262f4bf45a-event"
+              "clear_change-212abed6e73c-event"
             ]
           },
           "error": null,
@@ -240,7 +240,7 @@
           "iteration": 3,
           "observation_inputs": {
             "camera_id": "mechanical-room-cam-01",
-            "event_time": "2026-10-26T21:25:57-03:00"
+            "event_time": "2026-10-27T00:55:44+00:00"
           },
           "thresholds": {
             "exclude_incident_frames": true,
@@ -248,14 +248,14 @@
           },
           "selected_action": "select_historical_baseline",
           "evidence_references": [
-            "clear_change-8d262f4bf45a-baseline"
+            "clear_change-212abed6e73c-baseline"
           ],
           "result": {
-            "selected_frame_id": "clear_change-8d262f4bf45a-baseline",
-            "selected_timestamp": "2026-10-26T21:10:57-03:00",
+            "selected_frame_id": "clear_change-212abed6e73c-baseline",
+            "selected_timestamp": "2026-10-27T00:40:44+00:00",
             "reason": "nearest usable pre-event frame for the same camera and context",
             "evidence_references": [
-              "clear_change-8d262f4bf45a-baseline"
+              "clear_change-212abed6e73c-baseline"
             ]
           },
           "error": null,
@@ -264,8 +264,8 @@
         {
           "iteration": 4,
           "observation_inputs": {
-            "reference": "clear_change-8d262f4bf45a-baseline",
-            "current": "clear_change-8d262f4bf45a-event"
+            "reference": "clear_change-212abed6e73c-baseline",
+            "current": "clear_change-212abed6e73c-event"
           },
           "thresholds": {
             "mask_delta_saturation": 42,
@@ -274,8 +274,8 @@
           },
           "selected_action": "align_and_compare",
           "evidence_references": [
-            "clear_change-8d262f4bf45a-baseline",
-            "clear_change-8d262f4bf45a-event"
+            "clear_change-212abed6e73c-baseline",
+            "clear_change-212abed6e73c-event"
           ],
           "result": {
             "comparable": true,
@@ -304,11 +304,11 @@
                 "visual_cue": "localized cool-toned foreground change"
               }
             ],
-            "elapsed_ms": 100.335,
+            "elapsed_ms": 68.137,
             "notes": [],
             "evidence_references": [
-              "clear_change-8d262f4bf45a-baseline",
-              "clear_change-8d262f4bf45a-event"
+              "clear_change-212abed6e73c-baseline",
+              "clear_change-212abed6e73c-event"
             ]
           },
           "error": null,
@@ -330,7 +330,7 @@
           },
           "selected_action": "inspect_region",
           "evidence_references": [
-            "clear_change-8d262f4bf45a-event:R1"
+            "clear_change-212abed6e73c-event:R1"
           ],
           "result": {
             "region_id": "R1",
@@ -340,7 +340,7 @@
             "median_luminance": 170.0,
             "interpretation": "visible color/texture change only; material and cause are unverified",
             "evidence_references": [
-              "clear_change-8d262f4bf45a-event:R1"
+              "clear_change-212abed6e73c-event:R1"
             ]
           },
           "error": null,
@@ -368,7 +368,7 @@
           "iteration": 7,
           "observation_inputs": {
             "sensor_type": "water_contact",
-            "timestamp": "2026-10-26T21:25:57-03:00"
+            "timestamp": "2026-10-27T00:55:44+00:00"
           },
           "thresholds": {
             "maximum_time_offset_seconds": 300
@@ -445,19 +445,19 @@
         "change_mask": "29799d11c7f9337e8ce6534d196b07798db1486a48efd46b34909ed6c0fb7c56",
         "overlay": "c50deb1070c5d7b9eccb15dcf5094771a94e750d8c4d63aabb12435b5d67b244"
       },
-      "artifact_directory": "artifacts/demo/clear_change-8d262f4bf45a",
-      "report_url_local": "/artifacts/clear_change-8d262f4bf45a/report.html"
+      "artifact_directory": "artifacts/demo/clear_change-212abed6e73c",
+      "report_url_local": "/artifacts/clear_change-212abed6e73c/report.html"
     },
     {
       "scenario": "poor_image",
       "description": "Blurred alarm frame; no replacement frame is available",
       "outcome": "retake_requested",
-      "run_storage_id": "poor_image-59418d9b5685",
+      "run_storage_id": "poor_image-3242531c5fb3",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "poor_image-59418d9b5685",
+            "event_id": "poor_image-3242531c5fb3",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -467,9 +467,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "poor_image-59418d9b5685",
+            "event_id": "poor_image-3242531c5fb3",
             "available_historical_frames": 1,
-            "event_frame_ref": "poor_image-59418d9b5685-event"
+            "event_frame_ref": "poor_image-3242531c5fb3-event"
           },
           "error": null,
           "stopping_condition": null
@@ -477,7 +477,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "poor_image-59418d9b5685-event"
+            "frame": "poor_image-3242531c5fb3-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -485,7 +485,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "poor_image-59418d9b5685-event"
+            "poor_image-3242531c5fb3-event"
           ],
           "result": {
             "width": 640,
@@ -500,7 +500,7 @@
               "frame is blurred or lacks usable detail"
             ],
             "evidence_references": [
-              "poor_image-59418d9b5685-event"
+              "poor_image-3242531c5fb3-event"
             ]
           },
           "error": null,
@@ -573,19 +573,19 @@
         "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
         "current": "36a42944efe802561c86eacb5c6c55a2a1298fb38002d7cd4dca8215e6e0a002"
       },
-      "artifact_directory": "artifacts/demo/poor_image-59418d9b5685",
-      "report_url_local": "/artifacts/poor_image-59418d9b5685/report.html"
+      "artifact_directory": "artifacts/demo/poor_image-3242531c5fb3",
+      "report_url_local": "/artifacts/poor_image-3242531c5fb3/report.html"
     },
     {
       "scenario": "lighting_shift",
       "description": "Global illumination change without localized chromatic evidence; sensor inactive",
       "outcome": "no_visual_change_supported",
-      "run_storage_id": "lighting_shift-9b57bcfee8b0",
+      "run_storage_id": "lighting_shift-9b558a709c09",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "lighting_shift-9b57bcfee8b0",
+            "event_id": "lighting_shift-9b558a709c09",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -595,9 +595,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "lighting_shift-9b57bcfee8b0",
+            "event_id": "lighting_shift-9b558a709c09",
             "available_historical_frames": 1,
-            "event_frame_ref": "lighting_shift-9b57bcfee8b0-event"
+            "event_frame_ref": "lighting_shift-9b558a709c09-event"
           },
           "error": null,
           "stopping_condition": null
@@ -605,7 +605,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "lighting_shift-9b57bcfee8b0-event"
+            "frame": "lighting_shift-9b558a709c09-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -613,7 +613,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "lighting_shift-9b57bcfee8b0-event"
+            "lighting_shift-9b558a709c09-event"
           ],
           "result": {
             "width": 640,
@@ -626,7 +626,7 @@
             "usable": true,
             "reasons": [],
             "evidence_references": [
-              "lighting_shift-9b57bcfee8b0-event"
+              "lighting_shift-9b558a709c09-event"
             ]
           },
           "error": null,
@@ -636,7 +636,7 @@
           "iteration": 3,
           "observation_inputs": {
             "camera_id": "mechanical-room-cam-01",
-            "event_time": "2026-10-26T21:25:58-03:00"
+            "event_time": "2026-10-27T00:55:44+00:00"
           },
           "thresholds": {
             "exclude_incident_frames": true,
@@ -644,14 +644,14 @@
           },
           "selected_action": "select_historical_baseline",
           "evidence_references": [
-            "lighting_shift-9b57bcfee8b0-baseline"
+            "lighting_shift-9b558a709c09-baseline"
           ],
           "result": {
-            "selected_frame_id": "lighting_shift-9b57bcfee8b0-baseline",
-            "selected_timestamp": "2026-10-26T21:10:58-03:00",
+            "selected_frame_id": "lighting_shift-9b558a709c09-baseline",
+            "selected_timestamp": "2026-10-27T00:40:44+00:00",
             "reason": "nearest usable pre-event frame for the same camera and context",
             "evidence_references": [
-              "lighting_shift-9b57bcfee8b0-baseline"
+              "lighting_shift-9b558a709c09-baseline"
             ]
           },
           "error": null,
@@ -660,8 +660,8 @@
         {
           "iteration": 4,
           "observation_inputs": {
-            "reference": "lighting_shift-9b57bcfee8b0-baseline",
-            "current": "lighting_shift-9b57bcfee8b0-event"
+            "reference": "lighting_shift-9b558a709c09-baseline",
+            "current": "lighting_shift-9b558a709c09-event"
           },
           "thresholds": {
             "mask_delta_saturation": 42,
@@ -670,8 +670,8 @@
           },
           "selected_action": "align_and_compare",
           "evidence_references": [
-            "lighting_shift-9b57bcfee8b0-baseline",
-            "lighting_shift-9b57bcfee8b0-event"
+            "lighting_shift-9b558a709c09-baseline",
+            "lighting_shift-9b558a709c09-event"
           ],
           "result": {
             "comparable": true,
@@ -681,11 +681,11 @@
             "illumination_gain": 0.774,
             "changed_fraction": 0.0,
             "candidate_regions": [],
-            "elapsed_ms": 85.344,
+            "elapsed_ms": 68.315,
             "notes": [],
             "evidence_references": [
-              "lighting_shift-9b57bcfee8b0-baseline",
-              "lighting_shift-9b57bcfee8b0-event"
+              "lighting_shift-9b558a709c09-baseline",
+              "lighting_shift-9b558a709c09-event"
             ]
           },
           "error": null,
@@ -695,7 +695,7 @@
           "iteration": 5,
           "observation_inputs": {
             "sensor_type": "water_contact",
-            "timestamp": "2026-10-26T21:25:58-03:00"
+            "timestamp": "2026-10-27T00:55:44+00:00"
           },
           "thresholds": {
             "maximum_time_offset_seconds": 300
@@ -751,19 +751,19 @@
         "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
         "overlay": "2d53cd20f993b93b9955ced30ee28c82d17f0eeeef127feb3efe863e60016bc0"
       },
-      "artifact_directory": "artifacts/demo/lighting_shift-9b57bcfee8b0",
-      "report_url_local": "/artifacts/lighting_shift-9b57bcfee8b0/report.html"
+      "artifact_directory": "artifacts/demo/lighting_shift-9b558a709c09",
+      "report_url_local": "/artifacts/lighting_shift-9b558a709c09/report.html"
     },
     {
       "scenario": "historical_match",
       "description": "Alarm-time mark resembles a region in an older frame; latest prior frame is clear",
       "outcome": "no_new_change_supported",
-      "run_storage_id": "historical_match-cb1879c4884d",
+      "run_storage_id": "historical_match-1cd721013e20",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "historical_match-cb1879c4884d",
+            "event_id": "historical_match-1cd721013e20",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -773,9 +773,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "historical_match-cb1879c4884d",
+            "event_id": "historical_match-1cd721013e20",
             "available_historical_frames": 2,
-            "event_frame_ref": "historical_match-cb1879c4884d-event"
+            "event_frame_ref": "historical_match-1cd721013e20-event"
           },
           "error": null,
           "stopping_condition": null
@@ -783,7 +783,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "historical_match-cb1879c4884d-event"
+            "frame": "historical_match-1cd721013e20-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -791,7 +791,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "historical_match-cb1879c4884d-event"
+            "historical_match-1cd721013e20-event"
           ],
           "result": {
             "width": 640,
@@ -804,7 +804,7 @@
             "usable": true,
             "reasons": [],
             "evidence_references": [
-              "historical_match-cb1879c4884d-event"
+              "historical_match-1cd721013e20-event"
             ]
           },
           "error": null,
@@ -814,7 +814,7 @@
           "iteration": 3,
           "observation_inputs": {
             "camera_id": "mechanical-room-cam-01",
-            "event_time": "2026-10-26T21:25:59-03:00"
+            "event_time": "2026-10-27T00:55:45+00:00"
           },
           "thresholds": {
             "exclude_incident_frames": true,
@@ -822,14 +822,14 @@
           },
           "selected_action": "select_historical_baseline",
           "evidence_references": [
-            "historical_match-cb1879c4884d-baseline"
+            "historical_match-1cd721013e20-baseline"
           ],
           "result": {
-            "selected_frame_id": "historical_match-cb1879c4884d-baseline",
-            "selected_timestamp": "2026-10-26T21:10:59-03:00",
+            "selected_frame_id": "historical_match-1cd721013e20-baseline",
+            "selected_timestamp": "2026-10-27T00:40:45+00:00",
             "reason": "nearest usable pre-event frame for the same camera and context",
             "evidence_references": [
-              "historical_match-cb1879c4884d-baseline"
+              "historical_match-1cd721013e20-baseline"
             ]
           },
           "error": null,
@@ -838,8 +838,8 @@
         {
           "iteration": 4,
           "observation_inputs": {
-            "reference": "historical_match-cb1879c4884d-baseline",
-            "current": "historical_match-cb1879c4884d-event"
+            "reference": "historical_match-1cd721013e20-baseline",
+            "current": "historical_match-1cd721013e20-event"
           },
           "thresholds": {
             "mask_delta_saturation": 42,
@@ -848,8 +848,8 @@
           },
           "selected_action": "align_and_compare",
           "evidence_references": [
-            "historical_match-cb1879c4884d-baseline",
-            "historical_match-cb1879c4884d-event"
+            "historical_match-1cd721013e20-baseline",
+            "historical_match-1cd721013e20-event"
           ],
           "result": {
             "comparable": true,
@@ -878,11 +878,11 @@
                 "visual_cue": "localized cool-toned foreground change"
               }
             ],
-            "elapsed_ms": 93.369,
+            "elapsed_ms": 68.815,
             "notes": [],
             "evidence_references": [
-              "historical_match-cb1879c4884d-baseline",
-              "historical_match-cb1879c4884d-event"
+              "historical_match-1cd721013e20-baseline",
+              "historical_match-1cd721013e20-event"
             ]
           },
           "error": null,
@@ -904,7 +904,7 @@
           },
           "selected_action": "inspect_region",
           "evidence_references": [
-            "historical_match-cb1879c4884d-event:R1"
+            "historical_match-1cd721013e20-event:R1"
           ],
           "result": {
             "region_id": "R1",
@@ -914,7 +914,7 @@
             "median_luminance": 170.0,
             "interpretation": "visible color/texture change only; material and cause are unverified",
             "evidence_references": [
-              "historical_match-cb1879c4884d-event:R1"
+              "historical_match-1cd721013e20-event:R1"
             ]
           },
           "error": null,
@@ -929,14 +929,14 @@
           "thresholds": {},
           "selected_action": "retrieve_additional_frame",
           "evidence_references": [
-            "historical_match-cb1879c4884d-older"
+            "historical_match-1cd721013e20-older"
           ],
           "result": {
             "reason": "check whether candidate region was present before the nearest baseline",
-            "frame_id": "historical_match-cb1879c4884d-older",
+            "frame_id": "historical_match-1cd721013e20-older",
             "available": true,
             "evidence_references": [
-              "historical_match-cb1879c4884d-older"
+              "historical_match-1cd721013e20-older"
             ]
           },
           "error": null,
@@ -945,8 +945,8 @@
         {
           "iteration": 7,
           "observation_inputs": {
-            "reference": "historical_match-cb1879c4884d-older",
-            "current": "historical_match-cb1879c4884d-event"
+            "reference": "historical_match-1cd721013e20-older",
+            "current": "historical_match-1cd721013e20-event"
           },
           "thresholds": {
             "mask_delta_saturation": 42,
@@ -955,8 +955,8 @@
           },
           "selected_action": "align_and_compare",
           "evidence_references": [
-            "historical_match-cb1879c4884d-older",
-            "historical_match-cb1879c4884d-event"
+            "historical_match-1cd721013e20-older",
+            "historical_match-1cd721013e20-event"
           ],
           "result": {
             "comparable": true,
@@ -966,11 +966,11 @@
             "illumination_gain": 1.0,
             "changed_fraction": 0.0,
             "candidate_regions": [],
-            "elapsed_ms": 88.371,
+            "elapsed_ms": 66.336,
             "notes": [],
             "evidence_references": [
-              "historical_match-cb1879c4884d-older",
-              "historical_match-cb1879c4884d-event"
+              "historical_match-1cd721013e20-older",
+              "historical_match-1cd721013e20-event"
             ]
           },
           "error": null,
@@ -979,8 +979,8 @@
         {
           "iteration": 8,
           "observation_inputs": {
-            "older_frame": "historical_match-cb1879c4884d-older",
-            "event_frame": "historical_match-cb1879c4884d-event",
+            "older_frame": "historical_match-1cd721013e20-older",
+            "event_frame": "historical_match-1cd721013e20-event",
             "region_id": "R1"
           },
           "thresholds": {
@@ -988,8 +988,8 @@
           },
           "selected_action": "compare_historical_region",
           "evidence_references": [
-            "historical_match-cb1879c4884d-older",
-            "historical_match-cb1879c4884d-event:R1"
+            "historical_match-1cd721013e20-older",
+            "historical_match-1cd721013e20-event:R1"
           ],
           "result": {
             "region_id": "R1",
@@ -997,8 +997,8 @@
             "prior_candidate_regions": 0,
             "interpretation": "similar appearance exists in an older pre-event image",
             "evidence_references": [
-              "historical_match-cb1879c4884d-older",
-              "historical_match-cb1879c4884d-event:R1"
+              "historical_match-1cd721013e20-older",
+              "historical_match-1cd721013e20-event:R1"
             ]
           },
           "error": null,
@@ -1008,7 +1008,7 @@
           "iteration": 9,
           "observation_inputs": {
             "sensor_type": "water_contact",
-            "timestamp": "2026-10-26T21:25:59-03:00"
+            "timestamp": "2026-10-27T00:55:45+00:00"
           },
           "thresholds": {
             "maximum_time_offset_seconds": 300
@@ -1064,19 +1064,19 @@
         "change_mask": "29799d11c7f9337e8ce6534d196b07798db1486a48efd46b34909ed6c0fb7c56",
         "overlay": "c50deb1070c5d7b9eccb15dcf5094771a94e750d8c4d63aabb12435b5d67b244"
       },
-      "artifact_directory": "artifacts/demo/historical_match-cb1879c4884d",
-      "report_url_local": "/artifacts/historical_match-cb1879c4884d/report.html"
+      "artifact_directory": "artifacts/demo/historical_match-1cd721013e20",
+      "report_url_local": "/artifacts/historical_match-1cd721013e20/report.html"
     },
     {
       "scenario": "camera_movement",
       "description": "Camera shifted slightly; registration should suppress global displacement",
       "outcome": "no_visual_change_supported",
-      "run_storage_id": "camera_movement-a487d34552c3",
+      "run_storage_id": "camera_movement-7ce96c99da28",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "camera_movement-a487d34552c3",
+            "event_id": "camera_movement-7ce96c99da28",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -1086,9 +1086,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "camera_movement-a487d34552c3",
+            "event_id": "camera_movement-7ce96c99da28",
             "available_historical_frames": 1,
-            "event_frame_ref": "camera_movement-a487d34552c3-event"
+            "event_frame_ref": "camera_movement-7ce96c99da28-event"
           },
           "error": null,
           "stopping_condition": null
@@ -1096,7 +1096,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "camera_movement-a487d34552c3-event"
+            "frame": "camera_movement-7ce96c99da28-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -1104,7 +1104,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "camera_movement-a487d34552c3-event"
+            "camera_movement-7ce96c99da28-event"
           ],
           "result": {
             "width": 640,
@@ -1117,7 +1117,7 @@
             "usable": true,
             "reasons": [],
             "evidence_references": [
-              "camera_movement-a487d34552c3-event"
+              "camera_movement-7ce96c99da28-event"
             ]
           },
           "error": null,
@@ -1127,7 +1127,7 @@
           "iteration": 3,
           "observation_inputs": {
             "camera_id": "mechanical-room-cam-01",
-            "event_time": "2026-10-26T21:25:59-03:00"
+            "event_time": "2026-10-27T00:55:45+00:00"
           },
           "thresholds": {
             "exclude_incident_frames": true,
@@ -1135,14 +1135,14 @@
           },
           "selected_action": "select_historical_baseline",
           "evidence_references": [
-            "camera_movement-a487d34552c3-baseline"
+            "camera_movement-7ce96c99da28-baseline"
           ],
           "result": {
-            "selected_frame_id": "camera_movement-a487d34552c3-baseline",
-            "selected_timestamp": "2026-10-26T21:10:59-03:00",
+            "selected_frame_id": "camera_movement-7ce96c99da28-baseline",
+            "selected_timestamp": "2026-10-27T00:40:45+00:00",
             "reason": "nearest usable pre-event frame for the same camera and context",
             "evidence_references": [
-              "camera_movement-a487d34552c3-baseline"
+              "camera_movement-7ce96c99da28-baseline"
             ]
           },
           "error": null,
@@ -1151,8 +1151,8 @@
         {
           "iteration": 4,
           "observation_inputs": {
-            "reference": "camera_movement-a487d34552c3-baseline",
-            "current": "camera_movement-a487d34552c3-event"
+            "reference": "camera_movement-7ce96c99da28-baseline",
+            "current": "camera_movement-7ce96c99da28-event"
           },
           "thresholds": {
             "mask_delta_saturation": 42,
@@ -1161,8 +1161,8 @@
           },
           "selected_action": "align_and_compare",
           "evidence_references": [
-            "camera_movement-a487d34552c3-baseline",
-            "camera_movement-a487d34552c3-event"
+            "camera_movement-7ce96c99da28-baseline",
+            "camera_movement-7ce96c99da28-event"
           ],
           "result": {
             "comparable": true,
@@ -1172,11 +1172,11 @@
             "illumination_gain": 1.008,
             "changed_fraction": 0.0,
             "candidate_regions": [],
-            "elapsed_ms": 81.509,
+            "elapsed_ms": 76.062,
             "notes": [],
             "evidence_references": [
-              "camera_movement-a487d34552c3-baseline",
-              "camera_movement-a487d34552c3-event"
+              "camera_movement-7ce96c99da28-baseline",
+              "camera_movement-7ce96c99da28-event"
             ]
           },
           "error": null,
@@ -1186,7 +1186,7 @@
           "iteration": 5,
           "observation_inputs": {
             "sensor_type": "water_contact",
-            "timestamp": "2026-10-26T21:25:59-03:00"
+            "timestamp": "2026-10-27T00:55:45+00:00"
           },
           "thresholds": {
             "maximum_time_offset_seconds": 300
@@ -1242,19 +1242,19 @@
         "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
         "overlay": "e3c00fdb9327bf8601477974ee0e341e3a84b9a202baedba3839745f184a85b5"
       },
-      "artifact_directory": "artifacts/demo/camera_movement-a487d34552c3",
-      "report_url_local": "/artifacts/camera_movement-a487d34552c3/report.html"
+      "artifact_directory": "artifacts/demo/camera_movement-7ce96c99da28",
+      "report_url_local": "/artifacts/camera_movement-7ce96c99da28/report.html"
     },
     {
       "scenario": "occlusion_blur",
       "description": "Blurred and partly occluded alarm frame",
       "outcome": "retake_requested",
-      "run_storage_id": "occlusion_blur-363807f5f630",
+      "run_storage_id": "occlusion_blur-9c3a4f124c4f",
       "trace": [
         {
           "iteration": 1,
           "observation_inputs": {
-            "event_id": "occlusion_blur-363807f5f630",
+            "event_id": "occlusion_blur-9c3a4f124c4f",
             "camera_id": "mechanical-room-cam-01"
           },
           "thresholds": {
@@ -1264,9 +1264,9 @@
           "evidence_references": [],
           "result": {
             "camera_id": "mechanical-room-cam-01",
-            "event_id": "occlusion_blur-363807f5f630",
+            "event_id": "occlusion_blur-9c3a4f124c4f",
             "available_historical_frames": 1,
-            "event_frame_ref": "occlusion_blur-363807f5f630-event"
+            "event_frame_ref": "occlusion_blur-9c3a4f124c4f-event"
           },
           "error": null,
           "stopping_condition": null
@@ -1274,7 +1274,7 @@
         {
           "iteration": 2,
           "observation_inputs": {
-            "frame": "occlusion_blur-363807f5f630-event"
+            "frame": "occlusion_blur-9c3a4f124c4f-event"
           },
           "thresholds": {
             "minimum_blur_variance": 24,
@@ -1282,7 +1282,7 @@
           },
           "selected_action": "evaluate_image_quality",
           "evidence_references": [
-            "occlusion_blur-363807f5f630-event"
+            "occlusion_blur-9c3a4f124c4f-event"
           ],
           "result": {
             "width": 640,
@@ -1297,7 +1297,7 @@
               "frame is blurred or lacks usable detail"
             ],
             "evidence_references": [
-              "occlusion_blur-363807f5f630-event"
+              "occlusion_blur-9c3a4f124c4f-event"
             ]
           },
           "error": null,
@@ -1370,17 +1370,8 @@
         "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
         "current": "beaf65c97574738a299540ff968228fd6e01b75ecb925d9f4df0a73c2a28fda7"
       },
-      "artifact_directory": "artifacts/demo/occlusion_blur-363807f5f630",
-      "report_url_local": "/artifacts/occlusion_blur-363807f5f630/report.html"
+      "artifact_directory": "artifacts/demo/occlusion_blur-9c3a4f124c4f",
+      "report_url_local": "/artifacts/occlusion_blur-9c3a4f124c4f/report.html"
     }
-  ],
-  "review_example": {
-    "run_id": "clear_change-3deb69e58f67",
-    "scenario": "clear_change",
-    "synthetic": true,
-    "report": "artifacts/demo/clear_change-3deb69e58f67/report.json",
-    "review_record": "artifacts/demo/clear_change-3deb69e58f67/human-review.jsonl",
-    "action": "approve",
-    "scope": "acknowledgement only; no equipment or alarm control is performed"
-  }
+  ]
 }

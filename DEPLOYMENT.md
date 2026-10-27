@@ -4,6 +4,8 @@
 
 No AWS resources were created. The inspected workspace has no AWS CLI, Docker CLI, AWS environment credentials or `~/.aws` profiles. The owner selected preparation only and declined resource creation. There is no live endpoint, remote OpenCV execution or AWS verification. The app currently runs locally; this does not satisfy the competition's AWS component or public endpoint requirement.
 
+**Service availability caveat:** current AWS documentation says App Runner is closed to new customers; existing customers may continue using it. This AWS account's eligibility is unknown because no AWS identity is configured. The template below is usable only if that account can create App Runner services. AWS recommends ECS Express Mode for new customers, but that architecture has not been built or costed for this project. Do not assume the prepared App Runner template can be deployed in a new AWS account. [AWS availability notice](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html)
+
 ## Prepared AWS architecture
 
 - Build a Python 3.11 container with pinned `requirements-lock.txt`.
@@ -15,12 +17,14 @@ No AWS resources were created. The inspected workspace has no AWS CLI, Docker CL
 
 ## Cost and authorization boundary
 
-App Runner, ECR and S3 may incur charges. The region and account are not configured, so no price is asserted. App Runner capacity and request concurrency are capped, ECR retains three images, S3 evidence has a retention lifecycle, and real-image uploads are disabled. Before deployment, an owner must select a region, inspect AWS Pricing Calculator estimates and current credit terms, provide authenticated AWS CLI access, and explicitly approve resource creation. The deployment script additionally requires `-ApprovedForBillableDeployment`. No approval was given for actual deployment, and no workaround was attempted.
+Illustrative estimate **if App Runner is available to the account**, in **US East (N. Virginia), `us-east-1`**, using the template's one 0.5 vCPU / 1 GB minimum instance for 730 hours/month: provisioned memory is about **$5.11/month** at $0.007/GB-hour. Active CPU adds about **$0.032 per processing hour** at $0.064/vCPU-hour, so 8 processing hours/day adds about $7.68/month; continuous processing for 730 hours would add about $23.36/month, for roughly $28.47 total compute and provisioned memory. This estimate excludes ECR storage, S3 storage/requests, CloudWatch logs, data transfer, taxes and any second active instance; actual usage can be higher. See [AWS App Runner pricing](https://aws.amazon.com/apprunner/pricing/). The template caps scaling at two active instances but this is not a hard monthly spend limit.
+
+No AWS account balance, Free Tier credit, competition grant, region setting or billing history could be checked. The competition page describes up to $100 in credits for eligible new AWS customers, but this account's eligibility and balance are unverified. App Runner capacity and request concurrency are capped, ECR retains three images, S3 evidence has a retention lifecycle, and real-image uploads are disabled. Before any deployment, the owner must verify account/service eligibility, select the architecture and region, review current estimates/credits, provide secure authenticated AWS access, and explicitly authorize billable resource creation. The script additionally requires `-ApprovedForBillableDeployment`. No deployment approval was given and no workaround was attempted.
 
 ## Prerequisites after authorization
 
 1. Docker Engine, AWS CLI v2, PowerShell 7 or Windows PowerShell, Python 3.11+ and the pinned local tests must be available.
-2. Use an authorized role permitted to create ECR repositories/images, CloudFormation stacks, IAM roles, App Runner services and S3 buckets, plus `sts:GetCallerIdentity`.
+2. Use an authorized role permitted to create ECR repositories/images, CloudFormation stacks, IAM roles, App Runner services and S3 buckets, plus `sts:GetCallerIdentity`. Verify App Runner access in the account first; if it is a new AWS customer account, stop and select a supported alternative such as ECS Express Mode before proceeding.
 3. From this project directory, inspect and validate `deployment/stack.yaml`; review IAM actions, selected region, public HTTPS exposure, retention, service scaling and current price.
 4. After explicit approval only, run:
 
@@ -31,5 +35,5 @@ App Runner, ECR and S3 may incur charges. The region and account are not configu
 5. The script builds/pushes the container, deploys the stack, checks the public `/health` response for OpenCV 5, runs `clear_change`, checks for the investigation trace and writes `deployment-manifest.json`. Review the AWS CloudFormation events and App Runner logs. A script error or local Docker build is not deployment evidence.
 6. Preserve the returned live URL and sanitized manifest. Re-run the tests and an actual HTTP investigation. Add the URL to the Devpost entry and video only after the response is verified.
 
-The deployment template/script have not been validated by AWS CloudFormation or Docker in this environment. Teardown is intentionally not automated; preserve evidence and ask the resource owner before deleting data or stacks.
+The deployment template/script have not been validated by AWS CloudFormation or Docker in this environment. The template still requires review against account-specific App Runner availability. Teardown is intentionally not automated; preserve evidence and ask the resource owner before deleting data or stacks.
 

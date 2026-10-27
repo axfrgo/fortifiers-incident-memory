@@ -1,6 +1,6 @@
 {
   "title": "Held-out procedural synthetic mechanical-room evaluation",
-  "run_at_utc": "2026-10-27T00:25:35Z",
+  "run_at_utc": "2026-10-27T00:55:41Z",
   "environment": {
     "python": "3.14.0",
     "opencv": "5.0.0",
@@ -37,15 +37,15 @@
   },
   "latency_ms": {
     "n": 21,
-    "p50": 158.477,
-    "p95": 246.465,
-    "mean": 141.543
+    "p50": 137.061,
+    "p95": 217.262,
+    "mean": 127.773
   },
   "resource_observations": {
-    "rss_before_mb": 34.38,
-    "rss_after_mb": 61.16,
-    "rss_delta_mb": 26.78,
-    "process_cpu_seconds": 6.0
+    "rss_before_mb": 34.35,
+    "rss_after_mb": 60.29,
+    "rss_delta_mb": 25.94,
+    "process_cpu_seconds": 5.703
   },
   "cases": [
     {
@@ -56,7 +56,7 @@
       "one_pass_outcome": "no_visual_change_supported",
       "one_pass_action_correct": true,
       "tool_calls": 6,
-      "p50_latency_ms_3_runs": 166.833,
+      "p50_latency_ms_3_runs": 162.972,
       "candidate_regions": 0,
       "quality_rejected": false
     },
@@ -68,7 +68,7 @@
       "one_pass_outcome": "human_review_required",
       "one_pass_action_correct": true,
       "tool_calls": 9,
-      "p50_latency_ms_3_runs": 163.924,
+      "p50_latency_ms_3_runs": 151.671,
       "candidate_regions": 1,
       "quality_rejected": false
     },
@@ -80,7 +80,7 @@
       "one_pass_outcome": "no_visual_change_supported",
       "one_pass_action_correct": false,
       "tool_calls": 5,
-      "p50_latency_ms_3_runs": 41.688,
+      "p50_latency_ms_3_runs": 35.815,
       "candidate_regions": 0,
       "quality_rejected": true
     },
@@ -92,7 +92,7 @@
       "one_pass_outcome": "no_visual_change_supported",
       "one_pass_action_correct": true,
       "tool_calls": 6,
-      "p50_latency_ms_3_runs": 158.477,
+      "p50_latency_ms_3_runs": 137.061,
       "candidate_regions": 0,
       "quality_rejected": false
     },
@@ -104,7 +104,7 @@
       "one_pass_outcome": "human_review_required",
       "one_pass_action_correct": false,
       "tool_calls": 10,
-      "p50_latency_ms_3_runs": 246.465,
+      "p50_latency_ms_3_runs": 214.732,
       "candidate_regions": 1,
       "quality_rejected": false
     },
@@ -116,7 +116,7 @@
       "one_pass_outcome": "no_visual_change_supported",
       "one_pass_action_correct": true,
       "tool_calls": 6,
-      "p50_latency_ms_3_runs": 152.682,
+      "p50_latency_ms_3_runs": 134.053,
       "candidate_regions": 0,
       "quality_rejected": false
     },
@@ -128,7 +128,7 @@
       "one_pass_outcome": "no_visual_change_supported",
       "one_pass_action_correct": false,
       "tool_calls": 5,
-      "p50_latency_ms_3_runs": 44.306,
+      "p50_latency_ms_3_runs": 36.971,
       "candidate_regions": 0,
       "quality_rejected": true
     }

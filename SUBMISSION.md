@@ -1,6 +1,6 @@
 # Devpost submission wording — prepared, not submitted
 
-**Readiness warning:** this wording is not a claim that the entry is complete. The core OpenCV 5 application and synthetic evaluation run locally. The AWS workload and endpoint are not deployed; no public/judge-accessible repository or video is linked. These are explicit mandatory gaps. Do not submit until AWS execution, public judge access, team identification and video are actually in place. The user asked not to publish or submit without authorization.
+**Readiness warning (checked 2026-10-27):** the local OpenCV 5 app, synthetic evaluation and public source repository are verified. The AWS workload and endpoint are not deployed, and no video is recorded or hosted. The signed-in Devpost account is registered, but the project's submission list is empty; draft creation is blocked by a Devpost reCAPTCHA connection error. These remain mandatory gaps. Do not claim cloud execution, and do not submit this entry until the AWS, video, team identity and eligibility gaps are resolved and the owner gives final approval.
 
 ## Project name
 
@@ -30,7 +30,7 @@ OpenCV outputs are inputs to later actions. Poor blur quality skips comparison a
 
 ## AWS
 
-**Actual AWS use in this build: none.** An App Runner + private ECR + versioned S3 CloudFormation template and deployment script are prepared, but this environment lacked AWS CLI/credentials/Docker and the owner directed preparation only. No AWS resource, live endpoint, cloud processing response or cost result exists. Replace this paragraph only after the actual App Runner service is live and verified. The current entry does not yet meet the competition's mandatory AWS requirement.
+**Actual AWS use in this build: none.** A private ECR + App Runner + versioned S3 template and deployment script are prepared, but no AWS CLI, credentials or Docker are configured, and the owner directed preparation only. AWS says App Runner is closed to new customers; this account's access cannot be checked. No AWS resource, live endpoint or cloud processing response exists. The competition's meaningful AWS requirement and endpoint are not yet met. See `DEPLOYMENT.md` for the regional estimate and service restriction. Replace this section only after an AWS workload is live and independently verified.
 
 ## Challenges and solutions
 
@@ -42,7 +42,7 @@ OpenCV outputs are inputs to later actions. Poor blur quality skips comparison a
 
 ## Measured results
 
-On seven procedurally generated held-out scenario types with three runs each, the implemented workflow selected the expected scripted action in 7/7 and a simple no-history/no-quality one-pass rule in 4/7. On four pixel-labeled synthetic masks, precision was 0.99183, recall 0.99913, F1 0.99546 and mask IoU 0.99097. Controller p50/p95 latency was 158.477/246.465 ms for 21 runs on Windows 10, Python 3.14, OpenCV 5.0.0. These measurements describe synthetic fixtures and do not estimate field performance or detect real water. Evaluation details and failure cases are in `EVALUATION.md`.
+On seven procedurally generated held-out scenario types with three runs each, the implemented workflow selected the expected scripted action in 7/7 and a simple no-history/no-quality one-pass rule in 4/7. On four pixel-labeled synthetic masks, precision was 0.99183, recall 0.99913, F1 0.99546 and mask IoU 0.99097. In the fresh 21-run controller benchmark, p50/p95 latency was 137.061/217.262 ms on Windows 10, Python 3.14, OpenCV 5.0.0. A separate local HTTP check returned four expected outcomes and verified a PNG overlay and ZIP report; see `artifacts/final-local-verification.json`. These measurements describe synthetic fixtures and local execution. They do not estimate field performance, AWS latency or real-water detection. Evaluation details and failure cases are in `EVALUATION.md`.
 
 ## What we learned
 
@@ -52,17 +52,18 @@ Image quality and historical context should change the investigation, not just d
 
 After a verified AWS deployment and operator feedback: gather consented and licensed mechanical-room footage, build a camera-specific baseline enrollment process, independently label conditions, study threshold calibration and domain shift, add authenticated camera/sensor connectors, review retention/access policies and measure cost/latency on AWS. Thermal, RTSP, predictive-maintenance and Graviton/COOL paths are out of scope for this submission build.
 
-## Team, links and tags — fill before submission
+## Team, links and tags — verify before submission
 
-- Team name and real member names: **[insert actual team identity; not provided in this build]**
-- Code/archive URL: **[insert judge-accessible URL after authorized hosting]**
-- Working AWS endpoint: **[insert verified App Runner URL; currently none]**
-- Demo video (≤5 minutes): **[insert public/unlisted judge-accessible video link; not recorded]**
-- Technical report: `TECHNICAL_REPORT.md` (package path; upload/link after hosting)
-- Technologies: OpenCV 5, Python, FastAPI, NumPy, AWS App Runner, Amazon S3, CloudWatch, computer vision, industrial IoT, Agentic Vision.
-- Special award: the local workflow includes OpenCV-derived observations that change later calls/actions. Do not claim full award eligibility before completing the public AWS, endpoint, judge video and repository requirements.
+- Project name: **Fortifiers Incident Memory**. Confirm the actual team name, roster and representative; no team bio or member list was supplied for this entry.
+- Public code repository: https://github.com/axfrgo/fortifiers-incident-memory
+- Working AWS endpoint: **none** — deployment blocked; do not substitute the local `127.0.0.1` address.
+- Demo video (≤5 minutes): **none recorded or hosted**.
+- Technical report and diagrams: `TECHNICAL_REPORT.md`, `ARCHITECTURE.md`, `submission/architecture.svg`, `AGENT_WORKFLOW.md`, and `submission/agent-workflow.svg` in the repository.
+- Evaluation: `EVALUATION.md`, `artifacts/evaluation.json`, `artifacts/test-results.json`, and `artifacts/final-local-verification.json`.
+- Technologies: OpenCV 5, Python, FastAPI, NumPy, responsive web UI; AWS deployment is prepared but not yet used.
+- Agentic Vision: the local workflow has actual OpenCV observations changing later tool calls (retake, ROI inspection/history retrieval, or human review). This demonstrates the agentic mechanism. The project is not a complete eligible final entry while the meaningful AWS workload, judge endpoint and required video are missing.
 
 ## Competition entry checks
 
-The Devpost banner currently shows the earlier target deadline October 26, 2026 at 11:45 PM PDT; the page also has a 11:59 PM Pacific Time reference. This package targets 11:45 PM PDT. The overview and full rules differ on age wording (overview says above local age of majority; rules say at least 13 and require guardian permission below majority). Confirm the account's current eligibility, team registration, any local legal requirements and the binding rules before entry. Nothing has been registered, published or submitted in this task.
+The signed-in Devpost account is registered for the competition. Its “My projects” page showed no project draft during finalization; the “Start project” control was blocked by a reCAPTCHA connection error. No project has been submitted. The official banner shows October 26, 2026 at 11:45 PM PDT (October 27, 2026 at 03:45 AM ADT in Halifax); the overview also mentions 11:59 PM Pacific, so this package targets the earlier deadline. The full rules require participants to be at least 13 and guardian permission/forms for participants below local legal majority; the overview separately says participants must be above local majority. Confirm the governing eligibility with the organizer, actual team's roster, representative, rights and declarations before submission.
 

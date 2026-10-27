@@ -1,0 +1,132 @@
+{
+  "verified_at_utc": "2026-10-27T00:59:35.835705+00:00",
+  "environment": "local only; synthetic API fixtures",
+  "base_url": "http://127.0.0.1:8000",
+  "health": {
+    "status": "ok",
+    "service": "fortifiers-incident-memory",
+    "opencv_version": "5.0.0",
+    "opencv5": true,
+    "aws_s3_artifacts_enabled": false,
+    "user_uploads_enabled": true
+  },
+  "home_http_status": 200,
+  "scenarios": [
+    {
+      "scenario": "clear_change",
+      "http_status": 200,
+      "outcome": "human_review_required",
+      "expected_outcome": "human_review_required",
+      "outcome_correct": true,
+      "tool_calls": 9,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "inspect_region",
+        "retrieve_additional_frame",
+        "correlate_sensor_event",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "elapsed_ms": 480.096,
+      "run_id": "clear_change-6fbde008e8c9",
+      "html_report_url": "/artifacts/clear_change-6fbde008e8c9/report.html",
+      "overlay_http_status": 200,
+      "overlay_bytes": 405372,
+      "evidence_zip_http_status": 200,
+      "evidence_zip_bytes": 928587,
+      "evidence_zip_sha256": "dc5caa5f456d0527dde3de13768246e6e4eb5e37fcc3ea4b55f50a107e38092c",
+      "evidence_zip_path": "artifacts\\final-local-clear-change-evidence.zip"
+    },
+    {
+      "scenario": "poor_image",
+      "http_status": 200,
+      "outcome": "retake_requested",
+      "expected_outcome": "retake_requested",
+      "outcome_correct": true,
+      "tool_calls": 5,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "retrieve_additional_frame",
+        "generate_review_request",
+        "create_evidence_report"
+      ],
+      "elapsed_ms": 186.899,
+      "run_id": "poor_image-017216a4f4c6",
+      "html_report_url": "/artifacts/poor_image-017216a4f4c6/report.html"
+    },
+    {
+      "scenario": "lighting_shift",
+      "http_status": 200,
+      "outcome": "no_visual_change_supported",
+      "expected_outcome": "no_visual_change_supported",
+      "outcome_correct": true,
+      "tool_calls": 6,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "elapsed_ms": 354.743,
+      "run_id": "lighting_shift-fafe78f111dc",
+      "html_report_url": "/artifacts/lighting_shift-fafe78f111dc/report.html"
+    },
+    {
+      "scenario": "historical_match",
+      "http_status": 200,
+      "outcome": "no_new_change_supported",
+      "expected_outcome": "no_new_change_supported",
+      "outcome_correct": true,
+      "tool_calls": 10,
+      "actions": [
+        "retrieve_event_frames",
+        "evaluate_image_quality",
+        "select_historical_baseline",
+        "align_and_compare",
+        "inspect_region",
+        "retrieve_additional_frame",
+        "align_and_compare",
+        "compare_historical_region",
+        "correlate_sensor_event",
+        "create_evidence_report"
+      ],
+      "elapsed_ms": 516.548,
+      "run_id": "historical_match-2ef6af62d0f1",
+      "html_report_url": "/artifacts/historical_match-2ef6af62d0f1/report.html"
+    }
+  ],
+  "aws_execution_verified": false,
+  "public_access_verified": false,
+  "dashboard_runs": [
+    {
+      "scenario": "clear_change",
+      "run_id": "clear_change-95a644716830",
+      "outcome": "human_review_required",
+      "tool_calls": 9,
+      "ui_result": "Possible visible water change \u2014 review required",
+      "source": "interactive local browser at http://127.0.0.1:8000"
+    },
+    {
+      "scenario": "poor_image",
+      "run_id": "poor_image-7914440d132b",
+      "outcome": "retake_requested",
+      "tool_calls": 5,
+      "ui_result": "Insufficient visual evidence",
+      "source": "interactive local browser at http://127.0.0.1:8000"
+    },
+    {
+      "scenario": "lighting_shift",
+      "run_id": "lighting_shift-f9eef8853258",
+      "outcome": "no_visual_change_supported",
+      "tool_calls": 6,
+      "ui_result": "No credible visual evidence of a new water-like change",
+      "source": "interactive local browser at http://127.0.0.1:8000"
+    }
+  ]
+}

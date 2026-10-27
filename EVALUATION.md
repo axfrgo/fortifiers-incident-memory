@@ -6,9 +6,9 @@
 
 The held-out script runs the full workflow three times per scenario, seven scenarios total (21 runs). For comparison, a simple one-pass reference runs the same OpenCV detector once on the nearest baseline/current pair and has no quality gate, memory retrieval, sensor policy or agent tool routing. Expected outcomes are explicit scenario rules in `scripts/evaluate.py`; they are not independent human ground truth. Pixel labels mark only the synthetic color-patch polygon.
 
-## Actual results from the recorded run
+## Actual results from the fresh held-out run
 
-Environment: Windows 10.0.19045, Python 3.14.0, OpenCV 5.0.0.93 wheel/runtime version 5.0.0, NumPy 2.5.4, four reported logical CPUs. Controller-only timing excludes fixture creation, API response encoding, ZIP/S3 storage and network.
+Run timestamp: `2026-10-27T00:55:41Z`. Command sequence: `.venv\\Scripts\\python.exe scripts\\build_dataset.py`; `.venv\\Scripts\\python.exe scripts\\evaluate.py`. Environment: Windows 10.0.19045, Python 3.14.0, OpenCV 5.0.0.93 wheel/runtime version 5.0.0, NumPy 2.5.4, four reported logical CPUs. Controller-only timing excludes fixture creation, API response encoding, ZIP/S3 storage and network.
 
 | Measure | Observed |
 |---|---:|
@@ -19,15 +19,19 @@ Environment: Windows 10.0.19045, Python 3.14.0, OpenCV 5.0.0.93 wheel/runtime ve
 | Benign fixture types with a one-pass candidate | 0/4 |
 | Unnecessary retake requests | 0/7 |
 | Mean tool calls per investigation | 6.714 |
-| Controller latency p50 / p95 | 158.477 / 246.465 ms (n=21) |
+| Controller latency p50 / p95 | 137.061 / 217.262 ms (n=21) |
 | Pixel mask precision / recall / F1 | 0.99183 / 0.99913 / 0.99546 |
 | Pixel mask IoU | 0.99097 (four 640×480 masks: 1,228,800 pixel positions; 16,170 pixels in prediction/truth union) |
-| Process RSS before / after | 34.38 / 61.16 MiB (delta 26.78 MiB; not peak) |
-| Process CPU time during run | 6.000 s |
+| Process RSS before / after | 34.35 / 60.29 MiB (delta 25.94 MiB; not peak) |
+| Process CPU time during run | 5.703 s |
 
 ![Per-scenario full workflow versus one-pass expected-action correctness](artifacts/task-correctness.svg)
 
 Case-level results are in [artifacts/evaluation-cases.csv](artifacts/evaluation-cases.csv); the machine-readable source is [artifacts/evaluation.json](artifacts/evaluation.json).
+
+## Local HTTP demonstration check
+
+At `2026-10-27T00:59:35Z`, the running FastAPI app was called over `http://127.0.0.1:8000`. `/` and `/health` returned HTTP 200; health reported OpenCV 5.0.0. Four separate synthetic API requests returned the expected outcomes: clear change → `human_review_required` (9 tool calls, 480.096 ms); poor image → `retake_requested` (5 calls, 186.899 ms); lighting shift → `no_visual_change_supported` (6 calls, 354.743 ms); historical match → `no_new_change_supported` (10 calls, 516.548 ms). The clear-change overlay returned a PNG (405,372 bytes) and its evidence ZIP returned HTTP 200 (928,587 bytes; SHA-256 `dc5caa5f456d0527dde3de13768246e6e4eb5e37fcc3ea4b55f50a107e38092c`). These are single local request measurements, not cloud latency or a statistical benchmark. The response summary and downloaded bundle are `artifacts/final-local-verification.json` and `artifacts/final-local-clear-change-evidence.zip`.
 
 | Scenario | Full outcome | Full action correct | One-pass action correct | Calls |
 |---|---|---:|---:|---:|
