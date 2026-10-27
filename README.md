@@ -4,13 +4,21 @@
 
 ![Fortifiers Incident Memory project cover. Synthetic baseline, alarm-time image, and OpenCV 5 overlay.](submission/project-cover.png)
 
+![Frames captured from the real local application recording, showing the overview, synthetic comparisons, agent outcomes, evaluation card, and disclosure that AWS is not deployed.](artifacts/video/final-contact-sheet.jpg)
+
 Public source repository: https://github.com/axfrgo/fortifiers-incident-memory
 
 Environmental Incident Memory investigates what changed around a physical alarm. It retrieves a pre-event frame, runs real OpenCV 5 image analysis, chooses follow-up actions from those observations, checks older history and sensor timing, and creates a reviewable evidence record. The demo focuses on a synthetic industrial mechanical-room water-sensor event.
 
-> **Honest build status:** local OpenCV 5 processing, API scenarios and tests are verified. AWS and Docker are **not deployed or verified**: the workspace has no Docker/AWS CLI or configured AWS credentials, and the AWS browser session reached the IAM sign-in page rather than an authenticated console. No AWS resources were created. App Runner availability for this account is unknown. There is no public demo endpoint, so this build does not yet meet the competition's mandatory AWS workload and judge-accessible endpoint requirements. See [deployment-manifest.json](deployment-manifest.json) and [DEPLOYMENT.md](DEPLOYMENT.md).
+> **Honest build status:** local OpenCV 5 processing, API scenarios and tests are verified. AWS and Docker are **not deployed or verified**: no AWS account is authenticated in the console or configured locally, and no AWS resources were created. The AWS tab is at account signup; credits and App Runner eligibility are unknown. There is no public demo endpoint, so this build does not meet the competition's AWS workload and judge-accessible endpoint requirements. The real 3:40 video is published on YouTube as Unlisted and was verified by an unauthenticated HTTP request. See [deployment-manifest.json](deployment-manifest.json), [DEPLOYMENT.md](DEPLOYMENT.md), and [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md).
 
 All included images and sensor events are procedurally generated synthetic fixtures. The blue/cool-toned patch is a staged visual cue, not actual water and not real-world validation.
+
+## Demonstration video
+
+The recorded silent, captioned walkthrough is in the local workspace at `artifacts/video/fortifiers-incident-memory-demo.mp4`. It is 220.4 seconds (3:40), 1920×1080 at 15 fps; its SHA-256 and recording/render provenance are in [video-manifest.json](artifacts/video/video-manifest.json). It shows the real local application and synthetic incidents. It explicitly discloses that AWS is not deployed and the fixtures are not field validation. [Watch the Unlisted video on YouTube](https://youtu.be/_k0J1XHyVyA). It is also available as a [public GitHub release asset](https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-demo.mp4).
+
+The recording identifies this as a solo entry but does not show or name the entrant. No likeness or voice was fabricated. The entrant may still need to add their own introduction if the judges interpret the team-identification requirement as requiring a named or visible member.
 
 ### Synthetic OpenCV output
 
@@ -56,7 +64,7 @@ $env:PYTHONPATH = 'src'
 
 The fresh held-out run selected expected policy actions for 7/7 scenario types versus 4/7 for the simple one-pass comparator. Synthetic pixel-mask precision/recall/F1 were 0.99183/0.99913/0.99546. Controller p50/p95 were 137.061/217.262 ms across 21 runs. These are procedural-fixture measurements, not field leak-detection performance. A fresh local HTTP smoke check returned 200 for the dashboard, health endpoint and four scenarios; its actual traces are in `artifacts/finalization-api-smoke.json`. It is local-only evidence. Earlier overlay/ZIP evidence is in `artifacts/final-local-verification.json` and `artifacts/final-local-clear-change-evidence.zip`. Full results and limitations are in [EVALUATION.md](EVALUATION.md).
 
-The latest local test output is in `artifacts/test-results-finalization.xml` and `artifacts/test-results-finalization.json` (36 passed). `artifacts/demo-cases.json` points to synthetic reports, traces and overlays. The portable source archive is `artifacts/fortifiers-incident-memory-source.zip`; a copy is attached to the private Devpost draft but will not be judge-accessible there until that entry is submitted. The public GitHub repository above is the judge-accessible source.
+The latest local test output is in `artifacts/test-results-finalization.xml` and `artifacts/test-results.json` (36 passed). `artifacts/demo-cases.json` points to synthetic reports, traces and overlays. The portable source archive is `artifacts/fortifiers-incident-memory-source.zip`; its judge-accessible download is [the GitHub release archive](https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip), with digest and validation details in [source-archive-manifest.json](artifacts/source-archive-manifest.json). A ZIP is attached to the saved Devpost draft as well.
 
 ## Deployment
 
@@ -73,5 +81,5 @@ The prepared deployment package uses private ECR, App Runner for the OpenCV 5 AP
 - `tests/` — vision, memory, agent, API and storage failure tests.
 - `submission/` — architecture and workflow SVG diagrams.
 
-See [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md), [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md), [JUDGING_SCORECARD.md](JUDGING_SCORECARD.md), [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md), and [BUILD_LEDGER.md](BUILD_LEDGER.md). The signed-in Devpost account is registered, but its project list is empty; a reCAPTCHA connection error blocked draft creation. Team roster, AWS endpoint and hosted video remain outstanding. Submission wording and the timed video script are in [SUBMISSION.md](SUBMISSION.md) and [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
+See [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md), [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md), [JUDGING_SCORECARD.md](JUDGING_SCORECARD.md), [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md), and [BUILD_LEDGER.md](BUILD_LEDGER.md). The signed-in Devpost account has a saved private draft, not a submitted entry. The entrant reports entering solo. The AWS endpoint remains outstanding. Submission wording and the recorded-video notes are in [SUBMISSION.md](SUBMISSION.md) and [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
 

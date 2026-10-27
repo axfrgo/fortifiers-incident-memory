@@ -1,8 +1,36 @@
 {
-  "created_at_utc": "2026-10-27T02:29:59.136518+00:00",
+  "created_at_utc": "2026-10-27T04:07:33.157432+00:00",
   "archive": "fortifiers-incident-memory-source.zip",
-  "sha256": "7c22efa46893b522fee5b98819126e3158d37e60530a886b7a0ac2dcca8a5091",
-  "file_count": 213,
+  "sha256": "dd3590d8e353e5f8456c4fe8a5372dd60d85c6445f25e59cca0c24af250c1266",
+  "file_count": 218,
   "includes_virtual_environment": false,
-  "judge_accessible_public_url": "https://github.com/axfrgo/fortifiers-incident-memory"
+  "judge_accessible_public_url": "https://github.com/axfrgo/fortifiers-incident-memory",
+  "judge_accessible_archive_url": "https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip",
+  "validation": {
+    "verified_at_utc": "2026-10-27T04:07:14Z",
+    "source_archive": "fortifiers-incident-memory-source.zip",
+    "source_archive_sha256": "dd3590d8e353e5f8456c4fe8a5372dd60d85c6445f25e59cca0c24af250c1266",
+    "archive_bytes": 33931741,
+    "zip_entries": 218,
+    "extracted_to_new_directory": true,
+    "pinned_environment": {
+      "python": "3.14.0",
+      "opencv": "5.0.0",
+      "numpy": "2.5.4",
+      "pytest": "8.4.2",
+      "fastapi": "0.123.0",
+      "dependencies_installed_from": "requirements-lock.txt"
+    },
+    "command": "PYTHONPATH=src python -m pytest -q",
+    "test_result": {
+      "passed": 36,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "elapsed_seconds": 8.59,
+      "warnings": [
+        "Starlette TestClient uses deprecated anyio.abc.BlockingPortal alias."
+      ]
+    }
+  }
 }

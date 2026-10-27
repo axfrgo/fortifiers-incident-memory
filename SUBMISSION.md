@@ -1,6 +1,6 @@
 # Devpost submission wording — prepared, not submitted
 
-**Readiness warning (checked 2026-10-27):** the local OpenCV 5 app, synthetic evaluation and public source repository are verified. A private Devpost draft now exists with the project title, pitch, story, cover, source archive, test instructions and Agentic Vision selection. It is still incomplete: the required video URL is blank; the AWS workload and public endpoint are not deployed; and team eligibility declarations have not been verified. Do not claim cloud execution or field performance. The draft is not a public project or a submitted entry.
+**Readiness warning (checked 2026-10-27):** the local OpenCV 5 app, synthetic evaluation, public source repository and real 3:40 Unlisted video are verified. A private Devpost draft has the title, pitch, story, cover, source archive, test instructions, video URL and Agentic Vision selection. The AWS workload and public endpoint are not deployed. The entrant must verify eligibility declarations and the video may not satisfy a strict requirement to show or name a team member. Do not claim cloud execution or field performance. This draft is not a submitted entry.
 
 ## Project name
 
@@ -34,7 +34,7 @@ OpenCV outputs are inputs to later actions. Poor blur quality skips comparison a
 
 ## AWS
 
-**Actual AWS use in this build: none.** A private ECR + App Runner + versioned S3 template and deployment script are prepared, but the active in-app AWS tab is at IAM sign-in and no AWS CLI, Docker, or credential profile is configured. The account, credits, service access, and account-specific cost eligibility could not be checked. No resources were created because deployment was previously limited to preparation, and no spend ceiling is set. AWS says App Runner is closed to new customers; account eligibility remains unknown. No live endpoint or cloud processing response exists. The competition's meaningful AWS requirement and endpoint are not yet met. See `DEPLOYMENT.md` for the illustrative cost estimate and service restriction. Replace this section only after an AWS workload is live and independently verified.
+**Actual AWS use in this build: none.** A private ECR + App Runner + versioned S3 template and deployment script are prepared. The open AWS tab remains at the account-signup flow; no AWS CLI, Docker, or credential profile is configured. The account, credits, service access, and account-specific cost eligibility could not be checked. No resources were created, no costs were incurred, and no spend limit or deployment approval is in place. AWS says App Runner is closed to new customers; account eligibility remains unknown. No live endpoint or cloud processing response exists. The competition's meaningful AWS requirement and endpoint are not met. See `DEPLOYMENT.md` for the illustrative cost estimate and service restriction. Replace this section only after an AWS workload is live and independently verified.
 
 ## Challenges and solutions
 
@@ -58,10 +58,11 @@ After a verified AWS deployment and operator feedback: gather consented and lice
 
 ## Team, links and tags — verify before submission
 
-- Project name: **Fortifiers Incident Memory**. Confirm the actual team name, roster and representative; no team bio or member list was supplied for this entry.
+- Project name: **Fortifiers Incident Memory**. The entrant reports entering solo. The video identifies a solo entry but does not show or name the entrant; confirm whether a personal introduction is required.
 - Public code repository: https://github.com/axfrgo/fortifiers-incident-memory
+- Portable source archive: https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip
 - Working AWS endpoint: **none** — deployment blocked; do not substitute the local `127.0.0.1` address.
-- Demo video (≤5 minutes): **none recorded or hosted**.
+- Demo video (≤5 minutes): **published Unlisted**, 3:40 silent/captioned local demonstration: https://youtu.be/_k0J1XHyVyA. Public release mirror: https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-demo.mp4. See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) and [video-manifest.json](artifacts/video/video-manifest.json).
 - Technical report and diagrams: `TECHNICAL_REPORT.md`, `ARCHITECTURE.md`, `submission/architecture.svg`, `AGENT_WORKFLOW.md`, and `submission/agent-workflow.svg` in the repository.
 - Evaluation: `EVALUATION.md`, `artifacts/evaluation.json`, `artifacts/test-results.json`, and `artifacts/final-local-verification.json`.
 - Technologies: OpenCV 5, Python, FastAPI, NumPy, responsive web UI; AWS deployment is prepared but not yet used.
@@ -69,5 +70,5 @@ After a verified AWS deployment and operator feedback: gather consented and lice
 
 ## Competition entry checks
 
-The Devpost account is registered. The user reports entering solo; the draft has no listed teammates. A private draft was created and saved under the account, but it has not been submitted or made public. The AWS browser tab is not authenticated: opening the console redirected to an IAM sign-in form, and no local AWS CLI credentials are configured. The official Devpost banner shows October 26, 2026 at 11:45 PM PDT (October 27, 2026 at 03:45 AM ADT in Halifax); the overview also mentions 11:59 PM Pacific, so this package targets the earlier deadline. The rules/overview eligibility language should be reviewed by the entrant before accepting the required declarations. Confirm the actual representative, legal-majority/age requirements, rights and declarations before final submission.
+The Devpost account is registered and has a saved private draft at 4/5 steps. The user reports entering solo; the draft has no listed teammates. The saved project-details page contains the Unlisted demo URL. The draft has not been submitted or made public. The AWS tab remains at account signup; account access, credits and service eligibility remain unverified. The official Devpost banner shows October 26, 2026 at 11:45 PM PDT (October 27, 2026 at 03:45 AM ADT in Halifax); the overview also mentions 11:59 PM Pacific, so this package targets the earlier deadline. The entrant must review competition eligibility declarations and any platform terms before final submission.
 

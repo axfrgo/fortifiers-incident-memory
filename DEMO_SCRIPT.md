@@ -1,24 +1,29 @@
-# Demo storyboard — target 4:50 (video not recorded)
+# Recorded demonstration — 3:40
 
-**Status:** this is a ready-to-record storyboard, not a video file or hosted link. The workspace contains no recording/hosting evidence, team roster or actual team appearance. Windows Start menu inventory lists Game Bar and Snipping Tool, but this session's computer-control surface cannot operate those native recording tools; OBS and FFmpeg commands are absent. Do not use a fabricated avatar, voice, founder story or screenshots in place of a real team member. Insert the real project/team identity and have an actual member appear or speak at 0:00.
+**Recording status:** real screen capture completed from the running local FastAPI dashboard. The local workspace file is `artifacts/video/fortifiers-incident-memory-demo.mp4`; it is 220.4 seconds, 1920×1080, 15 fps, silent, and captioned with on-screen text. SHA-256: `a662dd0bd82bbb31df5396b0dc83754ac1b80c553ed61dd27733f29e0a741002`. [video-manifest.json](artifacts/video/video-manifest.json) records render metadata and the raw capture checksum. The video is [published Unlisted on YouTube](https://youtu.be/_k0J1XHyVyA) and available from the [public GitHub release](https://github.com/axfrgo/fortifiers-incident-memory/releases/tag/demo-2026-10-27). An unauthenticated YouTube request returned HTTP 200 and the expected title.
 
-| Time | Screen / narration | Evidence to show |
-|---|---|---|
-| 0:00–0:20 | Actual member: “We are [real team name and member names]. This is Fortifiers Incident Memory, a visual incident investigation prototype.” | Real team identification; application title; visible synthetic-fixture notice |
-| 0:20–0:50 | Select “New visible change + water sensor” and start the investigation. Explain alarm → environmental memory. | Running local web app at `http://127.0.0.1:8000`; synthetic-only data label |
-| 0:50–1:35 | Move the image slider; show actual OpenCV annotation and quality/registration measurement. Explain appearance does not prove cause. | Baseline, event frame, candidate box, OpenCV 5 version |
-| 1:35–2:20 | Walk the completed trace: ROI inspection, older-frame retrieval, sensor correlation, mandatory review. Then run “Older history match”; show the path and outcome change. | Distinct actual traces; historical similarity changes decision |
-| 2:20–2:55 | Record an acknowledgement or request-more-evidence. Explain that review controls do not actuate equipment. Download JSON/ZIP. | Human review record; report hashes; evidence ZIP |
-| 2:55–3:35 | Run the blurred frame, then lighting-only case. Show quality-gated retake and normalized no-change outcome. | Failure handling; no diagnosis on low-quality frame; lighting negative |
-| 3:35–4:05 | Show measured results and explain synthetic labels and one-pass comparator. | `artifacts/evaluation.json`, chart and CSV; 7/7 vs 4/7 is fixture policy correctness, not field accuracy |
-| 4:05–4:35 | Show local OpenCV pipeline, agent workflow diagram and the prepared AWS architecture. State that there is no AWS execution yet and App Runner availability is account-dependent. | `ARCHITECTURE.md`, SVGs, OpenCV APIs, AWS status manifest |
-| 4:35–4:50 | Be explicit: “The local app is verified, but the AWS workload and public endpoint are not deployed. This entry is not complete without the AWS component, a judge-accessible demo and the final video.” | `deployment-manifest.json` status BLOCKED; no simulated cloud claim |
+## What the recording actually shows
 
-## Exact remaining recording and publishing steps
+- Opening title, project tagline, and “solo entry · demo build” identification.
+- The real local dashboard and OpenCV 5.0.0 status.
+- A synthetic water-sensor event with a visible staged image change; the controller investigates and requests human review.
+- A blurred synthetic frame; image-quality output causes the controller to request a retake.
+- A lighting-only change; normalized comparison does not support a new localized change.
+- An older-history case; the agent retrieves earlier evidence and downgrades novelty.
+- Architecture and evaluation slides that explicitly state AWS is not deployed and all reported results come from synthetic fixtures.
+- Closing statement and limitations.
 
-1. Confirm actual team/project identity and confirm each member's eligibility and permission status.
-2. After the authorized AWS deployment is actually verified, replace the final limitation segment with the live `/health` response, deployed synthetic investigation and sanitized endpoint URL. Until then, retain the disclosure above.
-3. Start the local application using `README.md`; verify the selected scenarios work; capture the actual UI and one team member using an available screen recorder. Keep total duration under five minutes. If the AWS endpoint is still unavailable, keep the explicit local-only disclosure in the final segment.
-4. Review the complete recording to ensure all screenshots are genuine and synthetic data is labeled. Export MP4, check the final duration, and host it public or unlisted with judge access.
-5. Add the hosted video link to `SUBMISSION.md`/Devpost only after the file is available. No video file or URL was created here.
+This recording has no voiceover or user likeness. It labels the project as a solo entry but does not show or name the entrant. Add a short real introduction from the entrant if the competition requires the member’s name or appearance; do not use a generated likeness or voice.
 
+## Current hosting state
+
+YouTube Studio confirmed “Video published” after the entrant approved Unlisted publication. The Studio dialog showed the 3:41 item and share link. A no-credential HTTP GET to the link returned HTTP 200 and the video title. Devpost's saved private draft now contains the video URL; the draft has not been submitted.
+
+## Remaining presentation gaps
+
+1. AWS workload and public endpoint are not deployed. No cloud processing is shown or claimed in this recording.
+2. The entrant must decide whether to add their own spoken or visible introduction to satisfy team-identification requirements.
+3. The published video is hosted as Unlisted. Judges can watch with the link; its URL is already saved in the Devpost draft.
+4. Review the draft before submission. The entrant must complete any missing eligibility and identity declarations and give explicit final action-time approval. No submission has been made.
+
+The measured values shown in the recording are synthetic benchmark outputs only. They are not field leak-detection performance, AWS latency, customer outcomes, or a safety certification.

@@ -7,3 +7,5 @@ __pycache__/
 .env.*
 !.env.example
 artifacts/fortifiers-incident-memory-source.zip
+artifacts/demo/*/
+artifacts/video/*.mp4

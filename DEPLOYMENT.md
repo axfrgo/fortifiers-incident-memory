@@ -2,7 +2,7 @@
 
 ## Current status: BLOCKED / prepared only
 
-No AWS resources were created. The workspace has no AWS CLI, Docker CLI, AWS environment credentials or `~/.aws` profiles. The in-app AWS tab redirected to an IAM sign-in page instead of an authenticated console. No spend ceiling or account-specific App Runner eligibility is confirmed. There is no live endpoint, remote OpenCV execution or AWS verification. The app currently runs locally; this does not satisfy the competition's AWS component or public endpoint requirement.
+No AWS resources were created. The workspace has no AWS CLI, Docker CLI, AWS environment credentials or `~/.aws` profiles. The open AWS browser tab remains in the account-signup flow rather than an authenticated console. No credits, billing state, spend ceiling or account-specific App Runner eligibility are confirmed. There is no live endpoint, remote OpenCV execution or AWS verification. The app currently runs locally; this does not satisfy the competition's AWS component or public endpoint requirement.
 
 **Service availability caveat:** current AWS documentation says App Runner is closed to new customers; existing customers may continue using it. This AWS account's eligibility is unknown because no AWS identity is configured. The template below is usable only if that account can create App Runner services. AWS recommends ECS Express Mode for new customers, but that architecture has not been built or costed for this project. Do not assume the prepared App Runner template can be deployed in a new AWS account. [AWS availability notice](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html)
 

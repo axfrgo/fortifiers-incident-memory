@@ -8,7 +8,7 @@ This is an evidence map, not a prediction of judging outcomes. Rules were checke
 | Innovation | 20% | Environmental history, sensor timing, active older-frame retrieval and uncertainty-aware trace | **Implemented conceptually**; no customer or field validation |
 | Real-world impact | 20% | Industrial incident-triage use case and manual-control boundary | **Potential only**; no measured operator benefit or real facility images |
 | UX | 10% | Responsive dashboard, slider, traces, timeline, labels, status, review controls | **PASS locally**; no accessibility audit or user study |
-| Documentation and presentation | 10% | Technical report, diagrams, demo script, scorecard, fresh measured evaluation, public source repo | **PARTIAL**; no team video or public demo endpoint |
+| Documentation and presentation | 10% | Technical report, diagrams, scorecard, measured synthetic evaluation, public source repo, real 3:40 Unlisted video | **PASS for materials**; AWS endpoint is absent and the video does not name/show the entrant |
 | Cloud delivery, reproducibility, responsible operation | 10% | Locked dependencies, CloudFormation, deployment script, privacy/operations docs | **BLOCKED for AWS delivery**; no AWS resources, live URL, Docker build or endpoint test |
 
 ## Agentic Vision Special Award map
@@ -19,13 +19,13 @@ This is an evidence map, not a prediction of judging outcomes. Rules were checke
 | Orchestration and appropriate autonomy | 25% | Four distinct traces, bounded call budget, adaptive history/retake/review paths | **PASS locally** |
 | Task effectiveness and evaluation | 20% | Seven synthetic scenarios; 21 runs; 7/7 expected policy actions; simple one-pass 4/7 | **Measured, synthetic-only** |
 | Failure handling, observability, security and human control | 15% | Quality fail-closed path, timestamps/dedup/security validation, audit review, no actuator | **Implemented locally**; cloud authentication/deployment not verified |
-| UX, documentation and demonstration | 10% | Interface, trace diagram, report and timed storyboard | **PARTIAL**; no hosted video/endpoint |
+| UX, documentation and demonstration | 10% | Interface, trace diagram, report and public 3:40 Unlisted video | **PASS for demo materials**; no AWS endpoint and no named/visible entrant |
 
-The workflow demonstrates the technical pattern described for Agentic Vision: OpenCV-derived observations actually alter a subsequent tool call or review request. The current public repository has source access, but the mandatory meaningful AWS component, judge-accessible endpoint and required video are not fulfilled. This is not a claim of a complete eligible final entry or award eligibility. [Official Agentic Vision description](https://opencv.org/opencv-ai-competition-2026/)
+The workflow demonstrates the technical pattern described for Agentic Vision: OpenCV-derived observations actually alter a subsequent tool call or review request. The public repository and Unlisted video are accessible. The mandatory meaningful AWS component and judge-accessible endpoint remain unfulfilled, and the video does not name/show the entrant. This is not a claim of a complete eligible final entry or award eligibility. [Official Agentic Vision description](https://opencv.org/opencv-ai-competition-2026/)
 
 ## Official materials and eligibility notes
 
-The Devpost final-submission list calls for a technical report, judge-accessible repository/archive, pinned dependencies and instructions, architecture diagram, working endpoint or arranged live demo, public/unlisted video ≤5 minutes showing team/application/architecture/results, and evaluation evidence including failures. This package covers source/docs/tests/evaluation and public source access, but not the AWS endpoint, arranged screen share or hosted team video. [Final submission requirements](https://opencv26.devpost.com/)
+The Devpost final-submission list calls for a technical report, judge-accessible repository/archive, pinned dependencies and instructions, architecture diagram, working endpoint or arranged live demo, public/unlisted video ≤5 minutes showing team/application/architecture/results, and evaluation evidence including failures. This package covers source/docs/tests/evaluation, public source access and a hosted demo. The AWS endpoint/live-demo arrangement and entrant identification in video remain gaps. [Final submission requirements](https://opencv26.devpost.com/)
 
 The full rules require participants to be at least 13; anyone below the local age of majority needs guardian permission and required forms. The overview banner separately says participants must be above local majority, so confirm the governing rule with the organizer. The signed-in Devpost account is registered, but its project list is empty; actual team roster and representative remain unknown. [Rules and eligibility](https://opencv26.devpost.com/rules)
 

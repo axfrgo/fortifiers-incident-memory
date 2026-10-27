@@ -9,8 +9,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 ARCHIVE = ROOT / "artifacts" / "fortifiers-incident-memory-source.zip"
 PUBLIC_REPOSITORY_URL = "https://github.com/axfrgo/fortifiers-incident-memory"
+PUBLIC_ARCHIVE_URL = f"{PUBLIC_REPOSITORY_URL}/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip"
 IGNORED_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache"}
-IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "source-archive-manifest.json"}
+IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "source-archive-manifest.json", "source-archive-validation.json"}
+NON_SOURCE_MEDIA_SUFFIXES = {".mp4", ".mov"}
 
 
 def included_files():
@@ -41,6 +43,10 @@ def included_files():
             continue
         if path.name in IGNORED_FILES or path.suffix == ".pyc":
             continue
+        # Large presentation recordings are hosted as separate release assets.
+        # Keep the portable source bundle focused on code, fixtures and reports.
+        if path.suffix.lower() in NON_SOURCE_MEDIA_SUFFIXES:
+            continue
         if path.name == ".env" or path.name.startswith(".env."):
             continue
         yield path, relative
@@ -56,7 +62,13 @@ def main() -> None:
     manifest = {"created_at_utc": datetime.now(timezone.utc).isoformat(),
                 "archive": ARCHIVE.name, "sha256": digest, "file_count": len(files),
                 "includes_virtual_environment": False,
-                "judge_accessible_public_url": PUBLIC_REPOSITORY_URL}
+                "judge_accessible_public_url": PUBLIC_REPOSITORY_URL,
+                "judge_accessible_archive_url": PUBLIC_ARCHIVE_URL}
+    validation_path = ROOT / "artifacts" / "source-archive-validation.json"
+    if validation_path.exists():
+        validation = json.loads(validation_path.read_text(encoding="utf-8"))
+        if validation.get("source_archive_sha256") == digest:
+            manifest["validation"] = validation
     (ARCHIVE.parent / "source-archive-manifest.json").write_text(json.dumps(manifest, indent=2), encoding="utf-8")
     print(json.dumps({**manifest, "path": str(ARCHIVE), "size_bytes": ARCHIVE.stat().st_size}, indent=2))
 
