@@ -1,6 +1,6 @@
 # Final submission status
 
-**Checked:** 2026-10-27 06:22:27 UTC. **Official deadline target:** 2026-10-27 06:45 UTC (02:45 EDT / 03:45 ADT).
+**Checked:** 2026-10-27 11:08:20 UTC. **Official deadline:** 2026-10-27 06:45 UTC (02:45 EDT / 03:45 ADT); this deadline has passed.
 
 ## Release states
 
@@ -12,7 +12,7 @@
 | REMOTE_TESTED | PASS | Anonymous HTTP health and all seven built-in synthetic investigations succeeded with distinct expected outcomes. Evidence ZIP download and CloudWatch executions were verified. See `artifacts/aws-remote-results.json`, `artifacts/aws-verification/current-smoke.json`, and `artifacts/aws-verification/cloudwatch-observation.json`. |
 | VIDEO_RECORDED | PASS | Genuine silent/captioned application capture, 220.4 s (3:40), 1920×1080; `artifacts/video/video-manifest.json`. |
 | VIDEO_ACCESSIBLE | PASS | Unlisted video: https://youtu.be/_k0J1XHyVyA. |
-| VIDEO_CONTENT_COMPLIANCE | BLOCKED | Video was recorded before AWS deployment, so it does not show the live AWS endpoint and does not identify the solo entrant. The submitted project page discloses this limitation. |
+| VIDEO_CONTENT_COMPLIANCE | BLOCKED | Video was recorded before AWS deployment, so it does not show the live AWS endpoint and does not identify the solo entrant. The private Fortifiers Screen Recorder plugin exists, but the current session exposed no start tool; its window-list call failed with a Unicode encoding error. The deadline has passed and no replacement was captured or submitted. |
 | DEVPOST_PREPARED | PASS | Entry contains project narrative, live AWS URL, public repo and archive, demo video, technical claims with synthetic-data limitations, and Agentic Vision selection. |
 | DEVPOST_SUBMITTED | PASS | Devpost displayed “Project submitted!” after the authorized Submit project action. Public project URL: https://devpost.com/software/fortifiers-incident-memory. |
 | SUBMISSION_CONFIRMED | PASS | Devpost showed its Project submitted confirmation and the resulting project page displayed the AWS endpoint, repository, archive, video, and competition. Confirmation was captured in the active browser session on 2026-10-27. A direct unauthenticated script request was met by Devposts Cloudflare JavaScript challenge, so no separate anonymous HTTP check is claimed. |
@@ -28,7 +28,7 @@
 | Public demo | PASS | Unauthenticated public AWS endpoint processes only built-in synthetic scenarios; arbitrary user uploads are disabled. |
 | Repository/archive | PASS | Public repository and downloadable source archive are linked from the submitted Devpost entry. |
 | Documentation | PASS | README, technical report, architecture and agent diagrams, evaluation, responsible use, deployment, scorecard, submission wording, demo script, and machine-readable test results are in the repository. |
-| Video requirement | BLOCKED | Video is public/unlisted and below five minutes, but lacks the live AWS walkthrough and entrant identification as disclosed above. |
+| Video requirement | BLOCKED | The public/unlisted 3:40 video lacks the live AWS walkthrough and entrant identification. The competition deadline has passed; no updated video was submitted. |
 | Solo entry | PASS | Devpost shows Alexander Ferguson as the sole listed teammate. |
 | Final submission | PASS | Devpost confirmation banner and public submitted project page were verified. |
 
@@ -47,6 +47,7 @@
 
 ## Remaining user actions
 
-1. If time remains before the deadline, record and replace the video with an AWS-inclusive version that identifies the entrant, then verify its public link.
-2. Review AWS billing after usage has fully posted; disable public invocation after judging if no longer needed.
+1. For a future recording, refresh or repair the private recorder plugin connection so its implemented start_recording function is available; the current recorder state is idle.
+2. Review AWS billing after usage has fully posted; disable public invocation when judging no longer requires the demo.
+
 
