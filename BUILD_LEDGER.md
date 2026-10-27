@@ -156,3 +156,10 @@ The latest local status and ledger now reflect the anonymous Contents API verifi
 - **2026-10-27 02:20Z:** Pushed commit 1047089677d576b4b6e687e0aee954861b67b98d and queried master HEAD plus pinned Contents API for FINAL_SUBMISSION_STATUS, BUILD_LEDGER, source-archive-manifest, final test JSON, and cover. GitHub returned that commit as HEAD and all five file calls returned contents; the status document contains GITHUB_PUBLISHED PASS. Anonymous requests used only User-Agent and Accept headers. A first output assembly used bare PowerShell true after fetching the files and failed; corrected to $true and verified the response.
 
 The status and ledger now reflect the public verification at commit 1047089677d576b4b6e687e0aee954861b67b98d. Rebuild the source ZIP after this doc update and push this final doc-only closeout; verify its public HEAD once more.
+
+## FINAL RELEASE HEAD — 2026-10-27 02:22Z
+
+| Time (UTC) | Action / command | Result | Evidence / next step |
+|---|---|---|---|
+| 2026-10-27 02:22Z | Push doc-only release record as commit a0a27ad274bbb265dd67da1de72ee006332cd8d6 and query unauthenticated GitHub master HEAD | API reported a0a27ad274bbb265dd67da1de72ee006332cd8d6 as master HEAD. | Public repo only; Fortifiers production repository remains untouched. |
+| 2026-10-27 02:22Z | Pinned anonymous GitHub Contents API check for FINAL_SUBMISSION_STATUS, BUILD_LEDGER, source-archive-manifest, test-results-finalization JSON and project-cover PNG | All five files returned content. The status file states GITHUB_PUBLISHED PASS; the test file reports 36 tests, 0 failures, 0 errors and 0 skipped. Archive manifest is SHA-256 dd0166826386738e74307fd8bd478ec2e142db23a5f0a81f643115ac06d3947e, 213 members; its ZIP integrity had passed before this ledger update. | Refresh and integrity-check the archive after this final status/ledger edit; then push the updated manifest and make the archive available in the Devpost draft if upload succeeds. |
