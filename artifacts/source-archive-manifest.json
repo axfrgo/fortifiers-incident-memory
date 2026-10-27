@@ -1,15 +1,15 @@
 {
-  "created_at_utc": "2026-10-27T05:43:01.707980+00:00",
+  "created_at_utc": "2026-10-27T05:46:56.038736+00:00",
   "archive": "fortifiers-incident-memory-source.zip",
-  "sha256": "f007885ff48bd3761149db0272729da3d0d37a4e090c8c45ffbd60cb2a1d7d7d",
+  "sha256": "4358fd45d4a449e4671c09021ef714c04f292d8d8b62763fa073efeecdd95986",
   "file_count": 232,
   "includes_virtual_environment": false,
   "judge_accessible_public_url": "https://github.com/axfrgo/fortifiers-incident-memory",
   "judge_accessible_archive_url": "https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip",
   "validation": {
-    "validated_at_utc": "2026-10-27T05:42:19Z",
-    "source_archive_sha256": "f007885ff48bd3761149db0272729da3d0d37a4e090c8c45ffbd60cb2a1d7d7d",
-    "archive_bytes": 34475275,
+    "validated_at_utc": "2026-10-27T05:46:46Z",
+    "source_archive_sha256": "4358fd45d4a449e4671c09021ef714c04f292d8d8b62763fa073efeecdd95986",
+    "archive_bytes": 34475558,
     "archive_files": 232,
     "zip_integrity": "PASS",
     "extracted_tests": {
@@ -17,7 +17,7 @@
       "passed": 37,
       "failed": 0,
       "skipped": 0,
-      "duration_seconds": 7.92,
+      "duration_seconds": 7.91,
       "environment": {
         "python": "3.14.0",
         "opencv": "5.0.0",
