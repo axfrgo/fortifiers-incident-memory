@@ -1,52 +1,75 @@
 {
-  "status": "BLOCKED_PENDING_AWS_ACCOUNT_VERIFICATION",
-  "checked_at_utc": "2026-10-27T04:32:43Z",
+  "status": "REMOTE_VERIFIED",
+  "checked_at_utc": "2026-10-27T05:24:29Z",
   "region": "us-east-2",
-  "runtime": "AWS Lambda Python 3.14 container with FastAPI, Mangum 0.22.0, and OpenCV 5.0.0.93",
-  "deployment_path": [
-    "AWS CodeBuild general1.small builds an immutable linux/amd64 image",
-    "Private ECR image repository",
-    "AWS Lambda public Function URL runs the OpenCV workload",
-    "Private S3 stores synthetic evidence for seven days",
-    "CloudWatch retains Lambda logs for 14 days and CodeBuild logs for seven days"
-  ],
-  "public_endpoint": null,
-  "aws_account_id": null,
-  "account_plan": "Free Plan credit active; balance intentionally omitted",
-  "cloudshell_status": "Unavailable: AWS reports new-account verification is still in progress",
-  "resources_created": false,
-  "aws_project_spend_verified": false,
-  "local_docker_verified": false,
-  "local_lambda_adapter_smoke": {
-    "status": "PASS",
-    "detail": "Mangum handled GET /health and GET /api/investigate/clear_change locally; the investigation returned HTTP 200, a nine-step trace, and a 1,652,510-byte JSON response. This does not prove AWS execution."
+  "runtime": "AWS Lambda Python 3.14 ZIP package; FastAPI via Mangum; OpenCV 5.0.0",
+  "source_commit": "b851290df9e99aca1a232c018e53bff48b8f559d",
+  "public_endpoint": "https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/",
+  "health_endpoint": "https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/health",
+  "cloudformation": {
+    "bootstrap_stack": "fortifiers-incident-memory-bootstrap",
+    "bootstrap_status": "CREATE_COMPLETE",
+    "app_stack": "fortifiers-incident-memory-demo-free-3",
+    "app_status": "UPDATE_COMPLETE"
+  },
+  "account_plan": "Free Plan selected; exact credit balance omitted",
+  "resources_created": true,
+  "current_project_spend_verified": false,
+  "deployment_artifact": {
+    "key": "fortifiers-incident-memory-lambda-b851290.zip",
+    "compressed_bytes": 101602882,
+    "uncompressed_bytes": 257097764,
+    "sha256": "b06b10e6b86d85448d2fd931494908ce9884cf32b2ffd66e0bfd72be7bf17597"
   },
   "runtime_safeguards": {
     "user_uploads_enabled": false,
-    "reserved_concurrency": 1,
-    "memory_mib": 2048,
+    "function_url_auth": "NONE (public synthetic demo)",
+    "reserved_concurrency": null,
+    "memory_mib": 512,
     "timeout_seconds": 90,
-    "ephemeral_storage_mib": 1024,
-    "public_function_url": true,
+    "ephemeral_storage_mib": 512,
     "s3_public_access_blocked": true,
-    "evidence_retention_days": 7
+    "s3_encryption": "SSE-S3",
+    "evidence_retention_days": 7,
+    "cloudwatch_log_retention_days": 14
   },
-  "estimated_cost": {
-    "lambda_rate_usd_per_gb_second": 0.0000166667,
-    "lambda_rate_usd_per_million_requests": 0.2,
-    "lambda_example_usd_per_call_at_2_gib_3_seconds": 0.0001,
-    "codebuild_example_usd_per_20_minute_build_before_credits": 0.1,
-    "hard_spend_cap": false,
-    "source": [
-      "https://aws.amazon.com/lambda/pricing/",
-      "https://aws.amazon.com/codebuild/pricing/",
-      "https://aws.amazon.com/ecr/pricing/"
-    ]
+  "remote_verification": {
+    "anonymous_http": true,
+    "root_status": 200,
+    "health_status": 200,
+    "opencv_version": "5.0.0",
+    "scenario_count": 7,
+    "scenario_http_200_count": 7,
+    "clear_change_outcome": "human_review_required",
+    "clear_change_trace_steps": 9,
+    "poor_image_outcome": "retake_requested",
+    "historical_match_outcome": "no_new_change_supported",
+    "lighting_shift_outcome": "no_visual_change_supported",
+    "upload_status": 403,
+    "unknown_scenario_status": 404,
+    "evidence_zip_download_status": 200,
+    "evidence_zip_bytes": 900871,
+    "evidence_zip_sha256": "cb70a2d09ae03d04aba9ff639aff56c6a7087a91bb5e6214b56a6abb0c49f2b2",
+    "cloudwatch_observed_max_memory_mib": 218,
+    "cloudwatch_observed_investigation_duration_ms": 2922.8,
+    "evidence_files": [
+      "report.json",
+      "report.html",
+      "images/baseline.png",
+      "images/event.png",
+      "images/overlay.png",
+      "images/change-mask.png"
+    ],
+    "results_file": "artifacts/aws-remote-results.json",
+    "verification_file": "artifacts/aws-verification/verification.json",
+    "current_smoke_file": "artifacts/aws-verification/current-smoke.json",
+    "cloudwatch_evidence_file": "artifacts/aws-verification/cloudwatch-observation.json"
   },
-  "templates": [
+  "deployment_path_note": "CodeBuild queue quota is zero; the verified Lambda function uses the reproducible ZIP deployment path. ECR/CodeBuild resources exist but were not used to run the OpenCV workload.",
+  "hard_spend_cap": false,
+  "source_templates": [
     "deployment/aws-bootstrap.yaml",
-    "deployment/aws-app.yaml"
+    "deployment/aws-app-zip.yaml"
   ],
-  "deployment_script": "deployment/deploy-lambda-cloudshell.sh",
-  "remote_verification": null
+  "package_builder": "deployment/package_lambda_zip.py"
 }

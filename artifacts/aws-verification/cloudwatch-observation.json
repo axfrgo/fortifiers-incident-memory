@@ -1,0 +1,28 @@
+{
+  "observed_at_utc": "2026-10-27T05:17:00Z",
+  "source": "AWS CloudWatch console, log group /aws/lambda/fortifiers-incident-memory-demo",
+  "visible_log_event_count": 27,
+  "runtime": "python:3.14.mainline.v111",
+  "observations": [
+    {
+      "event_time_utc": "2026-10-27T05:14:46Z",
+      "type": "cold_start_and_health_request",
+      "duration_ms": 270.97,
+      "billed_duration_ms": 2477,
+      "initialization_ms": 2205.78,
+      "configured_memory_mib": 512,
+      "max_memory_used_mib": 145
+    },
+    {
+      "event_time_utc": "2026-10-27T05:14:59Z",
+      "type": "synthetic_investigation_request",
+      "duration_ms": 2922.8,
+      "billed_duration_ms": 2923,
+      "configured_memory_mib": 512,
+      "max_memory_used_mib": 218
+    }
+  ],
+  "request_ids_omitted": true,
+  "account_identifiers_omitted": true,
+  "notes": "Single observed CloudWatch log stream; these are individual execution records, not benchmark percentiles."
+}

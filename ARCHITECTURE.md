@@ -1,37 +1,37 @@
 # Architecture
 
-Fortifiers Incident Memory is an event-triggered, bounded visual investigation service. The verified local runtime is Python 3.14.0 with OpenCV 5.0.0.93. The AWS path uses CodeBuild, private ECR, a Lambda container with a public Function URL, private S3 evidence retention, and CloudWatch logs. It is prepared but not yet remotely verified: AWS CloudShell reports the new account is still under verification. See [deployment-manifest.json](deployment-manifest.json) and [DEPLOYMENT.md](DEPLOYMENT.md).
+Fortifiers Incident Memory is an event-triggered, bounded visual investigation system. The same FastAPI/OpenCV 5 service runs locally and on AWS Lambda. The verified public AWS deployment is a Python 3.14 ZIP package at commit b851290df9e99aca1a232c018e53bff48b8f559d, with a public Function URL, private S3 evidence retention and CloudWatch logs. See deployment-manifest.json and DEPLOYMENT.md for live checks and resource details.
 
-![Architecture showing verified local OpenCV 5 processing and the prepared Lambda, private S3, ECR, CodeBuild, and CloudWatch path](submission/architecture.svg)
+![Verified OpenCV 5 application and AWS Lambda ZIP runtime with a public synthetic demo URL, private S3 evidence and CloudWatch logs](submission/architecture.svg)
 
 ## Data and trust boundaries
 
-1. A synthetic water-contact event selects a camera and alarm frame. The optional local upload API checks media type, total request size (17 MiB), per-image size (8 MiB), decoded dimensions (maximum 12 megapixels), color decoding and resolution compatibility. Decoding/re-encoding removes source metadata. OpenCV 5 DNN FaceDetectorYN uses the included YuNet model to blur detected faces. If the model or inference fails, upload processing stops; detection can still miss faces and other identifiers. The prepared cloud deployment disables user uploads.
-2. `IncidentMemory` indexes frames by camera, context and timezone-aware timestamp. It picks the nearest usable pre-event frame and excludes frames marked as incidents from baseline selection.
-3. OpenCV 5 evaluates blur/exposure, attempts ORB feature matching and a RANSAC homography, falls back to ECC translation, normalizes global brightness in HSV, thresholds localized chromatic change, applies morphology and extracts connected-component regions.
-4. The bounded controller uses these measurements to choose what it does next. A new region can trigger region inspection and older-frame retrieval. Poor quality requests a retake. A similar older region downgrades novelty. A sensor is considered correlated only if active and within the time window.
-5. The report labels observations separately from sensor correlation, hypothesis and unverified cause. It includes trace records, PNGs, SHA-256 hashes and operator review controls. Review records are acknowledgements only; no physical-control interface exists.
-6. Locally, files are saved under `artifacts/demo/`. The AWS container stores transient working files under Lambda `/tmp`, writes the evidence ZIP and human review records to a private S3 prefix with a seven-day expiry, and returns a presigned download URL. The Function URL serves the FastAPI dashboard and the real OpenCV workload. CloudWatch retains Lambda logs for 14 days and build logs for seven days. Uploads are disabled. This AWS path remains pending remote verification.
+1. A synthetic water-contact event selects a camera and alarm frame. The optional local upload API checks media type, request size, decoded dimensions, color decoding and resolution compatibility. Decoding/re-encoding removes source metadata. OpenCV 5 DNN FaceDetectorYN uses YuNet to blur detected faces; this can miss faces and identifiers. The AWS deployment disables all user uploads.
+2. IncidentMemory indexes frames by camera, context and timezone-aware timestamp. It selects a usable pre-event frame and excludes incident-marked frames from baseline selection.
+3. OpenCV 5 assesses blur/exposure, attempts ORB feature matching and RANSAC homography, falls back to ECC translation, normalizes brightness in HSV, creates localized change masks, applies morphology and extracts connected-component regions.
+4. The bounded controller chooses what to do next from these observations. A candidate can trigger ROI inspection and older-frame retrieval; poor quality requests another frame; a historical match downgrades novelty; sensor timing adds correlation context only.
+5. The report separates observed visual changes, sensor correlation, hypothesis and unverified cause. It includes traces, PNGs, SHA-256 hashes and operator review controls. No physical-control interface exists.
+6. The AWS Lambda function runs the actual OpenCV API. Evidence ZIPs and review records are stored in a private S3 prefix with a seven-day expiry. Function logs expire after 14 days. The public Function URL exposes only seven synthetic scenarios and disables image uploads. CloudWatch confirms real executions. The reproducible ZIP path is active; provisioned CodeBuild/ECR resources were not used because the account queue quota was zero.
 
 ## Components
 
 | Component | Location | Responsibility |
 |---|---|---|
-| Ingestion and HTTP API | `src/incident_memory/api.py` | Health, scenarios, safe image upload, investigation, downloadable artifacts, review capture |
-| Environmental memory | `src/incident_memory/memory.py` | Time/camera/context filtering, duplicate event detection, incident exclusion |
-| OpenCV 5 perception | `src/incident_memory/vision.py` | Decode, quality, registration, illumination normalization, candidate masks and geometry |
-| Agent controller | `src/incident_memory/agent.py` | Bounded observation-driven tool routing and fail-closed reports |
-| Reports | `src/incident_memory/reports.py` | Accessible HTML evidence report |
-| Cloud | `src/incident_memory/cloud.py`, `Dockerfile.lambda`, `deployment/aws-bootstrap.yaml`, `deployment/aws-app.yaml` | S3 evidence persistence, Lambda Function URL, CodeBuild, ECR, and least-privilege IAM |
-| Frontend | `src/incident_memory/static/` | Responsive scenario dashboard, image slider, trace and human review |
-| Evaluation | `scripts/evaluate.py`, `data/synthetic/` | Labeled procedural fixture set and measured comparator |
+| Ingestion and HTTP API | src/incident_memory/api.py | Health, scenarios, safe local image upload, investigation, downloadable artifacts, review capture |
+| Environmental memory | src/incident_memory/memory.py | Time/camera/context filtering, duplicate event detection, incident exclusion |
+| OpenCV 5 perception | src/incident_memory/vision.py | Decode, quality, registration, illumination normalization, candidate masks and geometry |
+| Agent controller | src/incident_memory/agent.py | Bounded observation-driven tool routing and fail-closed reports |
+| Reports | src/incident_memory/reports.py | Accessible HTML evidence report |
+| Cloud persistence | src/incident_memory/cloud.py | S3 evidence storage and presigned report downloads |
+| AWS deployment | deployment/aws-app-zip.yaml; scripts/package_lambda_zip.py | Lambda ZIP package, memory/runtime configuration, public Function URL and scoped IAM |
+| Frontend | src/incident_memory/static/ | Responsive scenario dashboard, image slider, trace and human review |
+| Evaluation | scripts/evaluate.py; data/synthetic/ | Labeled procedural fixture set and measured comparator |
 
-## API
+## Public endpoints
 
-- `GET /health` — reports service and OpenCV version.
-- `GET /api/scenarios` — lists clearly synthetic test cases.
-- `GET /api/investigate/{scenario_id}` — runs the actual OpenCV and agent path.
-- `POST /api/investigate/upload` — local-only default for authorized images; disabled in the prepared cloud template.
-- `POST /api/review/{run_id}` — records an acknowledgement, rejection or request for more evidence; it does not actuate equipment.
-- `GET /artifacts/{run_id}/{filename}` — local run artifacts.
-
+- GET /health — OpenCV version, deployment mode, build and commit.
+- GET /api/scenarios — lists synthetic test cases.
+- GET /api/investigate/{scenario_id} — runs OpenCV and the adaptive agent path.
+- POST /api/investigate/upload — local only; disabled in AWS.
+- POST /api/review/{run_id} — records acknowledge/reject/request-more-evidence; no actuation.
+- Evidence bundle — generated by the service, stored privately and downloaded through a time-limited signed URL.

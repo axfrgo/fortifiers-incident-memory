@@ -47,7 +47,7 @@ At `2026-10-27T00:59:35Z`, the running FastAPI app was called over `http://127.0
 
 The strongest evidence is deterministic branch behavior: blur and occlusion prevent diagnosis; history changes the new-versus-pre-existing action; a uniform lighting change is normalized; and a localized synthetic patch plus a time-aligned synthetic sensor reaches mandatory review. The one-pass comparator mislabels the blurred and history cases because it has no quality/history policy. The mask score is high because the generated patch is visually separable from a procedurally drawn room; it is not a water-classification score.
 
-The 36-test suite also covers corrupt/missing bytes, dimension mismatch, feature-registration fallback, absent baseline, sensor absence, timezone validation, duplicate events, insecure upload type/size, untrusted IDs, fail-closed face-model failure and an S3 failure stub. AWS and Docker tests against actual services were not possible and were not claimed. Initial fixture generation blurred the entire scene, causing the quality gate to reject the positive case; the fixture was corrected to soften only the synthetic patch edge before the recorded evaluation. An initial privacy test also exposed that OpenCV 5 removes the OpenCV 4 `CascadeClassifier` API; it was replaced with OpenCV 5 `FaceDetectorYN` and an upstream YuNet ONNX model. This is an implementation compatibility fix, not a real-world accuracy result. This test-fixture fix is not a real-world accuracy improvement.
+The 37-test suite also covers corrupt/missing bytes, dimension mismatch, feature-registration fallback, absent baseline, sensor absence, timezone validation, duplicate events, insecure upload type/size, untrusted IDs, fail-closed face-model failure and an S3 failure stub. AWS and Docker tests against actual services were not possible and were not claimed. Initial fixture generation blurred the entire scene, causing the quality gate to reject the positive case; the fixture was corrected to soften only the synthetic patch edge before the recorded evaluation. An initial privacy test also exposed that OpenCV 5 removes the OpenCV 4 `CascadeClassifier` API; it was replaced with OpenCV 5 `FaceDetectorYN` and an upstream YuNet ONNX model. This is an implementation compatibility fix, not a real-world accuracy result. This test-fixture fix is not a real-world accuracy improvement.
 
 ### Limits
 
@@ -58,3 +58,21 @@ The 36-test suite also covers corrupt/missing bytes, dimension mismatch, feature
 - RSS values are one before/after sample; not maximum working set.
 - No independent test of all browser/OS combinations or Python 3.11/Docker image builds.
 
+
+## AWS remote functional verification
+
+On 2026-10-27, anonymous HTTP requests exercised the deployed Lambda Function URL in us-east-2. Health returned HTTP 200 and reported OpenCV 5.0.0, deployment_mode aws-lambda, and the tested source commit. Seven synthetic scenario requests each returned HTTP 200:
+
+| Scenario | AWS result | Agent distinction |
+|---|---|---|
+| dry_normal | no_visual_change_supported | no candidate region |
+| clear_change | human_review_required | localized observation, ROI inspection, history lookup, sensor correlation, review request |
+| poor_image | retake_requested | image-quality gate prevents a leak assessment |
+| lighting_shift | no_visual_change_supported | illumination normalization suppresses global brightness change |
+| historical_match | no_new_change_supported | older frame changes the novelty assessment |
+| camera_movement | no_visual_change_supported | comparison does not support a new leak finding |
+| occlusion_blur | retake_requested | poor image quality stops the diagnosis |
+
+The seven client-observed request times were 1.206–2.384 seconds (one request per scenario, including network, response serialization and cold-start effects). This is not a latency distribution or a field benchmark. CloudWatch recorded one synthetic investigation with 2,922.8 ms function duration and 218 MiB maximum memory used; another cold invocation had 2,205.78 ms initialization and 145 MiB maximum used. The evidence ZIP downloaded anonymously, had 900,871 bytes, and passed ZIP integrity validation. Its SHA-256 is recorded in deployment-manifest.json.
+
+The AWS run verifies that OpenCV and the agent workflow execute in the deployed cloud service, and that outcomes/traces differ by scenario. It does not provide independent ground truth, accuracy validation, realistic load testing, current billing reconciliation or real-room performance. The full sanitized traces are in artifacts/aws-remote-results.json; the download and health summary are in artifacts/aws-verification/verification.json.

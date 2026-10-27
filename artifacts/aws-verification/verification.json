@@ -1,0 +1,43 @@
+{
+  "checked_at_utc": "2026-10-27T05:15:00Z",
+  "endpoint": "https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws",
+  "public_home_status": 200,
+  "health_status": 200,
+  "opencv_version": "5.0.0",
+  "deployment_mode": "aws-lambda",
+  "deployed_commit": "b851290df9e99aca1a232c018e53bff48b8f559d",
+  "investigation_status": 200,
+  "scenario": "clear_change",
+  "synthetic": true,
+  "outcome": "human_review_required",
+  "finding": "possible_visible_water_change",
+  "trace_count": 9,
+  "trace_actions": [
+    "retrieve_event_frames",
+    "evaluate_image_quality",
+    "select_historical_baseline",
+    "align_and_compare",
+    "inspect_region",
+    "retrieve_additional_frame",
+    "correlate_sensor_event",
+    "generate_review_request",
+    "create_evidence_report"
+  ],
+  "evidence_download_status": 200,
+  "evidence_host": "fortifiers-incident-memory-bootstrap-580538967634-us-east-2.s3.us-east-2.amazonaws.com",
+  "evidence_bytes": 900871,
+  "evidence_key": "evidence/clear_change-aa9608175ee3.zip",
+  "evidence_sse": "AES256",
+  "evidence_error_code": null,
+  "elapsed_s": 4.242,
+  "evidence_sha256": "cb70a2d09ae03d04aba9ff639aff56c6a7087a91bb5e6214b56a6abb0c49f2b2",
+  "evidence_entries": [
+    "report.json",
+    "report.html",
+    "images/baseline.png",
+    "images/event.png",
+    "images/overlay.png",
+    "images/change-mask.png"
+  ],
+  "evidence_zip_test_error": null
+}

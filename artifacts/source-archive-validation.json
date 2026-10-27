@@ -1,27 +1,30 @@
 {
-  "verified_at_utc": "2026-10-27T04:07:14Z",
-  "source_archive": "fortifiers-incident-memory-source.zip",
-  "source_archive_sha256": "dd3590d8e353e5f8456c4fe8a5372dd60d85c6445f25e59cca0c24af250c1266",
-  "archive_bytes": 33931741,
-  "zip_entries": 218,
-  "extracted_to_new_directory": true,
-  "pinned_environment": {
-    "python": "3.14.0",
-    "opencv": "5.0.0",
-    "numpy": "2.5.4",
-    "pytest": "8.4.2",
-    "fastapi": "0.123.0",
-    "dependencies_installed_from": "requirements-lock.txt"
-  },
-  "command": "PYTHONPATH=src python -m pytest -q",
-  "test_result": {
-    "passed": 36,
+  "validated_at_utc": "2026-10-27T05:42:19Z",
+  "source_archive_sha256": "f007885ff48bd3761149db0272729da3d0d37a4e090c8c45ffbd60cb2a1d7d7d",
+  "archive_bytes": 34475275,
+  "archive_files": 232,
+  "zip_integrity": "PASS",
+  "extracted_tests": {
+    "command": "PYTHONPATH=src .venv/Scripts/python.exe -m pytest -q",
+    "passed": 37,
     "failed": 0,
-    "errors": 0,
     "skipped": 0,
-    "elapsed_seconds": 8.59,
-    "warnings": [
-      "Starlette TestClient uses deprecated anyio.abc.BlockingPortal alias."
-    ]
+    "duration_seconds": 7.92,
+    "environment": {
+      "python": "3.14.0",
+      "opencv": "5.0.0",
+      "numpy": "2.5.4",
+      "fastapi": "0.123.0",
+      "pytest": "8.4.2"
+    }
+  },
+  "portable_contents": {
+    "virtual_environment_excluded": true,
+    "git_history_excluded": true,
+    "environment_files_excluded": true,
+    "lambda_runtime_zip_excluded": true,
+    "sanitized_aws_evidence_included": true,
+    "signed_presigned_urls_found": false,
+    "synthetic_visual_examples_included": true
   }
 }

@@ -46,6 +46,8 @@ def included_files():
             continue
         if path.name in IGNORED_FILES or path.suffix == ".pyc":
             continue
+        if path.name.startswith("fortifiers-incident-memory-lambda-") and path.suffix.lower() == ".zip":
+            continue
         # Large presentation recordings are hosted as separate release assets.
         # Keep the portable source bundle focused on code, fixtures and reports.
         if path.suffix.lower() in NON_SOURCE_MEDIA_SUFFIXES:

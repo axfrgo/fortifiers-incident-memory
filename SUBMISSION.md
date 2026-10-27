@@ -1,74 +1,96 @@
 # Devpost submission wording — prepared, not submitted
 
-**Readiness warning (checked 2026-10-27):** the local OpenCV 5 app, synthetic evaluation, public source repository and real 3:40 Unlisted video are verified. A private Devpost draft has the title, pitch, story, cover, source archive, test instructions, video URL and Agentic Vision selection. The AWS workload and public endpoint are not deployed. The entrant must verify eligibility declarations and the video may not satisfy a strict requirement to show or name a team member. Do not claim cloud execution or field performance. This draft is not a submitted entry.
+**Status:** The solo entrant has a saved private Devpost draft. The AWS endpoint and source repository are live. This document is ready-to-paste material, not evidence that the final form has been submitted. The entrant must review eligibility declarations and confirm the final entry before submission.
 
-## Project name
+## Project title
 
-**Fortifiers Incident Memory**
+Fortifiers Incident Memory
 
 ## Tagline
 
-**Give the Physical World a Memory.**
+Give the Physical World a Memory.
 
 ## One-sentence pitch
 
-An event-triggered visual investigation system that compares an alarm-time mechanical-room image with its history, uses sensor timing to guide the next evidence check, and creates a human-reviewable record of what visibly changed.
+An agentic visual investigation system that reconstructs environmental changes around alarms using OpenCV 5, historical evidence, sensor context and an observation-driven investigation workflow.
 
 ## Inspiration
 
-Facility alarms announce an event but often leave operators to hunt through footage to learn what looks different. We explored whether camera history could serve as environmental memory: retrieve the relevant pre-event state, compare it to the alarm frame, and actively seek additional evidence when the images or conclusions are weak.
+Traditional alarms announce an event but leave operators to hunt through footage for context. We explored whether a camera's visual history could act as environmental memory: retrieve the relevant pre-event state, compare it with the alarm-time image, and actively seek more evidence when the images or conclusions are weak.
 
 ## What it does
 
-The demo focuses on an industrial mechanical room and a simulated water-contact alarm. It checks frame quality, selects a same-camera pre-event baseline, aligns and compares images with OpenCV 5, draws candidate regions, checks an active sensor timestamp and can fetch an older image to determine whether an appearance was already present. Image-quality failures request a retake. A possible water-like visual change with sensor correlation becomes a hypothesis and asks a human to review. A visual comparison does not prove physical water or root cause.
+The demonstrator focuses on a mechanical room and a simulated water-contact alarm. It checks frame quality, selects a same-camera pre-event baseline, aligns and compares images with OpenCV 5, proposes visible change regions, checks synthetic sensor timing, and can retrieve an older frame to determine whether an appearance was already present. Poor image quality requests another frame. A possible water-like visual change correlated with a simulated sensor becomes a hypothesis and asks a human to review. Images do not prove physical water or root cause.
 
-All supplied rooms, frames, patches and sensor records are generated synthetic fixtures. They are not customer footage or real-world validation.
+All supplied scenes, frames, visual changes and sensor events are procedurally generated synthetic fixtures. They are not customer footage or real-world validation.
 
 ## How we built it
 
-The local product is a Python 3.11+ FastAPI service, NumPy, OpenCV 5 and a lightweight responsive browser interface. OpenCV performs quality checks, ORB feature matching, RANSAC homography registration, ECC translation fallback, HSV illumination normalization, change masking, morphology, connected components and overlay/measurement generation. A deterministic bounded controller chooses subsequent tools from those observations and writes timestamped traces, image hashes, JSON and accessible HTML reports.
+The application uses FastAPI, NumPy, OpenCV 5 and a lightweight responsive web interface. OpenCV performs image validation and quality assessment, ORB feature matching with RANSAC homography, ECC translation fallback, HSV illumination normalization, difference masking, morphology, connected components, region measurements and annotation. A bounded deterministic controller routes tools from the actual observations and writes timestamped traces, evidence hashes, JSON and accessible HTML reports.
 
-## OpenCV 5 and Agentic Vision
+## How OpenCV 5 is used
 
-OpenCV outputs are inputs to later actions. Poor blur quality skips comparison and selects a retake request. A localized change selects ROI inspection and older-history retrieval. Historical similarity downgrades the novelty assessment. A region plus a time-aligned water-contact sensor selects a human-review request. Lighting normalization suppresses a global brightness-only change. The controller is bounded and has no actuator tools. See `AGENT_WORKFLOW.md` and `submission/agent-workflow.svg`.
+The application requires OpenCV major version 5 at runtime. OpenCV derives the image-quality, alignment, illumination, mask and candidate-region observations that guide subsequent tools. The same pinned OpenCV workload runs in the AWS Lambda service.
 
-## AWS
+## How AWS is used
 
-**Actual AWS use in this build: none.** A private ECR + App Runner + versioned S3 template and deployment script are prepared. The open AWS tab remains at the account-signup flow; no AWS CLI, Docker, or credential profile is configured. The account, credits, service access, and account-specific cost eligibility could not be checked. No resources were created, no costs were incurred, and no spend limit or deployment approval is in place. AWS says App Runner is closed to new customers; account eligibility remains unknown. No live endpoint or cloud processing response exists. The competition's meaningful AWS requirement and endpoint are not met. See `DEPLOYMENT.md` for the illustrative cost estimate and service restriction. Replace this section only after an AWS workload is live and independently verified.
+The API and OpenCV processing run on AWS Lambda in us-east-2, not only in the browser or on S3. The Python 3.14 ZIP package is served through a public Lambda Function URL and writes synthetic evidence to a private, encrypted S3 bucket with seven-day retention. CloudWatch logs record Lambda execution. The AWS health endpoint reports OpenCV 5.0.0 and deployed commit b851290df9e99aca1a232c018e53bff48b8f559d.
+
+Live synthetic demo: https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/
+
+The endpoint is publicly reachable and unauthenticated, but only exposes seven fixed synthetic scenarios; arbitrary image uploads are disabled. It is not a production service, and billing after deployment has not yet been reconciled.
+
+## How Agentic Vision changes later actions
+
+This is a software controller, not an AI coding assistant. OpenCV results directly change the next action:
+- Poor blur/occlusion quality selects a retake request and stops diagnosis.
+- A localized candidate selects ROI inspection and older-frame retrieval.
+- A similar older region changes the novelty conclusion to no_new_change_supported.
+- A visible candidate plus a time-aligned simulated water sensor leads to human review.
+
+The deployed clear-change trace has nine actual steps and ends in human review. The poor-image trace requests a retake; the historical-match trace retrieves older evidence and downgrades the candidate. Full traces are in artifacts/aws-remote-results.json.
 
 ## Challenges and solutions
 
-- Uniform brightness changes looked like scene changes, so comparison normalizes the HSV value channel and separately inspects localized saturation differences.
-- Camera movement and low-feature images can break pixel comparison, so the engine attempts ORB/RANSAC, falls back to ECC translation, lowers reliability on identity fallback and rejects weak comparisons.
-- A mark can appear new relative to the nearest frame, so the controller can fetch older history and compare the ROI before deciding whether novelty is supported.
-- A blue-looking patch and a sensor are not proof of a leak, so evidence classes distinguish observation, sensor correlation, hypothesis and unverified cause and stop at human review.
-- The first positive fixture was blurred across the full frame and therefore correctly failed the quality gate; the synthetic patch generator was corrected to retain room detail and soften only patch edges.
+- Uniform brightness changes can resemble scene changes. HSV illumination normalization reduces this effect.
+- Low-feature frames and camera motion can break direct pixel comparison. The pipeline tries ORB/RANSAC and ECC translation and reduces confidence or rejects weak comparisons.
+- A region can look new against the nearest frame but already exist in older history. The controller can retrieve and inspect older evidence.
+- A colored patch and a sensor are not proof of a leak. Evidence classes separate observed change, sensor correlation, hypothesis and unverified cause, and the system stops at human review.
+- Deploying OpenCV under the account's Lambda limits required a compact ZIP package. CodeBuild could not start because the account build-queue quota was zero; the tested workload was deployed through a pinned Lambda ZIP package instead.
 
-## Measured results
+## Measured accomplishments
 
-On seven procedurally generated held-out scenario types with three runs each, the implemented workflow selected the expected scripted action in 7/7 and a simple no-history/no-quality one-pass rule in 4/7. On four pixel-labeled synthetic masks, precision was 0.99183, recall 0.99913, F1 0.99546 and mask IoU 0.99097. In the fresh 21-run controller benchmark, p50/p95 latency was 137.061/217.262 ms on Windows 10, Python 3.14, OpenCV 5.0.0. A separate local HTTP check returned four expected outcomes and verified a PNG overlay and ZIP report; see `artifacts/final-local-verification.json`. These measurements describe synthetic fixtures and local execution. They do not estimate field performance, AWS latency or real-water detection. Evaluation details and failure cases are in `EVALUATION.md`.
+The local held-out synthetic controller selected the test-authored expected action on 7/7 scenario types, compared with 4/7 for a simple one-pass reference. Across 21 local runs, controller p50/p95 latency was 137.061/217.262 ms. Four generated pixel masks yielded precision 0.99183, recall 0.99913, F1 0.99546 and IoU 0.99097. These are synthetic pixel-change metrics, not leak-detection accuracy.
+
+All seven AWS synthetic scenarios returned HTTP 200 with the expected materially different policy outcomes. An anonymous client downloaded and integrity-checked a 900,871-byte evidence ZIP. A CloudWatch investigation report recorded 2,922.8 ms duration and 218 MiB maximum used memory. See EVALUATION.md and deployment-manifest.json. No field performance is claimed.
 
 ## What we learned
 
-Image quality and historical context should change the investigation, not just decorate a static model result. The most useful contribution is the auditable path from an observation to the next tool call and a bounded human review request. Synthetic success is a useful controller test, but does not replace evaluation on authorized real environments.
+Image quality and historical context should change the investigation rather than decorate a static score. The useful contribution is an auditable path from an OpenCV observation to the next evidence action and a bounded human-review request. Synthetic success validates controller branches, not real-world performance.
 
-## Roadmap
+## Future roadmap
 
-After a verified AWS deployment and operator feedback: gather consented and licensed mechanical-room footage, build a camera-specific baseline enrollment process, independently label conditions, study threshold calibration and domain shift, add authenticated camera/sensor connectors, review retention/access policies and measure cost/latency on AWS. Thermal, RTSP, predictive-maintenance and Graviton/COOL paths are out of scope for this submission build.
+With authorized real facility footage and operator participation: build a camera-specific baseline enrollment flow, gather independently labeled cases, study threshold calibration and domain shift, add authenticated camera/sensor connectors, define retention/access policies and measure cost/latency at representative load. Thermal, RTSP, predictive maintenance and Graviton/COOL paths are not part of this submission.
 
-## Team, links and tags — verify before submission
+## Team and links
 
-- Project name: **Fortifiers Incident Memory**. The entrant reports entering solo. The video identifies a solo entry but does not show or name the entrant; confirm whether a personal introduction is required.
-- Public code repository: https://github.com/axfrgo/fortifiers-incident-memory
+- Project: Fortifiers Incident Memory; user reports a solo entry.
+- Public code: https://github.com/axfrgo/fortifiers-incident-memory
 - Portable source archive: https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip
-- Working AWS endpoint: **none** — deployment blocked; do not substitute the local `127.0.0.1` address.
-- Demo video (≤5 minutes): **published Unlisted**, 3:40 silent/captioned local demonstration: https://youtu.be/_k0J1XHyVyA. Public release mirror: https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-demo.mp4. See [DEMO_SCRIPT.md](DEMO_SCRIPT.md) and [video-manifest.json](artifacts/video/video-manifest.json).
-- Technical report and diagrams: `TECHNICAL_REPORT.md`, `ARCHITECTURE.md`, `submission/architecture.svg`, `AGENT_WORKFLOW.md`, and `submission/agent-workflow.svg` in the repository.
-- Evaluation: `EVALUATION.md`, `artifacts/evaluation.json`, `artifacts/test-results.json`, and `artifacts/final-local-verification.json`.
-- Technologies: OpenCV 5, Python, FastAPI, NumPy, responsive web UI; AWS deployment is prepared but not yet used.
-- Agentic Vision: the local workflow has actual OpenCV observations changing later tool calls (retake, ROI inspection/history retrieval, or human review). This demonstrates the agentic mechanism. The project is not a complete eligible final entry while the meaningful AWS workload, judge endpoint and required video are missing.
+- Live AWS demo: https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/
+- Unlisted video, 3:40: https://youtu.be/_k0J1XHyVyA
+- Technical report: TECHNICAL_REPORT.md
+- Architecture: ARCHITECTURE.md and submission/architecture.svg
+- Agent workflow: AGENT_WORKFLOW.md and submission/agent-workflow.svg
+- Evaluation: EVALUATION.md and artifacts/evaluation.json
+- Tags: OpenCV 5, AWS Lambda, AWS, FastAPI, Python, Computer Vision, Agentic Vision.
 
-## Competition entry checks
+The video was recorded before AWS deployment; it shows the local application and includes a then-accurate end card saying AWS was not deployed. It does not show or name the entrant. The live AWS endpoint and verified remote traces/results are separately linked above; do not imply the current video captured cloud execution.
 
-The Devpost account is registered and has a saved private draft at 4/5 steps. The user reports entering solo; the draft has no listed teammates. The saved project-details page contains the Unlisted demo URL. The draft has not been submitted or made public. The AWS tab remains at account signup; account access, credits and service eligibility remain unverified. The official Devpost banner shows October 26, 2026 at 11:45 PM PDT (October 27, 2026 at 03:45 AM ADT in Halifax); the overview also mentions 11:59 PM Pacific, so this package targets the earlier deadline. The entrant must review competition eligibility declarations and any platform terms before final submission.
+## Agentic Vision award explanation
 
+OpenCV 5 performs substantive image analysis. Its quality, alignment, mask, region and historical-similarity observations are consumed by a bounded tool-routing controller. The next action changes across clear-change, poor-image, lighting-only and historical-match cases, as shown in the remote traces. Failures stop or request more evidence, reports preserve hashes and classifications, and consequential actions require a human. Evaluation includes positive and negative synthetic fixtures and a one-pass comparison. No award eligibility or ranking is guaranteed.
+
+## Final entrant checks
+
+The user reports entering solo and the account is registered. The entrant must review official age/location/team eligibility and data/IP declarations personally. The deadline banner's earlier displayed cutoff was October 27, 2026 at 06:45 UTC. The Devpost draft is not submitted and must be reviewed and submitted by the entrant before the platform closes. Do not claim submission confirmation until Devpost displays it.

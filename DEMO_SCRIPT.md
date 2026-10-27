@@ -1,29 +1,34 @@
-# Recorded demonstration — 3:40
+# Demo video script and current recording status
 
-**Recording status:** real screen capture completed from the running local FastAPI dashboard. The local workspace file is `artifacts/video/fortifiers-incident-memory-demo.mp4`; it is 220.4 seconds, 1920×1080, 15 fps, silent, and captioned with on-screen text. SHA-256: `a662dd0bd82bbb31df5396b0dc83754ac1b80c553ed61dd27733f29e0a741002`. [video-manifest.json](artifacts/video/video-manifest.json) records render metadata and the raw capture checksum. The video is [published Unlisted on YouTube](https://youtu.be/_k0J1XHyVyA) and available from the [public GitHub release](https://github.com/axfrgo/fortifiers-incident-memory/releases/tag/demo-2026-10-27). An unauthenticated YouTube request returned HTTP 200 and the expected title.
+## Existing video
 
-## What the recording actually shows
+The published Unlisted video is a genuine 3:40 screen capture of the local FastAPI dashboard. It is 1920×1080, 15 fps, silent/captioned, and its SHA-256 is in artifacts/video/video-manifest.json. It shows synthetic positive and negative investigations, architecture and local synthetic evaluation. The video was recorded before the AWS deployment, so its end card says AWS is not deployed. It does not show or name the solo entrant. It is accessible at https://youtu.be/_k0J1XHyVyA.
 
-- Opening title, project tagline, and “solo entry · demo build” identification.
-- The real local dashboard and OpenCV 5.0.0 status.
-- A synthetic water-sensor event with a visible staged image change; the controller investigates and requests human review.
-- A blurred synthetic frame; image-quality output causes the controller to request a retake.
-- A lighting-only change; normalized comparison does not support a new localized change.
-- An older-history case; the agent retrieves earlier evidence and downgrades novelty.
-- Architecture and evaluation slides that explicitly state AWS is not deployed and all reported results come from synthetic fixtures.
-- Closing statement and limitations.
+A replacement AWS-inclusive recording is not available yet. The installed local recorder tool is not exposed in this session. Do not represent the old video as evidence of AWS execution. A fresh recording also needs the entrant's real name/identity if the judges expect the actual solo participant to appear.
 
-This recording has no voiceover or user likeness. It labels the project as a solo entry but does not show or name the entrant. Add a short real introduction from the entrant if the competition requires the member’s name or appearance; do not use a generated likeness or voice.
+## Recording plan for a replacement (4:45 maximum)
 
-## Current hosting state
+Use the existing screen recorder to capture the actual browser. Keep the interface at a readable desktop resolution, disable notifications, and do not show account IDs, billing details or browser credentials. Use the actual live AWS endpoint and actual outputs. If identifying the entrant on camera or voice, the entrant must record their own introduction.
 
-YouTube Studio confirmed “Video published” after the entrant approved Unlisted publication. The Studio dialog showed the 3:41 item and share link. A no-credential HTTP GET to the link returned HTTP 200 and the video title. Devpost's saved private draft now contains the video URL; the draft has not been submitted.
+| Time | Screen and narration |
+|---|---|
+| 0:00–0:20 | Project title and tagline. The solo entrant introduces themself if required. Explain that alarms report an event while this tool compares visual history and gathers evidence. |
+| 0:20–0:55 | Open the public AWS dashboard and select the synthetic clear_change scenario. State that all scenes and sensor events are generated test fixtures. |
+| 0:55–1:35 | Run the event. Show before/after images, OpenCV change overlay and region; distinguish observed appearance from confirmed physical cause. |
+| 1:35–2:20 | Show the real trace: quality, baseline selection, ORB/RANSAC alignment, region inspection, historical retrieval, sensor correlation and human review. Point out the observation that causes each next action. |
+| 2:20–2:55 | Run poor_image. Show quality gate and retake_requested rather than an unsupported diagnosis. |
+| 2:55–3:25 | Run historical_match or lighting_shift. Show the older-frame retrieval or normalized brightness outcome changing the final policy. |
+| 3:25–3:50 | Open the evidence report or download the ZIP. Show image hashes, report and human-review classification. |
+| 3:50–4:15 | Show architecture diagram and describe Python 3.14 Lambda ZIP, actual OpenCV 5 execution, private S3 evidence and CloudWatch logs. |
+| 4:15–4:35 | Show evaluation: 7/7 expected policy actions vs 4/7 one-pass on synthetic held-out cases; mask metrics are synthetic pixel overlap, not leak accuracy. Mention 37 passing tests and one or more limitations. |
+| 4:35–4:45 | Close with the tagline and note this is decision support, not a certified safety device. |
 
-## Remaining presentation gaps
+## Remaining exact recording/publishing step
 
-1. AWS workload and public endpoint are not deployed. No cloud processing is shown or claimed in this recording.
-2. The entrant must decide whether to add their own spoken or visible introduction to satisfy team-identification requirements.
-3. The published video is hosted as Unlisted. Judges can watch with the link; its URL is already saved in the Devpost draft.
-4. Review the draft before submission. The entrant must complete any missing eligibility and identity declarations and give explicit final action-time approval. No submission has been made.
+1. Record the replacement using the approved local screen recorder; capture only the browser content needed for the demo.
+2. Include a real entrant introduction or title card with the participant's name if required. Do not synthesize a likeness or voice.
+3. Review the final runtime (under five minutes), confirm the endpoint works from a fresh unauthenticated session, and ensure no credentials or account/billing details appear.
+4. Upload the replacement video to the entrant's YouTube channel as Unlisted, then verify the final video link while signed out.
+5. Replace the video URL in Devpost and update artifacts/video/video-manifest.json, README.md, SUBMISSION.md and FINAL_SUBMISSION_STATUS.md.
 
-The measured values shown in the recording are synthetic benchmark outputs only. They are not field leak-detection performance, AWS latency, customer outcomes, or a safety certification.
+The current published video remains accessible but predates AWS deployment. The replacement video and its accessibility have not been verified.

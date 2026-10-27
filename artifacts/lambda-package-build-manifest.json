@@ -1,0 +1,17 @@
+{
+  "created_at_utc": "2026-10-27T05:12:16.673002+00:00",
+  "source_commit": "b851290df9e99aca1a232c018e53bff48b8f559d",
+  "runtime": "python3.14",
+  "architecture": "x86_64",
+  "opencv_pin": "opencv-python-headless==5.0.0.93",
+  "requirements_lock": "requirements-lock.txt",
+  "wheel_platform_tags": [
+    "manylinux_2_28_x86_64",
+    "manylinux2014_x86_64"
+  ],
+  "file_count": 4250,
+  "uncompressed_bytes": 257097764,
+  "zip_bytes": 101602882,
+  "sha256": "b06b10e6b86d85448d2fd931494908ce9884cf32b2ffd66e0bfd72be7bf17597",
+  "zip_path": "artifacts/fortifiers-incident-memory-lambda-cp314.zip"
+}

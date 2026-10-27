@@ -1,43 +1,55 @@
-# AWS deployment
+# AWS deployment — live verification
 
-## Current deployment state
+## Current service
 
-No project AWS resources have been created or billed yet. The authenticated account has an active Free Plan credit, but this document intentionally omits account identifiers and balances. Do not upgrade the account to a Paid Plan. The AWS CloudShell console currently reports that account verification is still in progress, so its CLI environment is unavailable; console-based deployment is being checked before declaring the endpoint blocked.
+The OpenCV investigation API is deployed on AWS Lambda in us-east-2 and is publicly reachable at:
 
-The deployment target is AWS Lambda because AWS App Runner no longer accepts new customers. `deployment/aws-bootstrap.yaml` defines a private ECR repository, a short-lived private S3 evidence bucket, a least-privilege Lambda role, and a one-off CodeBuild project. `deployment/aws-app.yaml` defines the actual public FastAPI/OpenCV Lambda and its Function URL. The OpenCV workload itself runs in the Lambda container; S3-only hosting is not used as a substitute for AWS processing.
+https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/
 
-## Architecture and safeguards
+Open the root URL for the dashboard. The health endpoint is /health. AWS runs the actual Python API and OpenCV image-processing workload; the static demo is not hosted by S3 alone.
 
-- Python 3.14 Lambda container uses the existing pinned `requirements-lock.txt`, OpenCV 5.0.0.93 and `mangum==0.22.0`. The Docker build fails unless OpenCV imports and reports major version 5.
-- CodeBuild builds the published Git commit and pushes an immutable commit-tagged image to private ECR. The Docker platform is `linux/amd64`.
-- Lambda has 2 GiB memory, a 90-second timeout, 1 GiB `/tmp` storage, and reserved concurrency of one. It runs on demand; it has no always-on instance charge.
-- The public HTTPS Lambda Function URL serves the dashboard and synthetic investigation API. Only seven built-in synthetic scenarios are enabled in AWS; image uploads are disabled. No machinery, alarms, doors, or emergency-response controls exist.
-- S3 blocks all public access, uses SSE-S3 encryption, and expires evidence under `evidence/` after seven days. The execution role can read and write only that prefix. The returned evidence URL is a one-hour presigned URL.
-- Lambda logs are retained for 14 days; CodeBuild logs for seven days. Build and runtime identifiers appear at `/health`.
-- The function is publicly callable, so any visitor can run the finite synthetic scenarios. Reserved concurrency limits simultaneous execution, not total request count. Monitor Free Plan credits and disable the function URL or delete the stack after judging. Credits and Free Plan eligibility are not a hard spending cap; no Paid Plan upgrade is authorized.
+- Runtime: AWS Lambda Python 3.14 ZIP package, FastAPI through Mangum.
+- OpenCV runtime: 5.0.0.
+- Deployed source commit: b851290df9e99aca1a232c018e53bff48b8f559d.
+- CloudFormation app stack: fortifiers-incident-memory-demo-free-3 (UPDATE_COMPLETE at 2026-10-27 05:17 UTC check).
+- Bootstrap stack: fortifiers-incident-memory-bootstrap (CREATE_COMPLETE).
+- Package: S3-hosted immutable ZIP, 101,602,882 compressed bytes; SHA-256 b06b10e6b86d85448d2fd931494908ce9884cf32b2ffd66e0bfd72be7bf17597.
+- Lambda settings: 512 MiB memory, 90-second timeout, 512 MiB temporary storage, no reserved concurrency.
+- Function URL access: public, unauthenticated (AuthType NONE). The endpoint is intended only for synthetic competition scenarios.
+- User image uploads: disabled; upload route returns 403.
+- Evidence: private S3 bucket, SSE-S3, seven-day lifecycle, time-limited presigned downloads.
+- Logs: CloudWatch log group with 14-day retention.
+- CloudWatch observed one cold-started invocation at 2,477 ms billed (2,205.78 ms init, 145 MiB max used) and a later investigation invocation at 2,923 ms billed (218 MiB max used). These are individual observations, not a latency distribution.
+- Cost: account is on the AWS Free Plan. Credits and usage are not a hard spending cap. Current project spend after deployment has not been independently reconciled in Billing; do not claim zero cost.
 
-## Cost estimate
+The public API exposes seven fixed synthetic scenarios. It does not accept arbitrary images, control machinery, disable alarms, open doors, or dispatch responders. Do not send confidential or personal data to this unauthenticated endpoint.
 
-This is an estimate, not a spending limit. AWS's published Lambda rate is $0.0000166667 per GB-second plus $0.20 per million requests. At 2 GiB and a three-second invocation, compute is about $0.0001 per call; a 90-second invocation would be about $0.003. AWS CodeBuild publishes 100 monthly general1.small build minutes in its Free Tier; beyond that, the listed example rate is $0.005/minute, so a 20-minute build would be about $0.10. ECR, S3, CloudWatch, and data transfer depend on actual image size, retained evidence, log volume, and traffic. A small, low-traffic demo is expected to consume only a small amount of the account's existing credits, but public traffic can increase usage. Verify the billing page after deployment; its usage data may lag.
+## Remote verification evidence
 
-Sources: [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [CodeBuild pricing](https://aws.amazon.com/codebuild/pricing/), [ECR pricing](https://aws.amazon.com/ecr/pricing/), [Lambda container images](https://docs.aws.amazon.com/lambda/latest/dg/python-image.html), and [Function URL access](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
+Anonymous requests were run against the public endpoint after deployment:
 
-## Deployment procedure
+- GET / and GET /health returned HTTP 200. Health reports OpenCV 5.0.0, deployment_mode aws-lambda, commit b851290df9e99aca1a232c018e53bff48b8f559d, S3 evidence enabled, and uploads disabled.
+- All seven listed scenarios returned HTTP 200 with distinct outputs: dry_normal → no_visual_change_supported; clear_change → human_review_required; poor_image → retake_requested; lighting_shift → no_visual_change_supported; historical_match → no_new_change_supported; camera_movement → no_visual_change_supported; occlusion_blur → retake_requested.
+- An unknown scenario returned 404. Upload endpoint returned 403 with user uploads disabled. Static JavaScript returned 200.
+- A synthetic clear-change case produced a nine-step trace, a human-review-required result, and an evidence package. Its ZIP was downloaded without AWS credentials: 900,871 bytes, SHA-256 cb70a2d09ae03d04aba9ff639aff56c6a7087a91bb5e6214b56a6abb0c49f2b2. The bundle contains JSON/HTML reports, baseline/event frames, overlay and change mask, and passes ZIP integrity validation.
+- The results are synthetic scenario checks. They do not establish field accuracy or physical leak detection.
 
-Run from AWS CloudShell in `us-east-2` after account verification is complete and the public repository contains the final tested commit:
+Machine-readable evidence: artifacts/aws-remote-results.json, artifacts/aws-verification/verification.json, artifacts/aws-verification/clear-change-evidence.zip, and artifacts/lambda-package-build-manifest.json. The sanitized verification excludes AWS account identifiers and signed URLs. CloudWatch logs are visible in the signed-in AWS console under /aws/lambda/fortifiers-incident-memory-demo. A sample report showed 512 MiB configured memory and 218 MiB maximum used.
 
-```bash
-git clone https://github.com/axfrgo/fortifiers-incident-memory.git
-cd fortifiers-incident-memory
-bash deployment/deploy-lambda-cloudshell.sh
-```
+The package builder is deployment/package_lambda_zip.py. The Lambda template is deployment/aws-app-zip.yaml. CodeBuild and ECR were provisioned as a possible image path, but AWS denied CodeBuild starts because the account queue quota is zero. The verified workload instead uses the reproducible ZIP Lambda package. Earlier failed CloudFormation app attempts are retained as rollback history; the current stack is UPDATE_COMPLETE.
 
-The script validates its identity without printing the account number, deploys the bootstrap stack, starts CodeBuild from the exact Git commit, deploys the Lambda stack from the immutable ECR image, and prints the HTTPS URL. It fails on a failed build or stack operation. Do not report a deployment from a local Docker result or an AWS health check alone.
+## Rebuild and redeploy
 
-## Remote acceptance checks
+This deployment was prepared from Windows using the pinned lock and Linux-compatible wheels, then uploaded through the authenticated AWS console. For a repeat build, use Python and pip versions documented by the builder and run:
 
-From a fresh unauthenticated browser session, verify the homepage and `/health`; confirm OpenCV 5, the build ID, commit hash, `deployment_mode=aws-lambda`, S3 enabled, and uploads disabled. Then run `clear_change`, `poor_image`, and `historical_match` or `lighting_shift`; inspect their different traces and findings; download the presigned ZIP; check a review action; confirm an upload returns 403; and check CloudWatch logs for the real invocation. Save sanitized responses in `artifacts/aws-remote-verification.json` and update `deployment-manifest.json` with the URL, commit, build, stack names, and measured usage. Never place AWS credentials, account IDs, or signed presigned URLs in public files.
+    .venv\Scripts\python.exe scripts\package_lambda_zip.py
 
-## Teardown
+The generated package includes a manifest with the source commit, runtime, dependency pins and checksum. Upload that ZIP to the project bootstrap bucket, set the app stack's PackageBucket and PackageKey parameters, and update stack fortifiers-incident-memory-demo-free-3 from deployment/aws-app-zip.yaml. Keep Python 3.14, 512 MiB memory, uploads disabled and S3 private. Then verify /health and at least clear_change, poor_image and historical_match with an unauthenticated client. The current deployed build is b851290df9e99aca1a232c018e53bff48b8f559d.
 
-After judging, disable public invocation first if the endpoint is no longer needed, then delete the app stack. The bootstrap template retains the private S3 bucket and ECR repository on stack deletion to prevent accidental evidence loss. To remove all resources, empty the named bucket, delete the repository images/repository, then delete the bootstrap stack. Review the resource names and region before running cleanup commands; CloudWatch groups, build project, and IAM roles are scoped to this project. Do not delete unrelated resources.
+A current-stack update must be followed by a real remote investigation and CloudWatch inspection. A successful template deployment or health endpoint alone is not sufficient evidence.
+
+## Cost and teardown
+
+Lambda is billed per request and execution duration; S3 storage/requests, CloudWatch ingestion/retention and data transfer may also incur charges. The Free Plan credit may offset eligible charges but does not cap all service usage, and billing data can lag. Public access can be invoked by third parties; rate and traffic are not capped by the application. Monitor the Billing dashboard and disable the public Function URL after judging if continued access is not needed.
+
+To stop new public invocations, remove the Function URL permission/configuration using the stack template or update the app stack to disable the URL. After the judging period, delete only fortifiers-incident-memory-demo-free-3. The bootstrap stack retains the private bucket and ECR repository on stack deletion to protect evidence. To remove all project resources, inspect and empty the named private bucket, delete only the project ECR repository, then delete fortifiers-incident-memory-bootstrap. Review resource names and region carefully; do not delete unrelated resources.
