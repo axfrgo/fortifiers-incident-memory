@@ -170,3 +170,12 @@ The status and ledger now reflect the public verification at commit 1047089677d5
 |---|---|---|---|
 | 2026-10-27 02:24Z | Push commit 028c7108716b63c72b41651c3273ec161b519683; query unauthenticated GitHub master HEAD and pinned Contents API for status, ledger, archive manifest, test JSON and cover | API reported 028c7108716b63c72b41651c3273ec161b519683 as HEAD. All five files returned content; the test summary shows 36/0/0/0. | Public repository check did not use credentials. |
 | 2026-10-27 02:24Z | In the authenticated Devpost in-app tab, select the current 33 MB fortifiers-incident-memory-source.zip in Additional info, then press Save & continue | The save action timed out at the UI bridge, but a fresh page snapshot landed on the Submit project finalization page with the draft still at 3/5 steps. The Additional info screen showed Current File: fortifiers-incident-memory-source.zip. | The file name is unchanged and Devpost does not expose a checksum there; the refreshed archive's server-side hash is not independently verified. The public GitHub repo is the verified judge-accessible source. Do not accept terms or submit the project; required video and public endpoint are still missing. |
+
+## FINAL PUBLIC REPOSITORY CHECK — 2026-10-27 02:27Z
+
+| Time (UTC) | Action / command | Result | Evidence / next step |
+|---|---|---|---|
+| 2026-10-27 02:27Z | Push commit 4556f692012ca430c0dbede81ee9f63b805342f0; query unauthenticated master HEAD and pinned GitHub Contents API for status, ledger, archive manifest and test JSON | API reported 4556f692012ca430c0dbede81ee9f63b805342f0 as master HEAD. All four requested files returned current content; test summary remains 36 passed and 0 failures/errors/skips. | No Authorization header or GitHub credential was used. |
+| 2026-10-27 02:27Z | Rebuild and validate portable source ZIP after current docs | 213 members, no corrupt entry, manifest hash matches. Current archive SHA-256 is recorded in artifacts/source-archive-manifest.json. | This archive is locally verified; the Devpost upload UI displayed only its filename and did not expose an independently checkable server-side hash. |
+
+The repo HEAD and 02:27 local source archive were verified before this final ledger entry. Rebuild the archive and manifest after this entry, then push that doc-only closeout and verify its public HEAD. AWS, public endpoint, actual video, and final Devpost submission remain blocked; leave the Devpost draft at the finalization page for entrant review.
