@@ -1,18 +1,18 @@
 # Final submission status
 
-**Checked:** 2026-10-27 05:47 UTC. **Target deadline:** 2026-10-27 06:45 UTC (the earlier Devpost time, in UTC).
+**Checked:** 2026-10-27 05:50 UTC. **Target deadline:** 2026-10-27 06:45 UTC (the earlier Devpost time, in UTC).
 
 ## Required release states
 
 | State | Status | Evidence |
 |---|---|---|
-| LOCAL_VERIFIED | PASS | Python 3.14.0, OpenCV 5.0.0; latest complete suite 37 passed, 0 failed, 0 skipped in 7.44 s. The extracted portable package passed 37/37 in 7.91 s. One Starlette/AnyIO deprecation warning. See `artifacts/test-results.xml`, `artifacts/test-results.json`, and `artifacts/source-archive-validation.json`. |
-| GITHUB_PUBLISHED | PASS | Public repository https://github.com/axfrgo/fortifiers-incident-memory. Anonymous HTTP 200 for repository, README, status and source-archive manifest at 05:48 UTC. Public source commit `46a4a02cc37b50baa99ca200815e61564ef0dbe1` contains the release/status update. |
+| LOCAL_VERIFIED | PASS | Python 3.14.0, OpenCV 5.0.0; latest complete suite 37 passed, 0 failed, 0 skipped in 7.44 s. The extracted final portable package passed 37/37 in 8.94 s. One Starlette/AnyIO deprecation warning. See `artifacts/test-results.xml`, `artifacts/test-results.json`, and `artifacts/source-archive-validation.json`. |
+| GITHUB_PUBLISHED | PASS | Public repository https://github.com/axfrgo/fortifiers-incident-memory. Public source HEAD at 05:50 UTC was `ab2e607666977bc760bd5be2630ba18308f3fdee`; anonymous HTTP 200 for repository, README, status and source-archive manifest. |
 | AWS_DEPLOYED | PASS | Public AWS Lambda Function URL https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/; anonymous `/health` reports OpenCV 5.0.0 and AWS Lambda mode. Deployed app commit is `b851290df9e99aca1a232c018e53bff48b8f559d`; CloudFormation stack `fortifiers-incident-memory-demo-free-3` is `UPDATE_COMPLETE`. |
 | REMOTE_TESTED | PASS | Anonymous homepage, health and all seven synthetic scenarios returned HTTP 200 with distinct expected outcomes; clear-change evidence ZIP downloaded and integrity-checked; CloudWatch confirms actual Lambda executions. Evidence: `artifacts/aws-remote-results.json`, `artifacts/aws-verification/current-smoke.json`, `artifacts/aws-verification/cloudwatch-observation.json`. |
 | VIDEO_RECORDED | PASS | Existing silent/captioned local application capture is 220.4 s (3:40), 1920×1080. Manifest: `artifacts/video/video-manifest.json`. It predates AWS deployment. |
 | VIDEO_ACCESSIBLE | PASS | Unlisted YouTube video https://youtu.be/_k0J1XHyVyA and public GitHub mirror are accessible. |
-| DEVPOST_PREPARED | PASS | Private solo draft has the AWS URL, repository, testing instructions, and Agentic Vision selection. Current source archive is attached; Devpost showed DRAFT and 4/5 steps at 05:47 UTC. |
+| DEVPOST_PREPARED | PASS | Private solo draft has the AWS URL, repository, testing instructions, and Agentic Vision selection. Final source archive is attached; Devpost showed DRAFT and 4/5 steps at 05:50 UTC, with the terms checkbox unchecked. |
 | DEVPOST_SUBMITTED | BLOCKED | No final submission has been made. The entrant has not authorized the rules/terms declaration or Submit project action. |
 | SUBMISSION_CONFIRMED | BLOCKED | Devpost has not displayed a submitted/success state. |
 
@@ -52,3 +52,4 @@
 2. The entrant should personally review the official rules and eligibility declarations.
 3. The entrant must explicitly authorize accepting the terms declaration and submitting the project; verify the success state before marking it submitted.
 4. Check AWS usage after billing reports update, and disable public invocation after judging if it is no longer needed.
+
