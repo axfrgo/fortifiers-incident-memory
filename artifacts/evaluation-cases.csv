@@ -1,0 +1,8 @@
+scenario,expected_outcome,agent_outcome,agent_action_correct,one_pass_outcome,one_pass_action_correct,tool_calls,p50_latency_ms_3_runs,candidate_regions,quality_rejected
+dry_normal,no_visual_change_supported,no_visual_change_supported,True,no_visual_change_supported,True,6,166.833,0,False
+clear_change,human_review_required,human_review_required,True,human_review_required,True,9,163.924,1,False
+poor_image,retake_requested,retake_requested,True,no_visual_change_supported,False,5,41.688,0,True
+lighting_shift,no_visual_change_supported,no_visual_change_supported,True,no_visual_change_supported,True,6,158.477,0,False
+historical_match,no_new_change_supported,no_new_change_supported,True,human_review_required,False,10,246.465,1,False
+camera_movement,no_visual_change_supported,no_visual_change_supported,True,no_visual_change_supported,True,6,152.682,0,False
+occlusion_blur,retake_requested,retake_requested,True,no_visual_change_supported,False,5,44.306,0,True

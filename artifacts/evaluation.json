@@ -1,0 +1,141 @@
+{
+  "title": "Held-out procedural synthetic mechanical-room evaluation",
+  "run_at_utc": "2026-10-27T00:25:35Z",
+  "environment": {
+    "python": "3.14.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "cpu_count": 4
+  },
+  "dataset": {
+    "split": "held_out",
+    "seed": 26026,
+    "scenario_count": 7,
+    "agent_runs": 21,
+    "pixel_scored_scenarios": 4,
+    "provenance": "synthetic procedural drawings created by scripts/build_dataset.py"
+  },
+  "workflow": {
+    "full_agent_action_correct": 7,
+    "full_agent_action_accuracy": 1.0,
+    "one_pass_action_correct": 4,
+    "one_pass_action_accuracy": 0.57143,
+    "benign_scenarios_with_one_pass_candidate": 0,
+    "benign_scenario_count": 4,
+    "unnecessary_retake_requests": 0,
+    "mean_agent_tool_calls": 6.714
+  },
+  "pixel_region_metrics": {
+    "tp_pixels": 16024,
+    "fp_pixels": 132,
+    "fn_pixels": 14,
+    "precision": 0.99183,
+    "recall": 0.99913,
+    "f1": 0.99546,
+    "iou": 0.99097
+  },
+  "latency_ms": {
+    "n": 21,
+    "p50": 158.477,
+    "p95": 246.465,
+    "mean": 141.543
+  },
+  "resource_observations": {
+    "rss_before_mb": 34.38,
+    "rss_after_mb": 61.16,
+    "rss_delta_mb": 26.78,
+    "process_cpu_seconds": 6.0
+  },
+  "cases": [
+    {
+      "scenario": "dry_normal",
+      "expected_outcome": "no_visual_change_supported",
+      "agent_outcome": "no_visual_change_supported",
+      "agent_action_correct": true,
+      "one_pass_outcome": "no_visual_change_supported",
+      "one_pass_action_correct": true,
+      "tool_calls": 6,
+      "p50_latency_ms_3_runs": 166.833,
+      "candidate_regions": 0,
+      "quality_rejected": false
+    },
+    {
+      "scenario": "clear_change",
+      "expected_outcome": "human_review_required",
+      "agent_outcome": "human_review_required",
+      "agent_action_correct": true,
+      "one_pass_outcome": "human_review_required",
+      "one_pass_action_correct": true,
+      "tool_calls": 9,
+      "p50_latency_ms_3_runs": 163.924,
+      "candidate_regions": 1,
+      "quality_rejected": false
+    },
+    {
+      "scenario": "poor_image",
+      "expected_outcome": "retake_requested",
+      "agent_outcome": "retake_requested",
+      "agent_action_correct": true,
+      "one_pass_outcome": "no_visual_change_supported",
+      "one_pass_action_correct": false,
+      "tool_calls": 5,
+      "p50_latency_ms_3_runs": 41.688,
+      "candidate_regions": 0,
+      "quality_rejected": true
+    },
+    {
+      "scenario": "lighting_shift",
+      "expected_outcome": "no_visual_change_supported",
+      "agent_outcome": "no_visual_change_supported",
+      "agent_action_correct": true,
+      "one_pass_outcome": "no_visual_change_supported",
+      "one_pass_action_correct": true,
+      "tool_calls": 6,
+      "p50_latency_ms_3_runs": 158.477,
+      "candidate_regions": 0,
+      "quality_rejected": false
+    },
+    {
+      "scenario": "historical_match",
+      "expected_outcome": "no_new_change_supported",
+      "agent_outcome": "no_new_change_supported",
+      "agent_action_correct": true,
+      "one_pass_outcome": "human_review_required",
+      "one_pass_action_correct": false,
+      "tool_calls": 10,
+      "p50_latency_ms_3_runs": 246.465,
+      "candidate_regions": 1,
+      "quality_rejected": false
+    },
+    {
+      "scenario": "camera_movement",
+      "expected_outcome": "no_visual_change_supported",
+      "agent_outcome": "no_visual_change_supported",
+      "agent_action_correct": true,
+      "one_pass_outcome": "no_visual_change_supported",
+      "one_pass_action_correct": true,
+      "tool_calls": 6,
+      "p50_latency_ms_3_runs": 152.682,
+      "candidate_regions": 0,
+      "quality_rejected": false
+    },
+    {
+      "scenario": "occlusion_blur",
+      "expected_outcome": "retake_requested",
+      "agent_outcome": "retake_requested",
+      "agent_action_correct": true,
+      "one_pass_outcome": "no_visual_change_supported",
+      "one_pass_action_correct": false,
+      "tool_calls": 5,
+      "p50_latency_ms_3_runs": 44.306,
+      "candidate_regions": 0,
+      "quality_rejected": true
+    }
+  ],
+  "limitations": [
+    "Synthetic fixtures share a procedural scene generator; results do not estimate field performance.",
+    "The one-pass comparator is a simple no-history/no-quality/no-sensor decision rule.",
+    "Pixel masks mark a staged color patch and are not labels for real water or leak cause."
+  ]
+}

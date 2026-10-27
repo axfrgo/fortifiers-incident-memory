@@ -1,0 +1,114 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >-
+  Fortifiers Incident Memory judge demo: App Runner executes the OpenCV 5 API;
+  a private versioned S3 bucket stores synthetic evidence bundles.
+Parameters:
+  ImageIdentifier:
+    Type: String
+    Description: Full ECR image URI with immutable build tag, pushed before stack deployment.
+  ServiceName:
+    Type: String
+    Default: fortifiers-incident-memory
+    AllowedPattern: '[A-Za-z0-9][A-Za-z0-9-]{3,39}'
+Resources:
+  EvidenceBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      VersioningConfiguration:
+        Status: Enabled
+      BucketEncryption:
+        ServerSideEncryptionConfiguration:
+          - ServerSideEncryptionByDefault:
+              SSEAlgorithm: AES256
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      LifecycleConfiguration:
+        Rules:
+          - Id: ExpireCurrentEvidence
+            Status: Enabled
+            Prefix: evidence/
+            ExpirationInDays: 30
+            NoncurrentVersionExpirationInDays: 7
+  AppRunnerEcrAccessRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: build.apprunner.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSAppRunnerServicePolicyForECRAccess
+  AppRunnerInstanceRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: tasks.apprunner.amazonaws.com
+            Action: sts:AssumeRole
+      Policies:
+        - PolicyName: PrivateEvidenceBundleAccess
+          PolicyDocument:
+            Version: '2012-10-17'
+            Statement:
+              - Effect: Allow
+                Action:
+                  - s3:PutObject
+                  - s3:GetObject
+                Resource: !Sub '${EvidenceBucket.Arn}/evidence/*'
+  AppRunnerScalingConfiguration:
+    Type: AWS::AppRunner::AutoScalingConfiguration
+    Properties:
+      AutoScalingConfigurationName: fortifiers-incident-memory
+      MaxConcurrency: 5
+      MaxSize: 2
+      MinSize: 1
+  AppRunnerService:
+    Type: AWS::AppRunner::Service
+    Properties:
+      ServiceName: !Ref ServiceName
+      AutoScalingConfigurationArn: !GetAtt AppRunnerScalingConfiguration.AutoScalingConfigurationArn
+      SourceConfiguration:
+        AutoDeploymentsEnabled: false
+        AuthenticationConfiguration:
+          AccessRoleArn: !GetAtt AppRunnerEcrAccessRole.Arn
+        ImageRepository:
+          ImageRepositoryType: ECR
+          ImageIdentifier: !Ref ImageIdentifier
+          ImageConfiguration:
+            Port: '8080'
+            RuntimeEnvironmentVariables:
+              ARTIFACT_BUCKET: !Ref EvidenceBucket
+              ALLOW_USER_UPLOADS: 'false'
+              LOG_LEVEL: INFO
+      InstanceConfiguration:
+        Cpu: 0.5 vCPU
+        Memory: 1 GB
+        InstanceRoleArn: !GetAtt AppRunnerInstanceRole.Arn
+      HealthCheckConfiguration:
+        Protocol: HTTP
+        Path: /health
+        Interval: 20
+        Timeout: 5
+        HealthyThreshold: 1
+        UnhealthyThreshold: 3
+      NetworkConfiguration:
+        EgressConfiguration:
+          EgressType: DEFAULT
+        IngressConfiguration:
+          IsPubliclyAccessible: true
+Outputs:
+  ServiceUrl:
+    Description: Public synthetic judge demo endpoint
+    Value: !Sub 'https://${AppRunnerService.ServiceUrl}'
+  EvidenceBucketName:
+    Description: Private S3 bucket for versioned synthetic evidence bundles
+    Value: !Ref EvidenceBucket

@@ -1,0 +1,371 @@
+{
+  "schema_version": "1.0",
+  "run_id": "clear_change-f49252b4ad7e",
+  "event_id": "clear_change-f49252b4ad7e",
+  "camera_id": "mechanical-room-cam-01",
+  "scenario": "clear_change",
+  "synthetic_demo": true,
+  "created_at": "2026-10-27T00:25:01.632144+00:00",
+  "outcome": "human_review_required",
+  "finding": "possible_visible_water_change",
+  "evidence_classes": [
+    "OBSERVED",
+    "SENSOR_CORRELATED",
+    "HYPOTHESIS"
+  ],
+  "sensor_correlation": {
+    "sensor_type": "water_contact",
+    "active": true,
+    "time_aligned": true,
+    "offset_seconds": 0.0,
+    "classification": "SENSOR_CORRELATED",
+    "evidence_references": [
+      "synthetic-demo-sensor"
+    ]
+  },
+  "quality": {
+    "width": 640,
+    "height": 480,
+    "blur_variance": 514.64,
+    "mean_luminance": 142.08,
+    "dark_fraction": 0.0,
+    "bright_fraction": 0.0,
+    "quality_score": 1.0,
+    "usable": true,
+    "reasons": []
+  },
+  "comparison": {
+    "comparable": true,
+    "registration_method": "orb_ransac_homography",
+    "registration_inliers": 831,
+    "reliability_score": 1.0,
+    "illumination_gain": 1.0,
+    "changed_fraction": 0.0263,
+    "candidate_regions": [
+      {
+        "region_id": "R1",
+        "bbox": [
+          228,
+          329,
+          142,
+          83
+        ],
+        "pixel_area": 8078,
+        "normalized_bbox": [
+          0.3563,
+          0.6854,
+          0.2219,
+          0.1729
+        ],
+        "cool_tone_fraction": 1.0,
+        "visual_cue": "localized cool-toned foreground change"
+      }
+    ],
+    "elapsed_ms": 81.339,
+    "notes": []
+  },
+  "regions": [
+    {
+      "region_id": "R1",
+      "bbox": [
+        228,
+        329,
+        142,
+        83
+      ],
+      "pixel_area": 8078,
+      "normalized_bbox": [
+        0.3563,
+        0.6854,
+        0.2219,
+        0.1729
+      ],
+      "cool_tone_fraction": 1.0,
+      "visual_cue": "localized cool-toned foreground change"
+    }
+  ],
+  "review_request": {
+    "type": "operator_review",
+    "mandatory": true,
+    "reason": "New localized cool-toned change and a time-aligned water sensor warrant operator review; cause remains unverified.",
+    "available_actions": [
+      "approve",
+      "reject",
+      "request_more_evidence"
+    ]
+  },
+  "privacy_redaction": null,
+  "limitations": [
+    "RGB appearance does not prove water or root cause",
+    "human review is required for safety or maintenance action"
+  ],
+  "sha256": {
+    "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+    "current": "8fecdf843aed85cd0e5de658abed076323b185071da4857a814af74ead07cc05",
+    "change_mask": "29799d11c7f9337e8ce6534d196b07798db1486a48efd46b34909ed6c0fb7c56",
+    "overlay": "c50deb1070c5d7b9eccb15dcf5094771a94e750d8c4d63aabb12435b5d67b244"
+  },
+  "trace": [
+    {
+      "iteration": 1,
+      "observation_inputs": {
+        "event_id": "clear_change-f49252b4ad7e",
+        "camera_id": "mechanical-room-cam-01"
+      },
+      "thresholds": {
+        "history_context": "mechanical_room"
+      },
+      "selected_action": "retrieve_event_frames",
+      "evidence_references": [],
+      "result": {
+        "camera_id": "mechanical-room-cam-01",
+        "event_id": "clear_change-f49252b4ad7e",
+        "available_historical_frames": 1,
+        "event_frame_ref": "clear_change-f49252b4ad7e-event"
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.477032+00:00"
+    },
+    {
+      "iteration": 2,
+      "observation_inputs": {
+        "frame": "clear_change-f49252b4ad7e-event"
+      },
+      "thresholds": {
+        "minimum_blur_variance": 24,
+        "minimum_resolution_px": 96
+      },
+      "selected_action": "evaluate_image_quality",
+      "evidence_references": [
+        "clear_change-f49252b4ad7e-event"
+      ],
+      "result": {
+        "width": 640,
+        "height": 480,
+        "blur_variance": 514.64,
+        "mean_luminance": 142.08,
+        "dark_fraction": 0.0,
+        "bright_fraction": 0.0,
+        "quality_score": 1.0,
+        "usable": true,
+        "reasons": [],
+        "evidence_references": [
+          "clear_change-f49252b4ad7e-event"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.484918+00:00"
+    },
+    {
+      "iteration": 3,
+      "observation_inputs": {
+        "camera_id": "mechanical-room-cam-01",
+        "event_time": "2026-10-27T00:25:01+00:00"
+      },
+      "thresholds": {
+        "exclude_incident_frames": true,
+        "minimum_quality_score": 0.4
+      },
+      "selected_action": "select_historical_baseline",
+      "evidence_references": [
+        "clear_change-f49252b4ad7e-baseline"
+      ],
+      "result": {
+        "selected_frame_id": "clear_change-f49252b4ad7e-baseline",
+        "selected_timestamp": "2026-10-27T00:10:01+00:00",
+        "reason": "nearest usable pre-event frame for the same camera and context",
+        "evidence_references": [
+          "clear_change-f49252b4ad7e-baseline"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.484963+00:00"
+    },
+    {
+      "iteration": 4,
+      "observation_inputs": {
+        "reference": "clear_change-f49252b4ad7e-baseline",
+        "current": "clear_change-f49252b4ad7e-event"
+      },
+      "thresholds": {
+        "mask_delta_saturation": 42,
+        "minimum_region_area_fraction": 0.0025,
+        "minimum_registration_reliability": 0.45
+      },
+      "selected_action": "align_and_compare",
+      "evidence_references": [
+        "clear_change-f49252b4ad7e-baseline",
+        "clear_change-f49252b4ad7e-event"
+      ],
+      "result": {
+        "comparable": true,
+        "registration_method": "orb_ransac_homography",
+        "registration_inliers": 831,
+        "reliability_score": 1.0,
+        "illumination_gain": 1.0,
+        "changed_fraction": 0.0263,
+        "candidate_regions": [
+          {
+            "region_id": "R1",
+            "bbox": [
+              228,
+              329,
+              142,
+              83
+            ],
+            "pixel_area": 8078,
+            "normalized_bbox": [
+              0.3563,
+              0.6854,
+              0.2219,
+              0.1729
+            ],
+            "cool_tone_fraction": 1.0,
+            "visual_cue": "localized cool-toned foreground change"
+          }
+        ],
+        "elapsed_ms": 81.339,
+        "notes": [],
+        "evidence_references": [
+          "clear_change-f49252b4ad7e-baseline",
+          "clear_change-f49252b4ad7e-event"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.568032+00:00"
+    },
+    {
+      "iteration": 5,
+      "observation_inputs": {
+        "region_id": "R1",
+        "bbox": [
+          228,
+          329,
+          142,
+          83
+        ]
+      },
+      "thresholds": {
+        "cool_tone_descriptor_only": true
+      },
+      "selected_action": "inspect_region",
+      "evidence_references": [
+        "clear_change-f49252b4ad7e-event:R1"
+      ],
+      "result": {
+        "region_id": "R1",
+        "visual_cue": "localized cool-toned foreground change",
+        "cool_tone_fraction": 1.0,
+        "median_saturation": 126.0,
+        "median_luminance": 170.0,
+        "interpretation": "visible color/texture change only; material and cause are unverified",
+        "evidence_references": [
+          "clear_change-f49252b4ad7e-event:R1"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.568614+00:00"
+    },
+    {
+      "iteration": 6,
+      "observation_inputs": {
+        "reason": "check whether candidate region was present before the nearest baseline",
+        "camera_id": "mechanical-room-cam-01"
+      },
+      "thresholds": {},
+      "selected_action": "retrieve_additional_frame",
+      "evidence_references": [],
+      "result": {
+        "reason": "check whether candidate region was present before the nearest baseline",
+        "frame_id": null,
+        "available": false,
+        "evidence_references": []
+      },
+      "error": "no additional usable historical frame was available",
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.568645+00:00"
+    },
+    {
+      "iteration": 7,
+      "observation_inputs": {
+        "sensor_type": "water_contact",
+        "timestamp": "2026-10-27T00:25:01+00:00"
+      },
+      "thresholds": {
+        "maximum_time_offset_seconds": 300
+      },
+      "selected_action": "correlate_sensor_event",
+      "evidence_references": [
+        "synthetic-demo-sensor"
+      ],
+      "result": {
+        "sensor_type": "water_contact",
+        "active": true,
+        "time_aligned": true,
+        "offset_seconds": 0.0,
+        "classification": "SENSOR_CORRELATED",
+        "evidence_references": [
+          "synthetic-demo-sensor"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:01.568666+00:00"
+    },
+    {
+      "iteration": 8,
+      "observation_inputs": {
+        "finding": "possible_visible_water_change"
+      },
+      "thresholds": {},
+      "selected_action": "generate_review_request",
+      "evidence_references": [],
+      "result": {
+        "type": "operator_review",
+        "mandatory": true,
+        "reason": "New localized cool-toned change and a time-aligned water sensor warrant operator review; cause remains unverified.",
+        "available_actions": [
+          "approve",
+          "reject",
+          "request_more_evidence"
+        ]
+      },
+      "error": null,
+      "stopping_condition": "waiting_for_human_review",
+      "timestamp": "2026-10-27T00:25:01.568677+00:00"
+    },
+    {
+      "iteration": 9,
+      "observation_inputs": {
+        "finding": "possible_visible_water_change",
+        "outcome": "human_review_required"
+      },
+      "thresholds": {},
+      "selected_action": "create_evidence_report",
+      "evidence_references": [
+        "baseline",
+        "current",
+        "change_mask",
+        "overlay"
+      ],
+      "result": {
+        "report_schema": "1.0",
+        "sha256_count": 4,
+        "evidence_references": [
+          "baseline",
+          "current",
+          "change_mask",
+          "overlay"
+        ]
+      },
+      "error": null,
+      "stopping_condition": "bounded investigation complete",
+      "timestamp": "2026-10-27T00:25:01.632487+00:00"
+    }
+  ]
+}

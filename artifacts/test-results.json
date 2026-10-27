@@ -1,0 +1,167 @@
+{
+  "generated_at_utc": "2026-10-27T00:27:14Z",
+  "command": ".\\.venv\\Scripts\\python.exe -m pytest -q --junitxml=artifacts/test-results.xml",
+  "exit_code": 0,
+  "summary": {
+    "tests": 36,
+    "passed": 36,
+    "failed": 0,
+    "skipped": 0
+  },
+  "environment": {
+    "python": "3.14.0",
+    "opencv": "5.0.0",
+    "numpy": "2.5.4",
+    "fastapi": "0.123.0",
+    "pytest": "8.4.2",
+    "platform": "Windows-10-10.0.19045-SP0"
+  },
+  "tests": [
+    {
+      "name": "tests.test_agent_memory.test_sensor_correlated_new_visual_change_requests_operator_review",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_low_quality_frame_requests_retake_and_never_claims_detection",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_lighting_only_change_is_downgraded_without_water_claim",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_older_history_changes_next_action_and_outcome",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_demo_outcomes_produce_distinct_agent_paths",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_baseline_retrieval_filters_camera_time_and_incident_frames",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_naive_timestamp_rejected",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_duplicate_event_id_is_idempotent_and_payload_conflict_rejected",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_missing_baseline_requests_retake_and_stops_safely",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_missing_sensor_downgrades_visual_finding",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_agent_never_emits_unsafe_actuator_action",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_agent_memory.test_incident_event_is_not_baseline_automatically",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_health_reports_opencv5",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_demo_endpoint_returns_report_trace_and_annotated_image",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_review_action_is_recorded_without_actuating_equipment",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_upload_accepts_images_and_deduplicates_alarm_id",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_upload_rejects_corrupt_input_and_incompatible_resolution",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_upload_rejects_unsupported_media_type",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_upload_rejects_inconsistent_timestamps",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_untrusted_event_id_cannot_escape_artifact_directory",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_non_synthetic_review_requires_authentication",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_api.test_upload_request_body_has_total_size_limit",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_cloud.test_cloud_storage_is_optional_without_bucket",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_cloud.test_s3_write_failure_propagates_instead_of_claiming_saved",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_runtime_is_opencv_5",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_clear_change_has_opencv_region_and_measurements",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_global_illumination_change_is_normalized",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_blur_quality_gate_rejects_unusable_frame",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_resolution_mismatch_is_fail_closed",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_feature_registration_failure_falls_back_and_downgrades_comparability",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_corrupt_and_missing_image_data_rejected[]",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_corrupt_and_missing_image_data_rejected[not an image]",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_corrupt_and_missing_image_data_rejected[\\x89PNG\\r\\n]",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_image_size_limit_rejected_before_decode",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_face_redaction_adapter_is_available_and_preserves_dimensions",
+      "status": "passed"
+    },
+    {
+      "name": "tests.test_vision.test_face_redaction_fails_closed_if_model_is_missing",
+      "status": "passed"
+    }
+  ],
+  "cloud_services_tested": false,
+  "docker_build_tested": false
+}

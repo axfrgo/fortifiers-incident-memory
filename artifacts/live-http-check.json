@@ -1,0 +1,27 @@
+{
+  "checked_at_utc": "2026-10-27T00:31:17.9104355Z",
+  "base_url": "http://127.0.0.1:8000",
+  "public_endpoint": false,
+  "health_status": "ok",
+  "opencv_version": "5.0.0",
+  "home_status": 200,
+  "scenario": "historical_match",
+  "synthetic": true,
+  "outcome": "no_new_change_supported",
+  "run_storage_id": "historical_match-8505b7722e03",
+  "trace_calls": 10,
+  "actions": [
+    "retrieve_event_frames",
+    "evaluate_image_quality",
+    "select_historical_baseline",
+    "align_and_compare",
+    "inspect_region",
+    "retrieve_additional_frame",
+    "align_and_compare",
+    "compare_historical_region",
+    "correlate_sensor_event",
+    "create_evidence_report"
+  ],
+  "evidence_download_status": 200,
+  "evidence_bytes": 928550
+}

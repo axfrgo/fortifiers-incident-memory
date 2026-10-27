@@ -1,0 +1,17 @@
+{
+  "status": "BLOCKED",
+  "checked_at_utc": "2026-10-27T00:27:52Z",
+  "reason": "No AWS CLI, AWS credential profile, environment credentials, or Docker CLI are available in the inspected workspace. The user explicitly directed preparation only and declined resource creation.",
+  "service_url": null,
+  "aws_account_id": null,
+  "opencv_runtime_verified_locally": "5.0.0.93",
+  "planned_runtime": "AWS App Runner from private ECR image",
+  "planned_evidence_storage": "private versioned S3 bucket with SSE-S3 and scoped App Runner instance-role access",
+  "planned_compute": {"cpu": "0.5 vCPU", "memory": "1 GB", "minimum_instances": 1, "maximum_instances": 2, "max_concurrency_per_instance": 5},
+  "planned_retention": {"current_s3_evidence_days": 30, "noncurrent_s3_evidence_days": 7, "ecr_images_retained": 3},
+  "planned_user_uploads_enabled": false,
+  "deployment_script": "deployment/deploy.ps1",
+  "live_endpoint_verified": false,
+  "local_docker_verified": false,
+  "resources_created": false
+}

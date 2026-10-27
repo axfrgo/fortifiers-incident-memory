@@ -1,0 +1,229 @@
+{
+  "schema_version": "1.0",
+  "run_id": "dry_normal-441f435bac5a",
+  "event_id": "dry_normal-441f435bac5a",
+  "camera_id": "mechanical-room-cam-01",
+  "scenario": "dry_normal",
+  "synthetic_demo": true,
+  "created_at": "2026-10-27T00:25:41.205705+00:00",
+  "outcome": "no_visual_change_supported",
+  "finding": "no_credible_visual_water_evidence",
+  "evidence_classes": [
+    "UNVERIFIED"
+  ],
+  "sensor_correlation": {
+    "sensor_type": "water_contact",
+    "active": false,
+    "time_aligned": true,
+    "offset_seconds": 0.0,
+    "classification": "UNVERIFIED",
+    "evidence_references": [
+      "synthetic-demo-sensor"
+    ]
+  },
+  "quality": {
+    "width": 640,
+    "height": 480,
+    "blur_variance": 516.37,
+    "mean_luminance": 141.95,
+    "dark_fraction": 0.0,
+    "bright_fraction": 0.0,
+    "quality_score": 1.0,
+    "usable": true,
+    "reasons": []
+  },
+  "comparison": {
+    "comparable": true,
+    "registration_method": "orb_ransac_homography",
+    "registration_inliers": 831,
+    "reliability_score": 1.0,
+    "illumination_gain": 1.0,
+    "changed_fraction": 0.0,
+    "candidate_regions": [],
+    "elapsed_ms": 95.897,
+    "notes": []
+  },
+  "regions": [],
+  "review_request": null,
+  "privacy_redaction": null,
+  "limitations": [
+    "RGB appearance does not prove water or root cause",
+    "human review is required for safety or maintenance action"
+  ],
+  "sha256": {
+    "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+    "current": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+    "change_mask": "45e945d98ded38001430be13601895981708846604f9db9184b3b6af1dd62402",
+    "overlay": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564"
+  },
+  "trace": [
+    {
+      "iteration": 1,
+      "observation_inputs": {
+        "event_id": "dry_normal-441f435bac5a",
+        "camera_id": "mechanical-room-cam-01"
+      },
+      "thresholds": {
+        "history_context": "mechanical_room"
+      },
+      "selected_action": "retrieve_event_frames",
+      "evidence_references": [],
+      "result": {
+        "camera_id": "mechanical-room-cam-01",
+        "event_id": "dry_normal-441f435bac5a",
+        "available_historical_frames": 1,
+        "event_frame_ref": "dry_normal-441f435bac5a-event"
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:41.041142+00:00"
+    },
+    {
+      "iteration": 2,
+      "observation_inputs": {
+        "frame": "dry_normal-441f435bac5a-event"
+      },
+      "thresholds": {
+        "minimum_blur_variance": 24,
+        "minimum_resolution_px": 96
+      },
+      "selected_action": "evaluate_image_quality",
+      "evidence_references": [
+        "dry_normal-441f435bac5a-event"
+      ],
+      "result": {
+        "width": 640,
+        "height": 480,
+        "blur_variance": 516.37,
+        "mean_luminance": 141.95,
+        "dark_fraction": 0.0,
+        "bright_fraction": 0.0,
+        "quality_score": 1.0,
+        "usable": true,
+        "reasons": [],
+        "evidence_references": [
+          "dry_normal-441f435bac5a-event"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:41.048328+00:00"
+    },
+    {
+      "iteration": 3,
+      "observation_inputs": {
+        "camera_id": "mechanical-room-cam-01",
+        "event_time": "2026-10-27T00:25:41+00:00"
+      },
+      "thresholds": {
+        "exclude_incident_frames": true,
+        "minimum_quality_score": 0.4
+      },
+      "selected_action": "select_historical_baseline",
+      "evidence_references": [
+        "dry_normal-441f435bac5a-baseline"
+      ],
+      "result": {
+        "selected_frame_id": "dry_normal-441f435bac5a-baseline",
+        "selected_timestamp": "2026-10-27T00:10:41+00:00",
+        "reason": "nearest usable pre-event frame for the same camera and context",
+        "evidence_references": [
+          "dry_normal-441f435bac5a-baseline"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:41.048383+00:00"
+    },
+    {
+      "iteration": 4,
+      "observation_inputs": {
+        "reference": "dry_normal-441f435bac5a-baseline",
+        "current": "dry_normal-441f435bac5a-event"
+      },
+      "thresholds": {
+        "mask_delta_saturation": 42,
+        "minimum_region_area_fraction": 0.0025,
+        "minimum_registration_reliability": 0.45
+      },
+      "selected_action": "align_and_compare",
+      "evidence_references": [
+        "dry_normal-441f435bac5a-baseline",
+        "dry_normal-441f435bac5a-event"
+      ],
+      "result": {
+        "comparable": true,
+        "registration_method": "orb_ransac_homography",
+        "registration_inliers": 831,
+        "reliability_score": 1.0,
+        "illumination_gain": 1.0,
+        "changed_fraction": 0.0,
+        "candidate_regions": [],
+        "elapsed_ms": 95.897,
+        "notes": [],
+        "evidence_references": [
+          "dry_normal-441f435bac5a-baseline",
+          "dry_normal-441f435bac5a-event"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:41.146594+00:00"
+    },
+    {
+      "iteration": 5,
+      "observation_inputs": {
+        "sensor_type": "water_contact",
+        "timestamp": "2026-10-27T00:25:41+00:00"
+      },
+      "thresholds": {
+        "maximum_time_offset_seconds": 300
+      },
+      "selected_action": "correlate_sensor_event",
+      "evidence_references": [
+        "synthetic-demo-sensor"
+      ],
+      "result": {
+        "sensor_type": "water_contact",
+        "active": false,
+        "time_aligned": true,
+        "offset_seconds": 0.0,
+        "classification": "UNVERIFIED",
+        "evidence_references": [
+          "synthetic-demo-sensor"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:25:41.146637+00:00"
+    },
+    {
+      "iteration": 6,
+      "observation_inputs": {
+        "finding": "no_credible_visual_water_evidence",
+        "outcome": "no_visual_change_supported"
+      },
+      "thresholds": {},
+      "selected_action": "create_evidence_report",
+      "evidence_references": [
+        "baseline",
+        "current",
+        "change_mask",
+        "overlay"
+      ],
+      "result": {
+        "report_schema": "1.0",
+        "sha256_count": 4,
+        "evidence_references": [
+          "baseline",
+          "current",
+          "change_mask",
+          "overlay"
+        ]
+      },
+      "error": null,
+      "stopping_condition": "bounded investigation complete",
+      "timestamp": "2026-10-27T00:25:41.206446+00:00"
+    }
+  ]
+}

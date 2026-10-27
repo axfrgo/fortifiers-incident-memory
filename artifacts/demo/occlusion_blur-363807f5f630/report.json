@@ -1,0 +1,172 @@
+{
+  "schema_version": "1.0",
+  "run_id": "occlusion_blur-363807f5f630",
+  "event_id": "occlusion_blur-363807f5f630",
+  "camera_id": "mechanical-room-cam-01",
+  "scenario": "occlusion_blur",
+  "synthetic_demo": true,
+  "created_at": "2026-10-27T00:26:00.342074+00:00",
+  "outcome": "retake_requested",
+  "finding": "insufficient_evidence",
+  "evidence_classes": [
+    "UNVERIFIED"
+  ],
+  "sensor_correlation": null,
+  "quality": {
+    "width": 640,
+    "height": 480,
+    "blur_variance": 15.18,
+    "mean_luminance": 135.67,
+    "dark_fraction": 0.0,
+    "bright_fraction": 0.0,
+    "quality_score": 0.627,
+    "usable": false,
+    "reasons": [
+      "frame is blurred or lacks usable detail"
+    ]
+  },
+  "comparison": null,
+  "regions": [],
+  "review_request": {
+    "type": "retake",
+    "mandatory": false,
+    "reason": "Alarm frame quality is inadequate; no incident claim is made.",
+    "available_actions": [
+      "approve",
+      "reject",
+      "request_more_evidence"
+    ]
+  },
+  "privacy_redaction": null,
+  "limitations": [
+    "RGB appearance does not prove water or root cause",
+    "human review is required for safety or maintenance action"
+  ],
+  "sha256": {
+    "baseline": "a8ff1f6e9fd98f2a3b68c1616fa8150a1c1ba399d038fa87e9929d94bfa16564",
+    "current": "beaf65c97574738a299540ff968228fd6e01b75ecb925d9f4df0a73c2a28fda7"
+  },
+  "trace": [
+    {
+      "iteration": 1,
+      "observation_inputs": {
+        "event_id": "occlusion_blur-363807f5f630",
+        "camera_id": "mechanical-room-cam-01"
+      },
+      "thresholds": {
+        "history_context": "mechanical_room"
+      },
+      "selected_action": "retrieve_event_frames",
+      "evidence_references": [],
+      "result": {
+        "camera_id": "mechanical-room-cam-01",
+        "event_id": "occlusion_blur-363807f5f630",
+        "available_historical_frames": 1,
+        "event_frame_ref": "occlusion_blur-363807f5f630-event"
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:26:00.305653+00:00"
+    },
+    {
+      "iteration": 2,
+      "observation_inputs": {
+        "frame": "occlusion_blur-363807f5f630-event"
+      },
+      "thresholds": {
+        "minimum_blur_variance": 24,
+        "minimum_resolution_px": 96
+      },
+      "selected_action": "evaluate_image_quality",
+      "evidence_references": [
+        "occlusion_blur-363807f5f630-event"
+      ],
+      "result": {
+        "width": 640,
+        "height": 480,
+        "blur_variance": 15.18,
+        "mean_luminance": 135.67,
+        "dark_fraction": 0.0,
+        "bright_fraction": 0.0,
+        "quality_score": 0.627,
+        "usable": false,
+        "reasons": [
+          "frame is blurred or lacks usable detail"
+        ],
+        "evidence_references": [
+          "occlusion_blur-363807f5f630-event"
+        ]
+      },
+      "error": null,
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:26:00.313532+00:00"
+    },
+    {
+      "iteration": 3,
+      "observation_inputs": {
+        "reason": "alarm frame quality is below comparison threshold; seek corroborating view",
+        "camera_id": "mechanical-room-cam-01"
+      },
+      "thresholds": {},
+      "selected_action": "retrieve_additional_frame",
+      "evidence_references": [],
+      "result": {
+        "reason": "alarm frame quality is below comparison threshold; seek corroborating view",
+        "frame_id": null,
+        "available": false,
+        "evidence_references": []
+      },
+      "error": "no additional usable historical frame was available",
+      "stopping_condition": null,
+      "timestamp": "2026-10-27T00:26:00.313568+00:00"
+    },
+    {
+      "iteration": 4,
+      "observation_inputs": {
+        "finding": "insufficient_evidence"
+      },
+      "thresholds": {},
+      "selected_action": "generate_review_request",
+      "evidence_references": [],
+      "result": {
+        "type": "retake",
+        "mandatory": false,
+        "reason": "Alarm frame quality is inadequate; no incident claim is made.",
+        "available_actions": [
+          "approve",
+          "reject",
+          "request_more_evidence"
+        ]
+      },
+      "error": null,
+      "stopping_condition": "retake_requested",
+      "timestamp": "2026-10-27T00:26:00.313580+00:00"
+    },
+    {
+      "iteration": 5,
+      "observation_inputs": {
+        "finding": "insufficient_evidence",
+        "outcome": "retake_requested"
+      },
+      "thresholds": {},
+      "selected_action": "create_evidence_report",
+      "evidence_references": [
+        "baseline",
+        "current"
+      ],
+      "result": {
+        "report_schema": "1.0",
+        "sha256_count": 2,
+        "evidence_references": [
+          "baseline",
+          "current"
+        ]
+      },
+      "error": null,
+      "stopping_condition": "bounded investigation complete",
+      "timestamp": "2026-10-27T00:26:00.342111+00:00"
+    }
+  ],
+  "retake_frame_available": false,
+  "elapsed_ms": 45.312
+}
