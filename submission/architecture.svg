@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1180" height="760" viewBox="0 0 1180 760" role="img" aria-labelledby="title desc">
-<title id="title">Fortifiers Incident Memory system architecture</title><desc id="desc">Verified local OpenCV 5 vision and agent pipeline with planned, not deployed, AWS App Runner and private S3 services.</desc>
+<title id="title">Fortifiers Incident Memory system architecture</title><desc id="desc">Verified local OpenCV 5 vision and agent pipeline with a prepared AWS Lambda container, Function URL, private S3, private ECR, CodeBuild, and CloudWatch path.</desc>
 <defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#80768d"/></marker><style>.bg{fill:#faf9fc}.box{fill:#fff;stroke:#d8d3df;stroke-width:1.5;rx:12}.local{stroke:#7152c7;stroke-width:2}.planned{stroke:#b99fe9;stroke-width:2;stroke-dasharray:7 5}.head{font:600 17px Arial;fill:#211c29}.txt{font:13px Arial;fill:#514b58}.sub{font:11px Arial;fill:#77717d}.label{font:700 11px Arial;letter-spacing:1.2px;fill:#766d83}.arrow{stroke:#8d8498;stroke-width:1.8;fill:none;marker-end:url(#arrow)}.panel{fill:#fff;stroke:#ddd8e4;stroke-width:1.4;rx:18}</style></defs>
 <rect class="bg" width="1180" height="760"/>
 <text x="50" y="42" class="label">FORTIFIERS INCIDENT MEMORY · SYSTEM ARCHITECTURE</text><text x="50" y="70" class="head" font-size="24">Event evidence → OpenCV 5 → observation-driven investigation</text>
@@ -12,9 +12,9 @@
 <rect x="320" y="348" width="270" height="118" class="box"/><text x="340" y="377" class="head">Environmental memory</text><text x="340" y="402" class="txt">camera · context · time · quality</text><text x="340" y="424" class="txt">incident frames excluded as baselines</text><text x="340" y="448" class="sub">historical retrieval changes decisions</text>
 <rect x="650" y="348" width="300" height="118" class="box"/><text x="670" y="377" class="head">Auditable evidence bundle</text><text x="670" y="402" class="txt">annotated PNG · mask · JSON · HTML</text><text x="670" y="424" class="txt">SHA-256 · trace · human review record</text><text x="670" y="448" class="sub">no physical-control interface</text>
 <path class="arrow" d="M700 302 V326 H455 V341"/><path class="arrow" d="M990 287 V326 H800 V341"/><path class="arrow" d="M590 407 H643"/>
-<rect x="40" y="556" width="1090" height="150" class="panel planned"/><text x="66" y="586" class="label" fill="#7152c7">PLANNED AWS DEPLOYMENT · NOT DEPLOYED / NOT LIVE-VERIFIED</text>
-<rect x="72" y="611" width="266" height="66" class="box planned"/><text x="92" y="638" class="head">Private ECR</text><text x="92" y="660" class="sub">container image · deployment script</text>
-<rect x="440" y="611" width="285" height="66" class="box planned"/><text x="460" y="638" class="head">AWS App Runner</text><text x="460" y="660" class="sub">executes FastAPI + actual OpenCV 5 CPU workload</text>
-<rect x="825" y="611" width="267" height="66" class="box planned"/><text x="845" y="638" class="head">Private S3 + CloudWatch</text><text x="845" y="660" class="sub">versioned encrypted evidence · service logs</text>
+<rect x="40" y="556" width="1090" height="150" class="panel planned"/><text x="66" y="586" class="label" fill="#7152c7">PREPARED AWS SERVERLESS PATH · DEPLOYMENT PENDING</text>
+<rect x="72" y="611" width="266" height="66" class="box planned"/><text x="92" y="638" class="head">CodeBuild + private ECR</text><text x="92" y="660" class="sub">pinned Lambda image · immutable commit tag</text>
+<rect x="440" y="611" width="285" height="66" class="box planned"/><text x="460" y="638" class="head">Lambda Function URL</text><text x="460" y="660" class="sub">runs FastAPI + actual OpenCV 5 CPU workload</text>
+<rect x="825" y="611" width="267" height="66" class="box planned"/><text x="845" y="638" class="head">Private S3 + CloudWatch</text><text x="845" y="660" class="sub">7-day evidence retention · service logs</text>
 <path class="arrow" d="M338 644 H432"/><path class="arrow" d="M725 644 H817"/>
 </svg>

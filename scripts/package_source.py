@@ -11,7 +11,7 @@ ARCHIVE = ROOT / "artifacts" / "fortifiers-incident-memory-source.zip"
 PUBLIC_REPOSITORY_URL = "https://github.com/axfrgo/fortifiers-incident-memory"
 PUBLIC_ARCHIVE_URL = f"{PUBLIC_REPOSITORY_URL}/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip"
 IGNORED_DIRS = {".git", ".venv", "__pycache__", ".pytest_cache"}
-IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "source-archive-manifest.json", "source-archive-validation.json"}
+IGNORED_FILES = {"fortifiers-incident-memory-source.zip", "source-archive-manifest.json", "source-archive-validation.json", "recording-smoke-frame.png"}
 NON_SOURCE_MEDIA_SUFFIXES = {".mp4", ".mov"}
 
 

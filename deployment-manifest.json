@@ -1,30 +1,52 @@
 {
-  "status": "BLOCKED",
-  "checked_at_utc": "2026-10-27T01:58:00Z",
-  "reason": "The in-app AWS tab redirected to an IAM sign-in page. No AWS CLI, Docker CLI, credential profile, or environment credentials are available. The AWS account and App Runner eligibility were not authenticated or verified; no spend ceiling was authorized. No resources or endpoint were created.",
-  "service_url": null,
+  "status": "BLOCKED_PENDING_AWS_ACCOUNT_VERIFICATION",
+  "checked_at_utc": "2026-10-27T04:32:43Z",
+  "region": "us-east-2",
+  "runtime": "AWS Lambda Python 3.14 container with FastAPI, Mangum 0.22.0, and OpenCV 5.0.0.93",
+  "deployment_path": [
+    "AWS CodeBuild general1.small builds an immutable linux/amd64 image",
+    "Private ECR image repository",
+    "AWS Lambda public Function URL runs the OpenCV workload",
+    "Private S3 stores synthetic evidence for seven days",
+    "CloudWatch retains Lambda logs for 14 days and CodeBuild logs for seven days"
+  ],
+  "public_endpoint": null,
   "aws_account_id": null,
-  "opencv_runtime_verified_locally": "5.0.0",
-  "opencv_wheel_locally_verified": "opencv-python-headless==5.0.0.93",
-  "planned_runtime": "AWS App Runner from private ECR image, only if account already has service access",
-  "account_service_eligibility": "unverified",
-  "alternative_for_new_customers": "AWS recommends ECS Express Mode; not implemented or costed in this project",
-  "illustrative_cost_estimate": {
-    "region_assumed_only": "us-east-1",
-    "configuration": "one 0.5-vCPU / 1-GB App Runner instance, 730 provisioned hours per month",
-    "provisioned_memory_usd_month": 5.11,
-    "active_compute_rate_usd_per_processing_hour": 0.032,
-    "continuous_processing_total_usd_month": 28.47,
-    "exclusions": ["ECR", "S3", "CloudWatch", "data transfer", "tax", "additional active instances"],
-    "pricing_source": "https://aws.amazon.com/apprunner/pricing/",
-    "account_credits_verified": false
-  },
-  "planned_evidence_storage": "private versioned S3 bucket with SSE-S3 and scoped App Runner instance-role access",
-  "planned_compute": {"cpu": "0.5 vCPU", "memory": "1 GB", "minimum_instances": 1, "maximum_instances": 2, "max_concurrency_per_instance": 5},
-  "planned_retention": {"current_s3_evidence_days": 30, "noncurrent_s3_evidence_days": 7, "ecr_images_retained": 3},
-  "planned_user_uploads_enabled": false,
-  "deployment_script": "deployment/deploy.ps1",
-  "live_endpoint_verified": false,
+  "account_plan": "Free Plan credit active; balance intentionally omitted",
+  "cloudshell_status": "Unavailable: AWS reports new-account verification is still in progress",
+  "resources_created": false,
+  "aws_project_spend_verified": false,
   "local_docker_verified": false,
-  "resources_created": false
+  "local_lambda_adapter_smoke": {
+    "status": "PASS",
+    "detail": "Mangum handled GET /health and GET /api/investigate/clear_change locally; the investigation returned HTTP 200, a nine-step trace, and a 1,652,510-byte JSON response. This does not prove AWS execution."
+  },
+  "runtime_safeguards": {
+    "user_uploads_enabled": false,
+    "reserved_concurrency": 1,
+    "memory_mib": 2048,
+    "timeout_seconds": 90,
+    "ephemeral_storage_mib": 1024,
+    "public_function_url": true,
+    "s3_public_access_blocked": true,
+    "evidence_retention_days": 7
+  },
+  "estimated_cost": {
+    "lambda_rate_usd_per_gb_second": 0.0000166667,
+    "lambda_rate_usd_per_million_requests": 0.2,
+    "lambda_example_usd_per_call_at_2_gib_3_seconds": 0.0001,
+    "codebuild_example_usd_per_20_minute_build_before_credits": 0.1,
+    "hard_spend_cap": false,
+    "source": [
+      "https://aws.amazon.com/lambda/pricing/",
+      "https://aws.amazon.com/codebuild/pricing/",
+      "https://aws.amazon.com/ecr/pricing/"
+    ]
+  },
+  "templates": [
+    "deployment/aws-bootstrap.yaml",
+    "deployment/aws-app.yaml"
+  ],
+  "deployment_script": "deployment/deploy-lambda-cloudshell.sh",
+  "remote_verification": null
 }

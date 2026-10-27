@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - test -n "$ECR_REPOSITORY_URI"
+      - IMAGE_TAG=$(printf '%s' "$CODEBUILD_RESOLVED_SOURCE_VERSION" | cut -c 1-12)
+      - test "${#IMAGE_TAG}" -eq 12
+      - aws ecr get-login-password --region "$AWS_DEFAULT_REGION" | docker login --username AWS --password-stdin "$(printf '%s' "$ECR_REPOSITORY_URI" | cut -d/ -f1)"
+  build:
+    commands:
+      - docker build --platform linux/amd64 -f Dockerfile.lambda -t "$ECR_REPOSITORY_URI:$IMAGE_TAG" .
+  post_build:
+    commands:
+      - docker push "$ECR_REPOSITORY_URI:$IMAGE_TAG"
+      - printf 'Built immutable image tag %s from commit %s\n' "$IMAGE_TAG" "$CODEBUILD_RESOLVED_SOURCE_VERSION"

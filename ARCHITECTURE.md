@@ -1,8 +1,8 @@
 # Architecture
 
-Fortifiers Incident Memory is an event-triggered, bounded visual investigation service. The verified runtime in this workspace is local Python 3.14.0 with OpenCV 5.0.0.93. The App Runner and S3 portion shown in purple is prepared infrastructure only; it has not been deployed. AWS currently says App Runner is closed to new customers, and this account's eligibility is unknown. See [deployment-manifest.json](deployment-manifest.json) and [DEPLOYMENT.md](DEPLOYMENT.md).
+Fortifiers Incident Memory is an event-triggered, bounded visual investigation service. The verified local runtime is Python 3.14.0 with OpenCV 5.0.0.93. The AWS path uses CodeBuild, private ECR, a Lambda container with a public Function URL, private S3 evidence retention, and CloudWatch logs. It is prepared but not yet remotely verified: AWS CloudShell reports the new account is still under verification. See [deployment-manifest.json](deployment-manifest.json) and [DEPLOYMENT.md](DEPLOYMENT.md).
 
-![Architecture showing verified local OpenCV 5 processing and planned App Runner/S3 components](submission/architecture.svg)
+![Architecture showing verified local OpenCV 5 processing and the prepared Lambda, private S3, ECR, CodeBuild, and CloudWatch path](submission/architecture.svg)
 
 ## Data and trust boundaries
 
@@ -11,7 +11,7 @@ Fortifiers Incident Memory is an event-triggered, bounded visual investigation s
 3. OpenCV 5 evaluates blur/exposure, attempts ORB feature matching and a RANSAC homography, falls back to ECC translation, normalizes global brightness in HSV, thresholds localized chromatic change, applies morphology and extracts connected-component regions.
 4. The bounded controller uses these measurements to choose what it does next. A new region can trigger region inspection and older-frame retrieval. Poor quality requests a retake. A similar older region downgrades novelty. A sensor is considered correlated only if active and within the time window.
 5. The report labels observations separately from sensor correlation, hypothesis and unverified cause. It includes trace records, PNGs, SHA-256 hashes and operator review controls. Review records are acknowledgements only; no physical-control interface exists.
-6. Locally, files are saved under `artifacts/demo/`. The prepared AWS version would run the same FastAPI/OpenCV process in App Runner, write synthetic evidence bundles to a private, versioned S3 bucket, and serve a public demo endpoint. CloudWatch would receive application/service logs. AWS resource creation and live verification remain blocked by missing tools/credentials and the user's instruction to prepare only. The template may be used only if the account already has App Runner access; the recommended alternative for new AWS customers has not been implemented.
+6. Locally, files are saved under `artifacts/demo/`. The AWS container stores transient working files under Lambda `/tmp`, writes the evidence ZIP and human review records to a private S3 prefix with a seven-day expiry, and returns a presigned download URL. The Function URL serves the FastAPI dashboard and the real OpenCV workload. CloudWatch retains Lambda logs for 14 days and build logs for seven days. Uploads are disabled. This AWS path remains pending remote verification.
 
 ## Components
 
@@ -22,7 +22,7 @@ Fortifiers Incident Memory is an event-triggered, bounded visual investigation s
 | OpenCV 5 perception | `src/incident_memory/vision.py` | Decode, quality, registration, illumination normalization, candidate masks and geometry |
 | Agent controller | `src/incident_memory/agent.py` | Bounded observation-driven tool routing and fail-closed reports |
 | Reports | `src/incident_memory/reports.py` | Accessible HTML evidence report |
-| Cloud | `src/incident_memory/cloud.py`, `deployment/stack.yaml` | Optional S3 evidence persistence and App Runner/IAM resources |
+| Cloud | `src/incident_memory/cloud.py`, `Dockerfile.lambda`, `deployment/aws-bootstrap.yaml`, `deployment/aws-app.yaml` | S3 evidence persistence, Lambda Function URL, CodeBuild, ECR, and least-privilege IAM |
 | Frontend | `src/incident_memory/static/` | Responsive scenario dashboard, image slider, trace and human review |
 | Evaluation | `scripts/evaluate.py`, `data/synthetic/` | Labeled procedural fixture set and measured comparator |
 

@@ -84,7 +84,7 @@ class RequestSizeLimitMiddleware:
 
 app.add_middleware(RequestSizeLimitMiddleware)
 ROOT = Path(__file__).resolve().parents[2]
-ARTIFACTS = ROOT / "artifacts" / "demo"
+ARTIFACTS = Path(os.getenv("INCIDENT_ARTIFACTS_DIR", str(ROOT / "artifacts" / "demo")))
 ASSETS = Path(__file__).resolve().parent / "static"
 app.mount("/static", StaticFiles(directory=ASSETS), name="static")
 upload_events: dict[str, str] = {}
@@ -144,6 +144,9 @@ def health():
     return {"status": "ok", "service": "fortifiers-incident-memory", "opencv_version": cv2.__version__,
             "opencv5": cv2.__version__.split(".", 1)[0] == "5",
             "aws_s3_artifacts_enabled": bool(os.getenv("ARTIFACT_BUCKET")),
+            "deployment_mode": os.getenv("DEPLOYMENT_MODE", "local"),
+            "build_id": os.getenv("DEPLOYED_BUILD_ID", "local"),
+            "git_commit": os.getenv("DEPLOYED_GIT_COMMIT", "unknown"),
             "user_uploads_enabled": os.getenv("ALLOW_USER_UPLOADS", "true").lower() == "true"}
 
 

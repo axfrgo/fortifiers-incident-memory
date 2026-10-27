@@ -4,13 +4,13 @@
 
 ![Fortifiers Incident Memory project cover. Synthetic baseline, alarm-time image, and OpenCV 5 overlay.](submission/project-cover.png)
 
-![Frames captured from the real local application recording, showing the overview, synthetic comparisons, agent outcomes, evaluation card, and disclosure that AWS is not deployed.](artifacts/video/final-contact-sheet.jpg)
+![Frames captured from the real local application recording, showing the overview, synthetic comparisons, agent outcomes, evaluation card, and disclosure that AWS is not deployed.](artifacts/video/contact-sheet.jpg)
 
 Public source repository: https://github.com/axfrgo/fortifiers-incident-memory
 
 Environmental Incident Memory investigates what changed around a physical alarm. It retrieves a pre-event frame, runs real OpenCV 5 image analysis, chooses follow-up actions from those observations, checks older history and sensor timing, and creates a reviewable evidence record. The demo focuses on a synthetic industrial mechanical-room water-sensor event.
 
-> **Honest build status:** local OpenCV 5 processing, API scenarios and tests are verified. AWS and Docker are **not deployed or verified**: no AWS account is authenticated in the console or configured locally, and no AWS resources were created. The AWS tab is at account signup; credits and App Runner eligibility are unknown. There is no public demo endpoint, so this build does not meet the competition's AWS workload and judge-accessible endpoint requirements. The real 3:40 video is published on YouTube as Unlisted and was verified by an unauthenticated HTTP request. See [deployment-manifest.json](deployment-manifest.json), [DEPLOYMENT.md](DEPLOYMENT.md), and [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md).
+> **Honest build status:** local OpenCV 5 processing, API scenarios and tests are verified. AWS deployment is in progress. The signed-in account has an active Free Plan credit, but the AWS CloudShell console is currently blocked while account verification completes. No project AWS resources or public endpoint have been verified yet. The prepared deployment uses Lambda containers and Function URLs because App Runner is closed to new customers. The real 3:40 video is published on YouTube as Unlisted and was verified through an unauthenticated request; it predates AWS deployment. See [deployment-manifest.json](deployment-manifest.json), [DEPLOYMENT.md](DEPLOYMENT.md), and [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md).
 
 All included images and sensor events are procedurally generated synthetic fixtures. The blue/cool-toned patch is a staged visual cue, not actual water and not real-world validation.
 
@@ -68,7 +68,7 @@ The latest local test output is in `artifacts/test-results-finalization.xml` and
 
 ## Deployment
 
-The prepared deployment package uses private ECR, App Runner for the OpenCV 5 API and a private versioned S3 bucket. **Nothing has been created in AWS.** App Runner is closed to new AWS customers, and this account's eligibility is unknown. A later authorized deployment requires a supported AWS service/account, Docker, AWS CLI/role, a selected region and explicit billable-resource approval. See [DEPLOYMENT.md](DEPLOYMENT.md) and `deployment/deploy.ps1`.
+The prepared deployment package uses private ECR, AWS CodeBuild, a Python 3.14 Lambda container running the OpenCV 5 API, a public Lambda Function URL, private S3 evidence retention and CloudWatch logs. AWS uploads are disabled; only synthetic scenarios are enabled. The local host has no AWS CLI or Docker, and the new account's CloudShell environment is still in AWS verification. No AWS resource or endpoint is claimed until remote investigation requests and artifacts are verified. See [DEPLOYMENT.md](DEPLOYMENT.md), `deployment/aws-bootstrap.yaml`, `deployment/aws-app.yaml`, and `deployment/deploy-lambda-cloudshell.sh`.
 
 ## Project map
 
@@ -82,4 +82,3 @@ The prepared deployment package uses private ECR, App Runner for the OpenCV 5 AP
 - `submission/` — architecture and workflow SVG diagrams.
 
 See [TECHNICAL_REPORT.md](TECHNICAL_REPORT.md), [RESPONSIBLE_USE.md](RESPONSIBLE_USE.md), [JUDGING_SCORECARD.md](JUDGING_SCORECARD.md), [FINAL_SUBMISSION_STATUS.md](FINAL_SUBMISSION_STATUS.md), and [BUILD_LEDGER.md](BUILD_LEDGER.md). The signed-in Devpost account has a saved private draft, not a submitted entry. The entrant reports entering solo. The AWS endpoint remains outstanding. Submission wording and the recorded-video notes are in [SUBMISSION.md](SUBMISSION.md) and [DEMO_SCRIPT.md](DEMO_SCRIPT.md).
-

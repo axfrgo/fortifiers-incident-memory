@@ -1,56 +1,50 @@
 # Final submission status
 
-**Checked:** 2026-10-27 04:05 UTC. **Target deadline:** 2026-10-27 06:45 UTC (the earlier official Devpost banner: Oct. 26, 2026 at 11:45 p.m. PDT = Oct. 27 at 03:45 a.m. ADT). About 2 hours 40 minutes remained at this check.
+**Checked:** 2026-10-27 04:32 UTC. **Target deadline:** 2026-10-27 06:45 UTC (earlier Devpost banner time). The project is being finalized against the earlier deadline.
 
-This report separates local proof from remote and entrant-controlled requirements. No AWS resources were created and no AWS cost was incurred. The Devpost draft remains unsubmitted.
+## Required state report
 
-## Requested release states
-
-| State | Status | Supporting evidence |
+| State | Status | Evidence |
 |---|---|---|
-| `LOCAL_VERIFIED` | **PASS** | OpenCV 5.0.0 and FastAPI app verified locally. Fresh pytest run: 36 passed, 0 failed, 0 skipped in 8.61 s. The portable ZIP extracted and the extracted source passed 36/36 tests in 8.16 s under the pinned clean environment. One Starlette/AnyIO deprecation warning. See [JUnit output](artifacts/test-results-finalization.xml), [machine-readable summary](artifacts/test-results.json), and exact archive digest/evidence in [source archive manifest](artifacts/source-archive-manifest.json). |
-| `GITHUB_PUBLISHED` | **PASS** | Public repository: [github.com/axfrgo/fortifiers-incident-memory](https://github.com/axfrgo/fortifiers-incident-memory). Anonymous Git/API check before this final documentation update showed `master` at `855ce2a115dd43e500ed94b15313e3b03bf72e31`. Final docs/archive still need a commit and push; verify the new public HEAD before closeout. |
-| `AWS_DEPLOYED` | **BLOCKED** | No AWS resources or endpoint exist. The open AWS tabs are at sign-in/account signup; identity, billing, credits and service access remain unknown. AWS CLI, Docker and credential profile are unavailable locally. |
-| `REMOTE_TESTED` | **BLOCKED** | There is no live service URL, cloud OpenCV investigation, CloudWatch execution evidence or remote test. |
-| `VIDEO_RECORDED` | **PASS** | Actual local UI capture: `artifacts/video/fortifiers-incident-memory-demo.mp4`, 220.4 s (3:40), 1920×1080, silent, SHA-256 `a662dd0bd82bbb31df5396b0dc83754ac1b80c553ed61dd27733f29e0a741002`. The film shows four real synthetic app outcomes and discloses no AWS deployment/no field validation. It does not name or show the entrant. |
-| `VIDEO_ACCESSIBLE` | **PASS** | YouTube Studio displayed “Video published”; Unlisted was selected. A no-credential HTTP GET to [the video](https://youtu.be/_k0J1XHyVyA) returned HTTP 200 and the expected title. An unauthenticated HEAD request to the [GitHub release asset](https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-demo.mp4) returned HTTP 200 and 49,804,378 bytes. |
-| `DEVPOST_PREPARED` | **PASS** | Authenticated Devpost page shows a saved solo draft at **4/5 steps**. The project story, YouTube URL, public repository, source archive, test instructions and Agentic Vision selection are saved. No working endpoint is listed because none exists; the entry remains incomplete until AWS execution/public endpoint or an organizer-approved live-demo arrangement is available. |
-| `DEVPOST_SUBMITTED` | **BLOCKED** | Not submitted. No final submission authorization or final rule/eligibility declaration was provided. The working endpoint/AWS requirement is also unresolved. |
-| `SUBMISSION_CONFIRMED` | **BLOCKED** | No submitted state, project confirmation or public Devpost submission exists. |
+| `LOCAL_VERIFIED` | **PASS** | Fresh run: 36 passed, 0 failed, 0 skipped in 8.17 seconds. Python 3.14.0; OpenCV 5.0.0; FastAPI 0.123.0. Fresh JUnit: [test-results-finalization.xml](artifacts/test-results-finalization.xml). Local Mangum smoke handled the health route and a `clear_change` investigation. |
+| `GITHUB_PUBLISHED` | **PASS, latest edits pending** | Public repo: [github.com/axfrgo/fortifiers-incident-memory](https://github.com/axfrgo/fortifiers-incident-memory). Public HEAD before this AWS update was `96af50c520e8ceaa0f63adda66c107294311cb2c`. New Lambda files and updated deployment docs are not pushed yet. |
+| `AWS_DEPLOYED` | **BLOCKED** | AWS billing shows an active Free Plan credit, but CloudShell reports account verification is still in progress. No project stack, image, function or public URL exists yet. See [deployment manifest](deployment-manifest.json) and [deployment notes](DEPLOYMENT.md). |
+| `REMOTE_TESTED` | **BLOCKED** | There is no endpoint to test; no cloud investigation, evidence download or CloudWatch invocation has occurred. |
+| `VIDEO_RECORDED` | **PASS, AWS narration outdated** | Actual local application recording: 220.4 seconds (3:40), 1920×1080, silent, synthetic-only. Its recording-time disclosure says AWS was not deployed. It must be replaced or supplemented if AWS becomes live. |
+| `VIDEO_ACCESSIBLE` | **PASS** | Unlisted YouTube video: [youtu.be/_k0J1XHyVyA](https://youtu.be/_k0J1XHyVyA). Previously verified without authentication. |
+| `DEVPOST_PREPARED` | **PASS, incomplete** | A private solo draft is saved at 4/5 steps with video/repository/story fields. It does not contain a live AWS endpoint. |
+| `DEVPOST_SUBMITTED` | **BLOCKED** | The entry is not submitted. Entrant eligibility/legal declarations and explicit final submit approval remain required. |
+| `SUBMISSION_CONFIRMED` | **BLOCKED** | No successful submission state or confirmation exists. |
 
-## Requirement evidence
+## Technical criteria
 
-| Requirement | Status | Evidence and limitation |
+| Requirement | Status | Evidence |
 |---|---|---|
-| OpenCV 5 visual processing | **PASS locally** | Runtime and tests identify OpenCV 5.0.0. ORB/RANSAC registration, ECC fallback, HSV normalization, change masks, morphology, components, measurements and overlays are implemented and exercised locally. No AWS runtime verification. |
-| Observation-driven Agentic Vision | **PASS locally** | Actual trace: poor blur quality selects a retake; candidate regions cause ROI/history/sensor tools; older history downgrades a pre-existing change; illumination normalization rejects a lighting-only shift; supported visual/sensor evidence stops for human review. See [workflow](AGENT_WORKFLOW.md), generated traces, and the video. Synthetic data only. |
-| Automated tests | **PASS locally** | 36/36 fresh run passed. AWS and Docker tests were not run. |
-| Evaluation | **PASS, synthetic only** | Seven procedural scenario types, three runs each: expected action 7/7 vs 4/7 for one-pass. Four pixel-labeled masks: precision 0.99183, recall 0.99913, F1 0.99546, IoU 0.99097. Controller p50/p95 137.061/217.262 ms in 21 local runs. These are not field or leak-detection performance. See [EVALUATION.md](EVALUATION.md). |
-| Judge-accessible source | **PASS** | Public GitHub repository above. Current package was extracted and tested from a clean pinned virtualenv. Latest documentation changes still require public push and anonymous HEAD verification. A ZIP archive is attached to the saved Devpost draft (35 MB upload limit). |
-| Meaningful AWS workload/public endpoint | **BLOCKED** | No deployment, endpoint, CloudWatch evidence, or AWS investigation. See [DEPLOYMENT.md](DEPLOYMENT.md). |
-| Demo video | **PASS** | Unlisted link and public release asset are live. Duration is 3:40. It identifies the entry as solo but does not show/name the entrant; add the entrant's own introduction if required by judging. |
-| Documentation | **PASS** | README, technical report, architecture and workflow diagrams, evaluation, responsible use, deployment instructions, judging scorecard, submission copy, demo notes, data provenance, build ledger, test results and status report are present. |
-| Solo eligibility | **BLOCKED** | User says the entry is solo and Devpost shows one creator. The entrant still needs to personally verify all eligibility declarations and intellectual-property/data-rights attestations. |
-| Devpost submission | **BLOCKED** | Saved draft URL: [Devpost project draft](https://devpost.com/submit-to/30984-opencv-ai-competition-2026-powered-by-aws/manage/submissions/1266641-fortifiers-incident-memory/project_details/edit). The video URL is saved. No endpoint is supplied, no legal declaration was accepted, and no final submission was made. |
+| OpenCV 5 | **PASS locally** | The local runtime reports 5.0.0; actual processing uses ORB/RANSAC, ECC fallback, HSV normalization, masks, morphology, connected components and evidence overlays. AWS container build and runtime still require verification. |
+| Agentic Vision | **PASS locally** | Seven procedural policy scenarios produce observation-dependent traces; blurred input requests another frame, older history downgrades a candidate, and illumination-only change is rejected. No cloud trace yet. |
+| Automated tests | **PASS locally** | Fresh test artifact shows 36/36 passed. The exact AWS image has not yet been built. |
+| Evaluation | **PASS, synthetic only** | Seven held-out procedural scenario types: expected task action 7/7 vs one-pass 4/7. Four generated masks: precision 0.99183, recall 0.99913, F1 0.99546, IoU 0.99097. Controller p50/p95 137.061/217.262 ms from 21 local runs. These are not field leak-detection metrics. See [EVALUATION.md](EVALUATION.md). |
+| Code/archive | **PASS / updating** | Public GitHub repository exists. New AWS templates and this status edit are pending push; source ZIP must be rebuilt, extracted, tested and uploaded to the public release after the final commit. |
+| Public web demo | **BLOCKED** | No remote URL exists. The local server is not judge-accessible and does not satisfy AWS execution. |
+| Documentation | **PASS / updating** | README, technical report, architecture, evaluation, responsible use, deployment, scorecard, submission wording and demo script exist. AWS deployment documentation now targets Lambda. |
+| Video team-identification requirement | **PARTIAL** | Current video is silent and does not show or name the entrant. Do not fabricate an appearance or voice. If the rules require visible team identification, the solo entrant must record their own introduction. |
+| Solo eligibility | **BLOCKED for verification** | The entrant reports entering solo. The entrant must personally confirm official age/location eligibility and rights declarations. |
+| Devpost submission | **BLOCKED** | [Saved draft](https://devpost.com/submit-to/30984-opencv-ai-competition-2026-powered-by-aws/manage/submissions/1266641-fortifiers-incident-memory/project_details/edit) is not a submitted entry. |
 
-## Exact links and deployment/cost facts
+## Links and facts
 
-- **Public repository:** https://github.com/axfrgo/fortifiers-incident-memory
-- **Current public Git commit before finalization push:** `855ce2a115dd43e500ed94b15313e3b03bf72e31`; update after pushing these finalization files.
-- **Unlisted demo video:** https://youtu.be/_k0J1XHyVyA
-- **Public video release mirror:** https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-demo.mp4
-- **Portable source archive:** https://github.com/axfrgo/fortifiers-incident-memory/releases/download/demo-2026-10-27/fortifiers-incident-memory-source.zip
+- **Repository:** https://github.com/axfrgo/fortifiers-incident-memory
+- **Last independently verified public commit:** `96af50c520e8ceaa0f63adda66c107294311cb2c`
+- **Unlisted video:** https://youtu.be/_k0J1XHyVyA
 - **AWS endpoint:** none.
-- **Devpost draft/preview:** https://devpost.com/software/fortifiers-incident-memory (draft is not publicly submitted); authenticated edit link is in the requirement table above.
-- **AWS resources created:** none. **Project AWS costs:** $0 incurred. Account credits/free-tier status are unknown because the browser remains at AWS sign-in/account signup.
-- **Potential App Runner cost:** prepared configuration is not free at list pricing. Prior illustrative `us-east-1` estimate: about $5.11/month idle plus $0.032 per active vCPU-hour, before ECR/S3/logging/data transfer/taxes/scale-out; this is not an account quote or spending cap. App Runner is closed to new customers; existing-account eligibility is unknown.
-- **Tests:** 36 passed / 0 failed / 0 skipped in 8.61 s locally; extracted archive 36/36 in 8.16 s with pinned dependencies. **Evaluation limits:** synthetic data only; no field, AWS, or real-world validation.
+- **AWS resources created for this project:** none. **Verified project spend:** $0.
+- **Devpost draft:** https://devpost.com/software/fortifiers-incident-memory (private, not submitted).
+- **Evaluation limitations:** procedural fixtures only; no licensed real-world leak dataset, field testing or calibrated probabilities.
 
-## Entrant actions still needed
+## Remaining actions
 
-1. Complete AWS console sign-in/account setup in the open AWS tab. Do not accept financial/billing terms or create resources unless you intend to and the account's credits and cost exposure are clear. A live AWS workload and endpoint remain mandatory for the strongest eligible package.
-2. Personally verify solo eligibility and any required legal/data-rights declarations.
-3. Review whether the silent video satisfies the rule to show team identification; if not, record a short genuine introduction yourself and replace the video.
-4. Review the Devpost draft. Do not treat its draft page as a submitted project. Final submission still requires the entrant's explicit authorization and a confirmation receipt.
-
-Official references: [competition overview](https://opencv26.devpost.com/) and [official rules](https://opencv26.devpost.com/rules). Use the earlier deadline displayed on the Devpost banner.
+1. AWS must finish account verification so CloudShell or another deployment route can run. The attempted CloudShell session was blocked before it could execute commands.
+2. AWS CodeConnections approval is pending before linking CloudFormation to the public repository. If AWS asks for permissions beyond this repository or write access, stop and review them.
+3. Deploy, call the live URL from an unauthenticated session, verify the three scenarios, S3 evidence bundle, review action and CloudWatch logs, and update the endpoint/build evidence.
+4. Re-record or supplement the video with the real AWS endpoint if deployment succeeds. The solo entrant must supply any required personal introduction.
+5. Update the Devpost draft with the live endpoint and finish the remaining page steps. Ask the entrant to review eligibility/legal declarations and explicitly approve the irreversible final submission.

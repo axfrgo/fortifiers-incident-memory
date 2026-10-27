@@ -1,0 +1,7 @@
+template-file-path: deployment/aws-bootstrap.yaml
+parameters:
+  ImageRepositoryName: fortifiers-incident-memory
+  SourceRepository: https://github.com/axfrgo/fortifiers-incident-memory.git
+tags:
+  project: fortifiers-incident-memory
+  purpose: synthetic-competition-demo

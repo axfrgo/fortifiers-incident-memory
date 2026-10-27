@@ -1,0 +1,80 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Public judge demo for Fortifiers Incident Memory on an observation-limited Lambda Function URL.
+
+Parameters:
+  ImageTag:
+    Type: String
+    AllowedPattern: '[0-9a-f]{12}'
+    Description: First 12 characters of the immutable image tag built from GitCommit.
+  GitCommit:
+    Type: String
+    AllowedPattern: '[0-9a-f]{40}'
+
+Resources:
+  FunctionLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/fortifiers-incident-memory-demo
+      RetentionInDays: 14
+
+  IncidentMemoryFunction:
+    Type: AWS::Lambda::Function
+    DependsOn: FunctionLogGroup
+    Properties:
+      FunctionName: fortifiers-incident-memory-demo
+      PackageType: Image
+      Code:
+        ImageUri: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/fortifiers-incident-memory:${ImageTag}'
+      Role: !Sub 'arn:${AWS::Partition}:iam::${AWS::AccountId}:role/fortifiers-incident-memory-bootstrap-lambda-execution'
+      Architectures:
+        - x86_64
+      MemorySize: 2048
+      Timeout: 90
+      EphemeralStorage:
+        Size: 1024
+      ReservedConcurrentExecutions: 1
+      Environment:
+        Variables:
+          DEPLOYMENT_MODE: aws-lambda
+          DEPLOYED_BUILD_ID: !Ref GitCommit
+          DEPLOYED_GIT_COMMIT: !Ref GitCommit
+          INCIDENT_ARTIFACTS_DIR: /tmp/fortifiers-incident-memory/artifacts/demo
+          ARTIFACT_BUCKET: !Sub 'fortifiers-incident-memory-bootstrap-${AWS::AccountId}-${AWS::Region}'
+          ALLOW_USER_UPLOADS: 'false'
+          PYTHONDONTWRITEBYTECODE: '1'
+          PYTHONUNBUFFERED: '1'
+
+  IncidentMemoryFunctionUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      AuthType: NONE
+      TargetFunctionArn: !GetAtt IncidentMemoryFunction.Arn
+
+  PublicFunctionUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref IncidentMemoryFunction
+      Action: lambda:InvokeFunctionUrl
+      Principal: '*'
+      FunctionUrlAuthType: NONE
+      InvokedViaFunctionUrl: true
+
+  PublicFunctionInvokePermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref IncidentMemoryFunction
+      Action: lambda:InvokeFunction
+      Principal: '*'
+      FunctionUrlAuthType: NONE
+      InvokedViaFunctionUrl: true
+
+Outputs:
+  FunctionUrl:
+    Description: Public synthetic-only judge demonstration URL.
+    Value: !GetAtt IncidentMemoryFunctionUrl.FunctionUrl
+  FunctionName:
+    Value: !Ref IncidentMemoryFunction
+  ContainerImage:
+    Value: !Sub '${AWS::AccountId}.dkr.ecr.${AWS::Region}.amazonaws.com/fortifiers-incident-memory:${ImageTag}'
+  LogGroupName:
+    Value: !Ref FunctionLogGroup

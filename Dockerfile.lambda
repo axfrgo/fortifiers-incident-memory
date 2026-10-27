@@ -1,0 +1,15 @@
+FROM public.ecr.aws/lambda/python:3.14
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    PYTHONPATH=/var/task/src
+
+RUN dnf install -y glib2 && dnf clean all
+COPY requirements-lock.txt ${LAMBDA_TASK_ROOT}/requirements-lock.txt
+RUN python -m pip install --no-cache-dir -r ${LAMBDA_TASK_ROOT}/requirements-lock.txt
+
+COPY src ${LAMBDA_TASK_ROOT}/src
+COPY lambda_handler.py ${LAMBDA_TASK_ROOT}/lambda_handler.py
+RUN python -c "import cv2, fastapi, mangum; assert cv2.__version__.split('.')[0] == '5'; print('Verified OpenCV', cv2.__version__)"
+
+CMD ["lambda_handler.handler"]

@@ -9,3 +9,4 @@ __pycache__/
 artifacts/fortifiers-incident-memory-source.zip
 artifacts/demo/*/
 artifacts/video/*.mp4
+artifacts/video/recording-smoke-frame.png

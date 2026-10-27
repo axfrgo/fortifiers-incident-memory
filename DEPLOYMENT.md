@@ -1,39 +1,43 @@
-# Deployment instructions and current status
+# AWS deployment
 
-## Current status: BLOCKED / prepared only
+## Current deployment state
 
-No AWS resources were created. The workspace has no AWS CLI, Docker CLI, AWS environment credentials or `~/.aws` profiles. The open AWS browser tab remains in the account-signup flow rather than an authenticated console. No credits, billing state, spend ceiling or account-specific App Runner eligibility are confirmed. There is no live endpoint, remote OpenCV execution or AWS verification. The app currently runs locally; this does not satisfy the competition's AWS component or public endpoint requirement.
+No project AWS resources have been created or billed yet. The authenticated account has an active Free Plan credit, but this document intentionally omits account identifiers and balances. Do not upgrade the account to a Paid Plan. The AWS CloudShell console currently reports that account verification is still in progress, so its CLI environment is unavailable; console-based deployment is being checked before declaring the endpoint blocked.
 
-**Service availability caveat:** current AWS documentation says App Runner is closed to new customers; existing customers may continue using it. This AWS account's eligibility is unknown because no AWS identity is configured. The template below is usable only if that account can create App Runner services. AWS recommends ECS Express Mode for new customers, but that architecture has not been built or costed for this project. Do not assume the prepared App Runner template can be deployed in a new AWS account. [AWS availability notice](https://docs.aws.amazon.com/apprunner/latest/dg/apprunner-availability-change.html)
+The deployment target is AWS Lambda because AWS App Runner no longer accepts new customers. `deployment/aws-bootstrap.yaml` defines a private ECR repository, a short-lived private S3 evidence bucket, a least-privilege Lambda role, and a one-off CodeBuild project. `deployment/aws-app.yaml` defines the actual public FastAPI/OpenCV Lambda and its Function URL. The OpenCV workload itself runs in the Lambda container; S3-only hosting is not used as a substitute for AWS processing.
 
-## Prepared AWS architecture
+## Architecture and safeguards
 
-- Build a Python 3.11 container with pinned `requirements-lock.txt`.
-- Push to a private ECR repository with image scanning and AES-256 repository encryption.
-- Use CloudFormation `deployment/stack.yaml` to create an internet-facing App Runner service that runs this FastAPI application and OpenCV 5 on CPU (0.5 vCPU/1 GB, one to two instances, five concurrent requests per instance).
-- The CloudFormation template creates a private, versioned S3 evidence bucket with all public access blocked and SSE-S3, plus a least-privilege App Runner instance role scoped to `evidence/*` objects. Current versions expire after 30 days and noncurrent versions after seven days. The service sets `ALLOW_USER_UPLOADS=false` and exposes only synthetic scenarios. App Runner `/health` is the health check; service logs are available through CloudWatch.
-- The deployment script applies `deployment/ecr-lifecycle-policy.json` to retain at most the newest three container images.
-- App Runner publishes HTTPS suitable for judges. The API writes a ZIP bundle to S3 and returns an expiring presigned download URL.
+- Python 3.14 Lambda container uses the existing pinned `requirements-lock.txt`, OpenCV 5.0.0.93 and `mangum==0.22.0`. The Docker build fails unless OpenCV imports and reports major version 5.
+- CodeBuild builds the published Git commit and pushes an immutable commit-tagged image to private ECR. The Docker platform is `linux/amd64`.
+- Lambda has 2 GiB memory, a 90-second timeout, 1 GiB `/tmp` storage, and reserved concurrency of one. It runs on demand; it has no always-on instance charge.
+- The public HTTPS Lambda Function URL serves the dashboard and synthetic investigation API. Only seven built-in synthetic scenarios are enabled in AWS; image uploads are disabled. No machinery, alarms, doors, or emergency-response controls exist.
+- S3 blocks all public access, uses SSE-S3 encryption, and expires evidence under `evidence/` after seven days. The execution role can read and write only that prefix. The returned evidence URL is a one-hour presigned URL.
+- Lambda logs are retained for 14 days; CodeBuild logs for seven days. Build and runtime identifiers appear at `/health`.
+- The function is publicly callable, so any visitor can run the finite synthetic scenarios. Reserved concurrency limits simultaneous execution, not total request count. Monitor Free Plan credits and disable the function URL or delete the stack after judging. Credits and Free Plan eligibility are not a hard spending cap; no Paid Plan upgrade is authorized.
 
-## Cost and authorization boundary
+## Cost estimate
 
-Illustrative estimate **if App Runner is available to the account**, in **US East (N. Virginia), `us-east-1`**, using the template's one 0.5 vCPU / 1 GB minimum instance for 730 hours/month: provisioned memory is about **$5.11/month** at $0.007/GB-hour. Active CPU adds about **$0.032 per processing hour** at $0.064/vCPU-hour, so 8 processing hours/day adds about $7.68/month; continuous processing for 730 hours would add about $23.36/month, for roughly $28.47 total compute and provisioned memory. This estimate excludes ECR storage, S3 storage/requests, CloudWatch logs, data transfer, taxes and any second active instance; actual usage can be higher. See [AWS App Runner pricing](https://aws.amazon.com/apprunner/pricing/). The template caps scaling at two active instances but this is not a hard monthly spend limit.
+This is an estimate, not a spending limit. AWS's published Lambda rate is $0.0000166667 per GB-second plus $0.20 per million requests. At 2 GiB and a three-second invocation, compute is about $0.0001 per call; a 90-second invocation would be about $0.003. AWS CodeBuild publishes 100 monthly general1.small build minutes in its Free Tier; beyond that, the listed example rate is $0.005/minute, so a 20-minute build would be about $0.10. ECR, S3, CloudWatch, and data transfer depend on actual image size, retained evidence, log volume, and traffic. A small, low-traffic demo is expected to consume only a small amount of the account's existing credits, but public traffic can increase usage. Verify the billing page after deployment; its usage data may lag.
 
-No AWS account balance, Free Tier credit, competition grant, region setting or billing history could be checked. The competition page describes up to $100 in credits for eligible new AWS customers, but this account's eligibility and balance are unverified. App Runner capacity and request concurrency are capped, ECR retains three images, S3 evidence has a retention lifecycle, and real-image uploads are disabled. Before any deployment, the owner must verify account/service eligibility, select the architecture and region, review current estimates/credits, provide secure authenticated AWS access, and explicitly authorize billable resource creation with a spend ceiling. The script additionally requires `-ApprovedForBillableDeployment`. No resources were created.
+Sources: [Lambda pricing](https://aws.amazon.com/lambda/pricing/), [CodeBuild pricing](https://aws.amazon.com/codebuild/pricing/), [ECR pricing](https://aws.amazon.com/ecr/pricing/), [Lambda container images](https://docs.aws.amazon.com/lambda/latest/dg/python-image.html), and [Function URL access](https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html).
 
-## Prerequisites after authorization
+## Deployment procedure
 
-1. Docker Engine, AWS CLI v2, PowerShell 7 or Windows PowerShell, Python 3.11+ and the pinned local tests must be available.
-2. Use an authorized role permitted to create ECR repositories/images, CloudFormation stacks, IAM roles, App Runner services and S3 buckets, plus `sts:GetCallerIdentity`. Verify App Runner access in the account first; if it is a new AWS customer account, stop and select a supported alternative such as ECS Express Mode before proceeding.
-3. From this project directory, inspect and validate `deployment/stack.yaml`; review IAM actions, selected region, public HTTPS exposure, retention, service scaling and current price.
-4. After explicit approval only, run:
+Run from AWS CloudShell in `us-east-2` after account verification is complete and the public repository contains the final tested commit:
 
-```powershell
-./deployment/deploy.ps1 -Region <approved-region> -ApprovedForBillableDeployment
+```bash
+git clone https://github.com/axfrgo/fortifiers-incident-memory.git
+cd fortifiers-incident-memory
+bash deployment/deploy-lambda-cloudshell.sh
 ```
 
-5. The script builds/pushes the container, deploys the stack, checks the public `/health` response for OpenCV 5, runs `clear_change`, checks for the investigation trace and writes `deployment-manifest.json`. Review the AWS CloudFormation events and App Runner logs. A script error or local Docker build is not deployment evidence.
-6. Preserve the returned live URL and sanitized manifest. Re-run the tests and an actual HTTP investigation. Add the URL to the Devpost entry and video only after the response is verified.
+The script validates its identity without printing the account number, deploys the bootstrap stack, starts CodeBuild from the exact Git commit, deploys the Lambda stack from the immutable ECR image, and prints the HTTPS URL. It fails on a failed build or stack operation. Do not report a deployment from a local Docker result or an AWS health check alone.
 
-The deployment template/script have not been validated by AWS CloudFormation or Docker in this environment. The template still requires review against account-specific App Runner availability. Teardown is intentionally not automated; preserve evidence and ask the resource owner before deleting data or stacks.
+## Remote acceptance checks
 
+From a fresh unauthenticated browser session, verify the homepage and `/health`; confirm OpenCV 5, the build ID, commit hash, `deployment_mode=aws-lambda`, S3 enabled, and uploads disabled. Then run `clear_change`, `poor_image`, and `historical_match` or `lighting_shift`; inspect their different traces and findings; download the presigned ZIP; check a review action; confirm an upload returns 403; and check CloudWatch logs for the real invocation. Save sanitized responses in `artifacts/aws-remote-verification.json` and update `deployment-manifest.json` with the URL, commit, build, stack names, and measured usage. Never place AWS credentials, account IDs, or signed presigned URLs in public files.
+
+## Teardown
+
+After judging, disable public invocation first if the endpoint is no longer needed, then delete the app stack. The bootstrap template retains the private S3 bucket and ECR repository on stack deletion to prevent accidental evidence loss. To remove all resources, empty the named bucket, delete the repository images/repository, then delete the bootstrap stack. Review the resource names and region before running cleanup commands; CloudWatch groups, build project, and IAM roles are scoped to this project. Do not delete unrelated resources.
