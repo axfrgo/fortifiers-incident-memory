@@ -1,0 +1,11 @@
+.git
+.venv
+__pycache__
+.pytest_cache
+artifacts
+data
+tests
+scripts
+submission
+BUILD_LEDGER.md
+*.pyc

@@ -1,0 +1,3 @@
+# Synthetic fixture provenance
+
+All images/masks in `tuning/` and `held_out/` are produced by `scripts/build_dataset.py` using `src/incident_memory/scenarios.py`. The fixtures depict a fictional mechanical room drawn from colored OpenCV primitives with seeded pixel texture. The positive change is a synthetic cool-toned polygon and reflection, not real liquid. Labels are generated from that polygon. No real facility, people, third-party photo or external dataset is represented. The held-out seed changes texture generation only; it is not an independent site or camera distribution. Use `manifest.csv` to map each fixture to its image, mask, split and scripted task label.
