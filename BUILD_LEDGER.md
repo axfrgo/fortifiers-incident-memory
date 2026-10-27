@@ -111,3 +111,27 @@
 - No genuine screen recording or hosted video exists. The video upload field is mandatory in the Devpost details page; the final page remains incomplete.
 - Final Devpost submission is not made. The private draft is saved; eligibility declarations, public endpoint, video, final rules acknowledgment and final submit remain.
 - Final GitHub release commit/push and anonymous latest-commit check remain to be done.
+## GITHUB RELEASE CHECK — 2026-10-27 02:12Z
+
+| Time (UTC) | Action / command | Result | Evidence / next step |
+|---|---|---|---|
+| 2026-10-27 02:11Z | git commit -m "Finalize competition verification evidence"; git push origin master | Created commit d27daddb35eaafd9bb531ca6af173e7b22650d46 and pushed master from this isolated project only. | The separate Fortifiers production repository was not changed. |
+| 2026-10-27 02:12Z | Anonymous GitHub API and raw-content requests (no Authorization header) | API returned d27daddb35eaafd9bb531ca6af173e7b22650d46 as master HEAD. Raw README.md, FINAL_SUBMISSION_STATUS.md, test-results-finalization.json, and submission/project-cover.png each returned HTTP 200. | Public access is verified for the pushed release files. A first output-format attempt used a bare PowerShell true and raised a formatting error after the requests; rerunning with $true returned the records. No credentials were sent. |
+| 2026-10-27 02:12Z | Update local FINAL_SUBMISSION_STATUS.md after the public check | Changed GITHUB_PUBLISHED from pending to PASS and recorded the verified release SHA and anonymous HTTP evidence. | This last status/ledger update must be included in the next doc-only closeout push. |
+
+## FINALIZATION STATE AT 2026-10-27 02:12Z
+
+- GitHub: public repo, isolated finalization release commit d27daddb35eaafd9bb531ca6af173e7b22650d46 verified anonymously.
+- Local: OpenCV 5.0.0, 36 tests passing, four HTTP 200 local synthetic investigation scenarios and ZIP integrity verified. No new tests after the documented fresh run.
+- AWS: BLOCKED; browser session in this task is at IAM sign-in, no configured deployment identity or Docker/AWS CLI, no spend ceiling, no resources.
+- Video: BLOCKED; no screen recording file, hosted URL, or verified recording surface.
+- Devpost: private draft saved under authenticated account, 3/5 steps; video URL blank; no public entry or submission. Final action requires entrant review and action-time confirmation.
+- Deadline: official banner target is 2026-10-27 06:45 UTC (2026-10-26 11:45 PM PDT); at this entry 4h33 remained.
+
+
+## PACKAGE AND SECRET-SCAN CLOSEOUT — 2026-10-27 02:13Z
+
+| Time (UTC) | Action / command | Result | Evidence / next step |
+|---|---|---|---|
+| 2026-10-27 02:13Z | Rebuild the portable source archive after status and ledger updates; run zipfile.testzip() and compare SHA/member count to artifacts/source-archive-manifest.json | 213 members, no corrupt member, manifest SHA/member count matched the archive. | Current SHA is recorded in artifacts/source-archive-manifest.json; this archive is for the private draft, while the public GitHub repository is the judge-accessible source. |
+| 2026-10-27 02:13Z | Repeat the targeted secret-pattern scan over current working text, source archive text, and Git history | No access-key, GitHub-token, private-key-header, AWS-secret assignment, or long generic token assignment matches. No full secret values were printed. | gitleaks, trufflehog and detect-secrets are not installed; this is a focused scan, not a comprehensive certification. The first doc-only diff check found one blank trailing line from the PowerShell append; removed it and reran the diff check cleanly. |
