@@ -7,7 +7,7 @@
 | State | Status | Evidence |
 |---|---|---|
 | LOCAL_VERIFIED | PASS | Python 3.14.0 and OpenCV 5.0.0. The latest recorded full suite is 37 passed, 0 failed, 0 skipped; the extracted portable archive also passed 37/37. See `artifacts/test-results.xml`, `artifacts/test-results.json`, and `artifacts/source-archive-validation.json`. |
-| GITHUB_PUBLISHED | PASS | Public repository: https://github.com/axfrgo/fortifiers-incident-memory. The public source archive is available at the release URL below. Finalization status and ledger changes are being pushed after Devpost confirmation. |
+| GITHUB_PUBLISHED | PASS | Public repository: https://github.com/axfrgo/fortifiers-incident-memory. The public source archive is available at the release URL below. Finalization status and ledger updates are published to master; anonymous GitHub API verification confirms the PASS states are present. |
 | AWS_DEPLOYED | PASS | Public AWS Lambda Function URL: https://bxdbra2nzvrrchyig26xr274dm0cvzol.lambda-url.us-east-2.on.aws/. It runs the actual FastAPI/OpenCV workload. Deployed app commit: `b851290df9e99aca1a232c018e53bff48b8f559d`; OpenCV 5.0.0. |
 | REMOTE_TESTED | PASS | Anonymous HTTP health and all seven built-in synthetic investigations succeeded with distinct expected outcomes. Evidence ZIP download and CloudWatch executions were verified. See `artifacts/aws-remote-results.json`, `artifacts/aws-verification/current-smoke.json`, and `artifacts/aws-verification/cloudwatch-observation.json`. |
 | VIDEO_RECORDED | PASS | Genuine silent/captioned application capture, 220.4 s (3:40), 1920×1080; `artifacts/video/video-manifest.json`. |
@@ -15,7 +15,7 @@
 | VIDEO_CONTENT_COMPLIANCE | BLOCKED | Video was recorded before AWS deployment, so it does not show the live AWS endpoint and does not identify the solo entrant. The submitted project page discloses this limitation. |
 | DEVPOST_PREPARED | PASS | Entry contains project narrative, live AWS URL, public repo and archive, demo video, technical claims with synthetic-data limitations, and Agentic Vision selection. |
 | DEVPOST_SUBMITTED | PASS | Devpost displayed “Project submitted!” after the authorized Submit project action. Public project URL: https://devpost.com/software/fortifiers-incident-memory. |
-| SUBMISSION_CONFIRMED | PASS | The submitted page loaded at the public project URL and displayed the submitted project, AWS endpoint, repository, archive, video, and competition name. Confirmation was captured in the active browser session on 2026-10-27. |
+| SUBMISSION_CONFIRMED | PASS | Devpost showed its Project submitted confirmation and the resulting project page displayed the AWS endpoint, repository, archive, video, and competition. Confirmation was captured in the active browser session on 2026-10-27. A direct unauthenticated script request was met by Devposts Cloudflare JavaScript challenge, so no separate anonymous HTTP check is claimed. |
 
 ## Competition evidence
 
@@ -49,3 +49,4 @@
 
 1. If time remains before the deadline, record and replace the video with an AWS-inclusive version that identifies the entrant, then verify its public link.
 2. Review AWS billing after usage has fully posted; disable public invocation after judging if no longer needed.
+
